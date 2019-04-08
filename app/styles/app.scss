@@ -1,2 +1,10 @@
 @import 'tailwind.css';
 
+html {
+  body { 
+    a, a:hover {
+      text-decoration: none;
+      color: inherit;
+    }
+  }
+}

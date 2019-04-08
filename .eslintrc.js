@@ -5,18 +5,17 @@ module.exports = {
     ecmaVersion: 2017,
     sourceType: 'module'
   },
-  plugins: [
-    'ember'
-  ],
+  plugins: ['ember'],
   extends: [
     'eslint:recommended',
-    'plugin:ember/recommended'
+    'plugin:ember/recommended',
+    'plugin:prettier/recommended',
+    'prettier-standard'
   ],
   env: {
     browser: true
   },
-  rules: {
-  },
+  rules: {},
   overrides: [
     // node files
     {
@@ -30,9 +29,7 @@ module.exports = {
         'config/**/*.js',
         'lib/*/index.js'
       ],
-      excludedFiles: [
-        'app/**',
-      ],
+      excludedFiles: ['app/**'],
       parserOptions: {
         sourceType: 'script',
         ecmaVersion: 2015
@@ -42,9 +39,14 @@ module.exports = {
         node: true
       },
       plugins: ['node'],
-      rules: Object.assign({}, require('eslint-plugin-node').configs.recommended.rules, {
-        // add your custom rules and overrides for node files here
-      })
+      rules: Object.assign(
+        {},
+        require('eslint-plugin-node').configs.recommended.rules,
+        {
+          // add your custom rules and overrides for node files here
+          'node/no-unpublished-require': 0
+        }
+      )
     }
   ]
-};
+}
