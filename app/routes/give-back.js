@@ -1,4 +1,3 @@
-import Route from '@ember/routing/route';
+import Route from '@ember/routing/route'
 
-export default class GiveBackRoute extends Route {
-}
+export default class GiveBackRoute extends Route {}

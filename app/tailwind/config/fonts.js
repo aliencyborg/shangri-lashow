@@ -17,8 +17,8 @@
 |
 */
 
- export default {
-  'sans': [
+export default {
+  sans: [
     'system-ui',
     'BlinkMacSystemFont',
     '-apple-system',
@@ -30,9 +30,9 @@
     'Fira Sans',
     'Droid Sans',
     'Helvetica Neue',
-    'sans-serif',
+    'sans-serif'
   ],
-  'serif': [
+  serif: [
     'Constantia',
     'Lucida Bright',
     'Lucidabright',
@@ -42,14 +42,14 @@
     'Bitstream Vera Serif',
     'Liberation Serif',
     'Georgia',
-    'serif',
+    'serif'
   ],
-  'mono': [
+  mono: [
     'Menlo',
     'Monaco',
     'Consolas',
     'Liberation Mono',
     'Courier New',
-    'monospace',
-  ],
-};
+    'monospace'
+  ]
+}

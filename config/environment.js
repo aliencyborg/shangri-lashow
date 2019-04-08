@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 module.exports = function(environment) {
   let ENV = {
@@ -13,7 +13,7 @@ module.exports = function(environment) {
         EMBER_NATIVE_DECORATOR_SUPPORT: true,
         EMBER_METAL_TRACKED_PROPERTIES: true,
         EMBER_GLIMMER_ANGLE_BRACKET_NESTED_LOOKUP: true,
-        EMBER_GLIMMER_ANGLE_BRACKET_BUILT_INS: true,
+        EMBER_GLIMMER_ANGLE_BRACKET_BUILT_INS: true
       },
       EXTEND_PROTOTYPES: {
         // Prevent Ember Data from overriding Date.parse.
@@ -25,7 +25,7 @@ module.exports = function(environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
     }
-  };
+  }
 
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
@@ -37,19 +37,19 @@ module.exports = function(environment) {
 
   if (environment === 'test') {
     // Testem prefers this...
-    ENV.locationType = 'none';
+    ENV.locationType = 'none'
 
     // keep test console output quieter
-    ENV.APP.LOG_ACTIVE_GENERATION = false;
-    ENV.APP.LOG_VIEW_LOOKUPS = false;
+    ENV.APP.LOG_ACTIVE_GENERATION = false
+    ENV.APP.LOG_VIEW_LOOKUPS = false
 
-    ENV.APP.rootElement = '#ember-testing';
-    ENV.APP.autoboot = false;
+    ENV.APP.rootElement = '#ember-testing'
+    ENV.APP.autoboot = false
   }
 
   if (environment === 'production') {
-
+    // prod stuff
   }
 
-  return ENV;
-};
+  return ENV
+}
