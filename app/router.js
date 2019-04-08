@@ -16,6 +16,7 @@ Router.map(function() {
   this.route('cast_crew');
   this.route('youtopia');
   this.route('music');
+  this.route('home');
 });
 
 export default Router;
