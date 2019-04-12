@@ -7,16 +7,16 @@ const Router = EmberRouter.extend({
 })
 
 Router.map(function() {
-  this.route('trailer')
-  this.route('shop')
-  this.route('photos')
-  this.route('give_back')
-  this.route('games')
-  this.route('episodes')
   this.route('cast_crew')
-  this.route('youtopia')
-  this.route('music')
+  this.route('episodes')
+  this.route('games')
+  this.route('give_back')
   this.route('home')
+  this.route('music')
+  this.route('photos')
+  this.route('shop')
+  this.route('trailer')
+  this.route('youtopia')
 })
 
 export default Router

@@ -15,6 +15,10 @@
 */
 
 export default {
+  // my colors
+  'shangri-sky': '#AFD3E4',
+
+  // tailwind
   transparent: 'transparent',
 
   black: '#22292f',
