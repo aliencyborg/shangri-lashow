@@ -1,6 +1,9 @@
 import Component from '@glimmer/component'
 import Konva, { Layer, Stage } from 'konva'
 
+const INTERIOR_SRC =
+  'https://res.cloudinary.com/aliencyborg-llc/image/upload/v1555123412/shangri-lashow/Home%20Page/Home_Page_Canvas_02_1920x1600.png'
+
 function fitStageIntoParentContainer(stage, stageHeight, stageWidth) {
   const container = document.querySelector('#home-canvas')
 
@@ -52,7 +55,7 @@ export default class HomeCanvasComponent extends Component {
 
     await new Promise(resolve => {
       interiorImageObj.onload = () => resolve()
-      interiorImageObj.src = '/assets/images/home/interior.png'
+      interiorImageObj.src = INTERIOR_SRC
     })
 
     bgLayer.add(interiorImg)
