@@ -1,5 +1,6 @@
 import Component from '@glimmer/component'
 import Konva, { Layer, Stage } from 'konva'
+import { inject as service } from '@ember/service'
 
 const INTERIOR_SRC =
   'https://res.cloudinary.com/aliencyborg-llc/image/upload/v1555123412/shangri-lashow/Home%20Page/Home_Page_Canvas_02_1920x1600.png'
@@ -69,16 +70,6 @@ function makeStage(height, width) {
   return stage
 }
 
-function buildImage(imageObj, name, x, y, visible = true) {
-  return new Konva.Image({
-    image: imageObj,
-    name,
-    visible,
-    x,
-    y
-  })
-}
-
 function imagePromise(imageObj, src) {
   return new Promise(resolve => {
     imageObj.onload = () => resolve()
@@ -87,7 +78,29 @@ function imagePromise(imageObj, src) {
 }
 
 export default class HomeCanvasComponent extends Component {
-  async setup() {
+  @service router
+
+  clickBtn(path) {
+    this.router.transitionTo(path)
+  }
+
+  buildImage(imageObj, name, x, y, path, visible = true) {
+    const konvaImg = new Konva.Image({
+      image: imageObj,
+      name,
+      visible,
+      x,
+      y
+    })
+
+    if (path) {
+      konvaImg.on('click', () => this.clickBtn(path))
+    }
+
+    return konvaImg
+  }
+
+  setup = async () => {
     const interiorImageObj = new Image()
 
     const castCrewBtnImageObj = new Image()
@@ -121,60 +134,97 @@ export default class HomeCanvasComponent extends Component {
       y: 0
     })
 
-    const castCrewBtnImg = buildImage(
+    const castCrewBtnImg = this.buildImage(
       castCrewBtnImageObj,
       'castCrew',
       1390,
       1060,
+      'cast_crew',
       false
     )
-    const castCrewImg = buildImage(castCrewImageObj, 'castCrew', 1470, 1130)
-    const episodesBtnImg = buildImage(
+    const castCrewImg = this.buildImage(
+      castCrewImageObj,
+      'castCrew',
+      1470,
+      1130
+    )
+    const episodesBtnImg = this.buildImage(
       episodesBtnImageObj,
       'episodes',
       500,
       1100,
+      'episodes',
       false
     )
-    const episodesImg = buildImage(episodesImageObj, 'episodes', 560, 1130)
-    const gamesBtnImg = buildImage(gamesBtnImageObj, 'games', 455, 600, false)
-    const gamesImg = buildImage(gamesImageObj, 'games', 485, 640)
-    const giveBackBtnImg = buildImage(
+    const episodesImg = this.buildImage(episodesImageObj, 'episodes', 560, 1130)
+    const gamesBtnImg = this.buildImage(
+      gamesBtnImageObj,
+      'games',
+      455,
+      600,
+      'games',
+      false
+    )
+    const gamesImg = this.buildImage(gamesImageObj, 'games', 485, 640)
+    const giveBackBtnImg = this.buildImage(
       giveBackBtnImageObj,
       'giveBack',
       1520,
       1410,
+      'give_back',
       false
     )
-    const giveBackImg = buildImage(giveBackImageObj, 'giveBack', 1545, 1445)
-    const musicBtnImg = buildImage(musicBtnImageObj, 'music', 470, 960, false)
-    const musicImg = buildImage(musicImageObj, 'music', 500, 1020)
-    const photosBtnImg = buildImage(
+    const giveBackImg = this.buildImage(
+      giveBackImageObj,
+      'giveBack',
+      1545,
+      1445
+    )
+    const musicBtnImg = this.buildImage(
+      musicBtnImageObj,
+      'music',
+      470,
+      960,
+      'music',
+      false
+    )
+    const musicImg = this.buildImage(musicImageObj, 'music', 500, 1020)
+    const photosBtnImg = this.buildImage(
       photosBtnImageObj,
       'photos',
       1610,
       420,
+      'photos',
       false
     )
-    const photosImg = buildImage(photosImageObj, 'photos', 1730, 450)
-    const shopBtnImg = buildImage(shopBtnImageObj, 'shop', 0, 850, false)
-    const shopImg = buildImage(shopImageObj, 'shop', 20, 910)
-    const trailerBtnImg = buildImage(
+    const photosImg = this.buildImage(photosImageObj, 'photos', 1730, 450)
+    const shopBtnImg = this.buildImage(
+      shopBtnImageObj,
+      'shop',
+      0,
+      850,
+      'shop',
+      false
+    )
+    const shopImg = this.buildImage(shopImageObj, 'shop', 20, 910)
+    const trailerBtnImg = this.buildImage(
       trailerBtnImageObj,
       'trailer',
       820,
       820,
+      'trailer',
       false
     )
-    const trailerImg = buildImage(trailerImageObj, 'trailer', 850, 870)
-    const youtopiaBtnImg = buildImage(
+    const trailerImg = this.buildImage(trailerImageObj, 'trailer', 850, 870)
+    const youtopiaBtnImg = this.buildImage(
       youtopiaBtnImageObj,
       'youtopia',
       1370,
       685,
+      'youtopia',
       false
     )
-    const youtopiaImg = buildImage(youtopiaImageObj, 'youtopia', 1462, 733)
+    const youtopiaImg = this.buildImage(youtopiaImageObj, 'youtopia', 1462, 733)
 
     function resizeFit() {
       fitStageIntoParentContainer(stage, 1600, 1920)
