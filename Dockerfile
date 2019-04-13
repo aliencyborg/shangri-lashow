@@ -8,8 +8,9 @@ RUN apt-get -y install nodejs
 RUN npm install -g ember-cli
 
 RUN mkdir /app
-COPY package*.json /app/
-RUN cd /app && npm ci
+# can't handle package-lock & npm ci right now, probably due to ember canary build
+COPY package.json /app/
+RUN cd /app && npm install
 COPY . /app
 RUN cd /app && ember build -environment production --output-path /usr/share/nginx/html
 
