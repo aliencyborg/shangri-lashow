@@ -1,6 +1,14 @@
 import Component from '@glimmer/component'
-import Konva, { Layer, Stage } from 'konva'
+// import Konva, { Layer, Stage } from 'konva'
+import Konva from 'konva'
 import { inject as service } from '@ember/service'
+import {
+  buildImage,
+  fitStageIntoParentContainer,
+  imagePromise,
+  makeLayer,
+  makeStage
+} from 'shangri-lashow/util/canvas-utils'
 
 const INTERIOR_SRC =
   'https://res.cloudinary.com/aliencyborg-llc/image/upload/v1555123412/shangri-lashow/Home%20Page/Home_Page_Canvas_02_1920x1600.png'
@@ -41,63 +49,11 @@ const YOUTOPIA_SRC =
 const YOUTOPIA_B_SRC =
   'https://res.cloudinary.com/aliencyborg-llc/image/upload/v1554831012/shangri-lashow/Home%20Page/YOUTOPIA_button_01.png'
 
-function fitStageIntoParentContainer(stage, stageHeight, stageWidth) {
-  const container = document.querySelector('#home-canvas')
-
-  const containerWidth = container.offsetWidth
-  const xScale = containerWidth / stageWidth
-
-  stage.width(stageWidth * xScale)
-  stage.height(stageHeight * xScale)
-  stage.scale({ x: xScale, y: xScale })
-  stage.draw()
-}
-
-function makeLayer() {
-  return new Layer()
-}
-
-function makeStage(height, width) {
-  const stageHeight = height || window.innerHeight
-  const stageWidth = width || window.innerWidth
-
-  const stage = new Stage({
-    container: 'home-container',
-    height: stageHeight,
-    width: stageWidth
-  })
-
-  return stage
-}
-
-function imagePromise(imageObj, src) {
-  return new Promise(resolve => {
-    imageObj.onload = () => resolve()
-    imageObj.src = src
-  })
-}
-
 export default class HomeCanvasComponent extends Component {
   @service router
 
-  clickBtn(path) {
+  navigate = path => {
     this.router.transitionTo(path)
-  }
-
-  buildImage(imageObj, name, x, y, path, visible = true) {
-    const konvaImg = new Konva.Image({
-      image: imageObj,
-      name,
-      visible,
-      x,
-      y
-    })
-
-    if (path) {
-      konvaImg.on('click', () => this.clickBtn(path))
-    }
-
-    return konvaImg
   }
 
   setup = async () => {
@@ -124,7 +80,7 @@ export default class HomeCanvasComponent extends Component {
 
     const bgLayer = makeLayer()
     const fgLayer = makeLayer()
-    const stage = makeStage(1600, 1920)
+    const stage = makeStage('home-canvas', 1600, 1920)
 
     const interiorImg = new Konva.Image({
       height: 1600,
@@ -134,100 +90,99 @@ export default class HomeCanvasComponent extends Component {
       y: 0
     })
 
-    const castCrewBtnImg = this.buildImage(
+    const castCrewBtnImg = buildImage(
       castCrewBtnImageObj,
       'castCrew',
       1390,
       1060,
-      'cast_crew',
-      false
+      false,
+      this.navigate,
+      'cast_crew'
     )
-    const castCrewImg = this.buildImage(
-      castCrewImageObj,
-      'castCrew',
-      1470,
-      1130
-    )
-    const episodesBtnImg = this.buildImage(
+    const castCrewImg = buildImage(castCrewImageObj, 'castCrew', 1470, 1130)
+    const episodesBtnImg = buildImage(
       episodesBtnImageObj,
       'episodes',
       500,
       1100,
-      'episodes',
-      false
+      false,
+      this.navigate,
+      'episodes'
     )
-    const episodesImg = this.buildImage(episodesImageObj, 'episodes', 560, 1130)
-    const gamesBtnImg = this.buildImage(
+    const episodesImg = buildImage(episodesImageObj, 'episodes', 560, 1130)
+    const gamesBtnImg = buildImage(
       gamesBtnImageObj,
       'games',
       455,
       600,
-      'games',
-      false
+      false,
+      this.navigate,
+      'games'
     )
-    const gamesImg = this.buildImage(gamesImageObj, 'games', 485, 640)
-    const giveBackBtnImg = this.buildImage(
+    const gamesImg = buildImage(gamesImageObj, 'games', 485, 640)
+    const giveBackBtnImg = buildImage(
       giveBackBtnImageObj,
       'giveBack',
       1520,
       1410,
-      'give_back',
-      false
+      false,
+      this.navigate,
+      'give_back'
     )
-    const giveBackImg = this.buildImage(
-      giveBackImageObj,
-      'giveBack',
-      1545,
-      1445
-    )
-    const musicBtnImg = this.buildImage(
+    const giveBackImg = buildImage(giveBackImageObj, 'giveBack', 1545, 1445)
+    const musicBtnImg = buildImage(
       musicBtnImageObj,
       'music',
       470,
       960,
-      'music',
-      false
+      false,
+      this.navigate,
+      'music'
     )
-    const musicImg = this.buildImage(musicImageObj, 'music', 500, 1020)
-    const photosBtnImg = this.buildImage(
+    const musicImg = buildImage(musicImageObj, 'music', 500, 1020)
+    const photosBtnImg = buildImage(
       photosBtnImageObj,
       'photos',
       1610,
       420,
-      'photos',
-      false
+      false,
+      this.navigate,
+      'photos'
     )
-    const photosImg = this.buildImage(photosImageObj, 'photos', 1730, 450)
-    const shopBtnImg = this.buildImage(
+    const photosImg = buildImage(photosImageObj, 'photos', 1730, 450)
+    const shopBtnImg = buildImage(
       shopBtnImageObj,
       'shop',
       0,
       850,
-      'shop',
-      false
+      false,
+      this.navigate,
+      'shop'
     )
-    const shopImg = this.buildImage(shopImageObj, 'shop', 20, 910)
-    const trailerBtnImg = this.buildImage(
+    const shopImg = buildImage(shopImageObj, 'shop', 20, 910)
+    const trailerBtnImg = buildImage(
       trailerBtnImageObj,
       'trailer',
       820,
       820,
-      'trailer',
-      false
+      false,
+      this.navigate,
+      'trailer'
     )
-    const trailerImg = this.buildImage(trailerImageObj, 'trailer', 850, 870)
-    const youtopiaBtnImg = this.buildImage(
+    const trailerImg = buildImage(trailerImageObj, 'trailer', 850, 870)
+    const youtopiaBtnImg = buildImage(
       youtopiaBtnImageObj,
       'youtopia',
       1370,
       685,
-      'youtopia',
-      false
+      false,
+      this.navigate,
+      'youtopia'
     )
-    const youtopiaImg = this.buildImage(youtopiaImageObj, 'youtopia', 1462, 733)
+    const youtopiaImg = buildImage(youtopiaImageObj, 'youtopia', 1462, 733)
 
     function resizeFit() {
-      fitStageIntoParentContainer(stage, 1600, 1920)
+      fitStageIntoParentContainer('#home-canvas', stage, 1600, 1920)
     }
 
     await imagePromise(interiorImageObj, INTERIOR_SRC)
