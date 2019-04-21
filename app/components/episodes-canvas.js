@@ -82,7 +82,7 @@ const TV_BACKGROUND_SRC = `https://res.cloudinary.com/aliencyborg-llc/image/uplo
 
 function buildVideo(videoObj, name, src) {
   videoObj.src = src
-  const video = buildImage(videoObj, name, 140, 300)
+  const video = buildImage(videoObj, name, 144, 300)
 
   videoObj.addEventListener(`loadedmetadata`, () => {
     video.width(videoObj.videoWidth)
@@ -169,7 +169,7 @@ export default class EpisodesCanvasComponent extends Component {
     const blankScreenImg = buildImage(
       blankScreenImageObj,
       `blankScreen`,
-      140,
+      144,
       300
     )
 
@@ -226,7 +226,6 @@ export default class EpisodesCanvasComponent extends Component {
     const ep12TrailerVideoObj = document.createElement(`video`)
     const ep13TrailerVideoObj = document.createElement(`video`)
 
-    console.log('promises')
     await imagePromise(ep01RowImageObj, EP_01_ROW_SRC)
     await imagePromise(ep02RowImageObj, EP_02_ROW_SRC)
     await imagePromise(ep03RowImageObj, EP_03_ROW_SRC)
@@ -467,9 +466,10 @@ export default class EpisodesCanvasComponent extends Component {
       if (isPlaying(currentTape)) {
         currentTape.pause()
       }
-      this.anim.stop()
       videoLayer.removeChildren()
       videoLayer.add(blankScreenImg)
+      videoLayer.draw()
+      this.anim.stop()
     }
 
     const resizeFit = () => {
@@ -502,14 +502,12 @@ export default class EpisodesCanvasComponent extends Component {
     this.stage.add(tapeLayer)
     this.stage.add(titleLayer)
 
-    console.log('promises')
     await imagePromise(blankScreenImageObj, BLANK_SCREEN_SRC)
     videoLayer.add(blankScreenImg)
 
     await imagePromise(backgroundImageObj, TV_BACKGROUND_SRC)
     bgLayer.add(backgroundImg)
 
-    console.log('promises')
     await imagePromise(tape01ImageObj, TAPE_01_SRC)
     await imagePromise(tape02ImageObj, TAPE_02_SRC)
     await imagePromise(tape03ImageObj, TAPE_03_SRC)
