@@ -1,5 +1,5 @@
 <div id="episodes-canvas" class="w-full">
-  <div {{did-insert this.setup}} id="episodes-container">
+  <div {{did-insert this.setup}} {{will-destroy this.teardown}} id="episodes-container">
     {{yield}}
   </div>
 </div>

@@ -276,4 +276,8 @@ export default class HomeCanvasComponent extends Component {
 
     window.addEventListener('resize', resizeFit)
   }
+
+  teardown = () => {
+    console.log('teardown')
+  }
 }
