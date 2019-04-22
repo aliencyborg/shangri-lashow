@@ -1,5 +1,4 @@
 import Component from '@glimmer/component'
-// import Konva, { Layer, Stage } from 'konva'
 import Konva from 'konva'
 import { inject as service } from '@ember/service'
 import {
@@ -10,6 +9,8 @@ import {
   makeStage
 } from 'shangri-lashow/util/canvas-utils'
 
+const LOADING_SRC =
+  'https://res.cloudinary.com/aliencyborg-llc/image/upload/c_scale,h_1600,w_1920/v1555911626/shangri-lashow/extras/shangri-la-01.png'
 const INTERIOR_SRC =
   'https://res.cloudinary.com/aliencyborg-llc/image/upload/v1555123412/shangri-lashow/Home%20Page/Home_Page_Canvas_02_1920x1600.png'
 const CAST_CREW_SRC =
@@ -57,6 +58,7 @@ export default class HomeCanvasComponent extends Component {
   }
 
   setup = async () => {
+    const loadingImageObj = new Image()
     const interiorImageObj = new Image()
 
     const castCrewBtnImageObj = new Image()
@@ -81,6 +83,18 @@ export default class HomeCanvasComponent extends Component {
     const bgLayer = makeLayer()
     const fgLayer = makeLayer()
     const stage = makeStage('home-canvas', 1600, 1920)
+
+    const loadingImg = new Konva.Image({
+      height: 1600,
+      image: loadingImageObj,
+      width: 1920,
+      x: 0,
+      y: 0
+    })
+
+    await imagePromise(loadingImageObj, LOADING_SRC)
+    bgLayer.add(loadingImg)
+    stage.add(bgLayer)
 
     const interiorImg = new Konva.Image({
       height: 1600,
@@ -187,6 +201,7 @@ export default class HomeCanvasComponent extends Component {
 
     await imagePromise(interiorImageObj, INTERIOR_SRC)
 
+    bgLayer.removeChildren()
     bgLayer.add(interiorImg)
 
     await imagePromise(castCrewBtnImageObj, CAST_CREW_B_SRC)
@@ -241,7 +256,6 @@ export default class HomeCanvasComponent extends Component {
       youtopiaBtnImg
     )
 
-    stage.add(bgLayer)
     stage.add(fgLayer)
 
     resizeFit()
@@ -278,6 +292,6 @@ export default class HomeCanvasComponent extends Component {
   }
 
   teardown = () => {
-    console.log('teardown')
+    // console.log('teardown')
   }
 }

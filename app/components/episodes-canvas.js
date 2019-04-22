@@ -11,7 +11,10 @@ import {
 
 const SCALE = 'c_scale,w_0.5'
 
+const LOADING_SRC =
+  'https://res.cloudinary.com/aliencyborg-llc/image/upload/c_scale,h_1461,w_1920/v1555911626/shangri-lashow/extras/shangri-la-01.png'
 const BLANK_SCREEN_SRC = `https://res.cloudinary.com/aliencyborg-llc/image/upload/${SCALE}/v1554831220/shangri-lashow/Episodes%20Page/Blank_Screen_01.png`
+
 const EP_01_TRAILER_SRC =
   'https://res.cloudinary.com/aliencyborg-llc/video/upload/v1555731904/shangri-lashow/video/Episode01Trailer.mp4'
 const EP_02_TRAILER_SRC =
@@ -117,8 +120,10 @@ export default class EpisodesCanvasComponent extends Component {
     // do nothing, animation just need to update the layer
     this.anim = new Konva.Animation(() => {}, videoLayer)
 
+    const loadingImageObj = new Image()
     const backgroundImageObj = new Image()
     const blankScreenImageObj = new Image()
+
     const ep01RowImageObj = new Image()
     const ep02RowImageObj = new Image()
     const ep03RowImageObj = new Image()
@@ -157,6 +162,18 @@ export default class EpisodesCanvasComponent extends Component {
     const tape11ImageObj = new Image()
     const tape12ImageObj = new Image()
     const tape13ImageObj = new Image()
+
+    const loadingImg = new Konva.Image({
+      height: 1461,
+      image: loadingImageObj,
+      width: 1920,
+      x: 0,
+      y: 0
+    })
+
+    await imagePromise(loadingImageObj, LOADING_SRC)
+    bgLayer.add(loadingImg)
+    this.stage.add(bgLayer)
 
     const backgroundImg = new Konva.Image({
       height: 1282,
@@ -497,6 +514,8 @@ export default class EpisodesCanvasComponent extends Component {
       playTrailer(name)
     }
 
+    bgLayer.destroyChildren()
+    this.stage.remove(bgLayer)
     this.stage.add(videoLayer)
     this.stage.add(bgLayer)
     this.stage.add(tapeLayer)
