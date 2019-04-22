@@ -12,6 +12,7 @@ RUN mkdir /app
 COPY package.json /app/
 RUN cd /app && npm install
 COPY . /app
+COPY nginx-default.conf /etc/nginx/conf.d/default.conf
 RUN cd /app && ember build -environment production --output-path /usr/share/nginx/html
 
 WORKDIR /usr/share/nginx/html
