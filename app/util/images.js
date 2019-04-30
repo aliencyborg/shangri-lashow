@@ -26,15 +26,7 @@ const makeScaleUrl = (baseHeight, baseWidth, height, width) => {
   return `${baseUrl}/${scaleParam}`
 }
 
-const home = (height, width, mobile = false) => {
-  let baseHeight = 1600
-  let baseWidth = 1920
-
-  if (mobile) {
-    baseHeight = 1400
-    baseWidth = 1080
-  }
-
+const home = (height, width, baseHeight, baseWidth, mobile = false) => {
   const scaleUrl = makeScaleUrl(baseHeight, baseWidth, height, width)
 
   if (mobile) {

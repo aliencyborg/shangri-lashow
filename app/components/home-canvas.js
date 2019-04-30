@@ -46,17 +46,22 @@ export default class HomeCanvasComponent extends Component {
 
     const { isMobile } = this.media
 
+    let baseHeight = 1600
     let stageHeight = 1600
+    let baseWidth = 1920
     let stageWidth = 1920
 
     if (isMobile) {
-      // stageHeight = 667 // 1400
-      // stageWidth = 375 // 1080
+      baseHeight = 1400
+      baseWidth = 1080
       stageHeight = window.innerHeight
       stageWidth = window.innerWidth
     }
 
-    const imageSources = images.home(stageHeight, stageWidth, isMobile)
+    const imageSources = images.home(stageHeight, stageWidth, baseHeight, baseWidth, isMobile)
+    const xFactor = Number((stageWidth / 1920).toFixed(2))
+    const yFactor = Number((stageWidth / 1600).toFixed(2))
+    const imageScale = { x: xFactor, y: yFactor }
 
     const bgLayer = makeLayer()
     const fgLayer = makeLayer()
@@ -88,91 +93,100 @@ export default class HomeCanvasComponent extends Component {
       'castCrew',
       1390,
       1060,
+      imageScale,
       false,
       this.navigate,
-      'cast_crew'
+      'cast_crew',
     )
-    const castCrewImg = buildImage(castCrewImageObj, 'castCrew', 1470, 1130)
+    const castCrewImg = buildImage(castCrewImageObj, 'castCrew', 1470, 1130, imageScale)
     const episodesBtnImg = buildImage(
       episodesBtnImageObj,
       'episodes',
       500,
       1100,
+      imageScale,
       false,
       this.navigate,
-      'episodes'
+      'episodes',
     )
-    const episodesImg = buildImage(episodesImageObj, 'episodes', 560, 1130)
+    const episodesImg = buildImage(episodesImageObj, 'episodes', 560, 1130, imageScale)
     const gamesBtnImg = buildImage(
       gamesBtnImageObj,
       'games',
       455,
       600,
+      imageScale,
       false,
       this.navigate,
-      'games'
+      'games',
     )
-    const gamesImg = buildImage(gamesImageObj, 'games', 485, 640)
+    const gamesImg = buildImage(gamesImageObj, 'games', 485, 640, imageScale)
     const giveBackBtnImg = buildImage(
       giveBackBtnImageObj,
       'giveBack',
       1520,
       1410,
+      imageScale,
       false,
       this.navigate,
-      'give_back'
+      'give_back',
     )
-    const giveBackImg = buildImage(giveBackImageObj, 'giveBack', 1545, 1445)
+    const giveBackImg = buildImage(giveBackImageObj, 'giveBack', 1545, 1445, imageScale)
     const musicBtnImg = buildImage(
       musicBtnImageObj,
       'music',
       470,
       960,
+      imageScale,
       false,
       this.navigate,
-      'music'
+      'music',
     )
-    const musicImg = buildImage(musicImageObj, 'music', 500, 1020)
+    const musicImg = buildImage(musicImageObj, 'music', 500, 1020, imageScale)
     const photosBtnImg = buildImage(
       photosBtnImageObj,
       'photos',
       1610,
       420,
+      imageScale,
       false,
       this.navigate,
-      'photos'
+      'photos',
     )
-    const photosImg = buildImage(photosImageObj, 'photos', 1730, 450)
+    const photosImg = buildImage(photosImageObj, 'photos', 1730, 450, imageScale)
     const shopBtnImg = buildImage(
       shopBtnImageObj,
       'shop',
       0,
       850,
+      imageScale,
       false,
       this.navigate,
-      'shop'
+      'shop',
     )
-    const shopImg = buildImage(shopImageObj, 'shop', 20, 910)
+    const shopImg = buildImage(shopImageObj, 'shop', 20, 910, imageScale)
     const trailerBtnImg = buildImage(
       trailerBtnImageObj,
       'trailer',
       820,
       820,
+      imageScale,
       false,
       this.navigate,
-      'trailer'
+      'trailer',
     )
-    const trailerImg = buildImage(trailerImageObj, 'trailer', 850, 870)
+    const trailerImg = buildImage(trailerImageObj, 'trailer', 850, 870, imageScale)
     const youtopiaBtnImg = buildImage(
       youtopiaBtnImageObj,
       'youtopia',
       1370,
       685,
+      imageScale,
       false,
       this.navigate,
-      'youtopia'
+      'youtopia',
     )
-    const youtopiaImg = buildImage(youtopiaImageObj, 'youtopia', 1462, 733)
+    const youtopiaImg = buildImage(youtopiaImageObj, 'youtopia', 1462, 733, imageScale)
 
     this.resizeFit = () =>
       fitStageIntoParentContainer(

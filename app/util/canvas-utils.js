@@ -5,16 +5,21 @@ function buildImage(
   name,
   x,
   y,
+  imageScale = {},
   visible = true,
   callback,
-  callbackArg
+  callbackArg,
 ) {
+  const { x: xFactor = 1.00, y: yFactor = 1.00 } = imageScale
+  const scaledX = parseInt(x * xFactor, 10)
+  const scaledY = parseInt(y * yFactor, 10)
+
   const konvaImg = new Konva.Image({
     image: imageObj,
     name,
     visible,
-    x,
-    y
+    x: scaledX,
+    y: scaledY
   })
 
   if (callback) {
@@ -29,7 +34,6 @@ function buildImage(
 }
 
 async function buildLoadingImage(height, width) {
-  console.log({ height, width })
   const LOADING_SRC = `https://res.cloudinary.com/aliencyborg-llc/image/upload/c_scale,h_${height},w_${width}/v1555911626/shangri-lashow/extras/shangri-la-01.png`
   const imageObj = new Image()
 
