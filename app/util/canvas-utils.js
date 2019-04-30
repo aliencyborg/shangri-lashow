@@ -28,6 +28,23 @@ function buildImage(
   return konvaImg
 }
 
+async function buildLoadingImage(height, width) {
+  console.log({ height, width })
+  const LOADING_SRC = `https://res.cloudinary.com/aliencyborg-llc/image/upload/c_scale,h_${height},w_${width}/v1555911626/shangri-lashow/extras/shangri-la-01.png`
+  const imageObj = new Image()
+
+  const image = new Konva.Image({
+    height,
+    image: imageObj,
+    width,
+    x: 0,
+    y: 0
+  })
+
+  await imagePromise(imageObj, LOADING_SRC)
+  return image
+}
+
 function fitStageIntoParentContainer(id, stage, stageHeight, stageWidth) {
   const container = document.querySelector(id)
 
@@ -66,6 +83,7 @@ function imagePromise(imageObj, src) {
 
 export {
   buildImage,
+  buildLoadingImage,
   fitStageIntoParentContainer,
   imagePromise,
   makeLayer,

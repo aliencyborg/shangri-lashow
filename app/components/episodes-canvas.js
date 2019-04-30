@@ -100,7 +100,28 @@ function isLocked(episode) {
   return episode > 2
 }
 
+function isPlaying(videoObj) {
+  if (!videoObj) return false
+  return !!(
+    videoObj.currentTime > 0 &&
+    !videoObj.paused &&
+    !videoObj.ended &&
+    videoObj.readyState > 2
+  )
+}
+
+function isPaused(videoObj) {
+  if (!videoObj) return false
+  return !!(
+    videoObj.currentTime > 0 &&
+    videoObj.paused &&
+    !videoObj.ended &&
+    videoObj.readyState > 2
+  )
+}
+
 export default class EpisodesCanvasComponent extends Component {
+  @service media
   @service router
 
   navigate = path => {
@@ -108,6 +129,8 @@ export default class EpisodesCanvasComponent extends Component {
   }
 
   anim
+  currentTape
+  resizeFit
   stage
 
   setup = async () => {
@@ -431,36 +454,14 @@ export default class EpisodesCanvasComponent extends Component {
       }
     }
 
-    let currentTape
-
-    function isPlaying(videoObj) {
-      if (!videoObj) return false
-      return !!(
-        videoObj.currentTime > 0 &&
-        !videoObj.paused &&
-        !videoObj.ended &&
-        videoObj.readyState > 2
-      )
-    }
-
-    function isPaused(videoObj) {
-      if (!videoObj) return false
-      return !!(
-        videoObj.currentTime > 0 &&
-        videoObj.paused &&
-        !videoObj.ended &&
-        videoObj.readyState > 2
-      )
-    }
-
     const togglePauseTrailer = () => {
-      if (isPaused(currentTape)) {
+      if (isPaused(this.currentTape)) {
         this.anim.start()
-        return currentTape.play()
+        return this.currentTape.play()
       }
-      if (isPlaying(currentTape)) {
+      if (isPlaying(this.currentTape)) {
         this.anim.stop()
-        return currentTape.pause()
+        return this.currentTape.pause()
       }
     }
 
@@ -475,13 +476,13 @@ export default class EpisodesCanvasComponent extends Component {
       trailerObj.addEventListener(`ended`, () => {
         stopTrailer()
       })
-      currentTape = trailerObj
+      this.currentTape = trailerObj
       this.anim.start()
     }
 
     const stopTrailer = () => {
-      if (isPlaying(currentTape)) {
-        currentTape.pause()
+      if (isPlaying(this.currentTape)) {
+        this.currentTape.pause()
       }
       videoLayer.removeChildren()
       videoLayer.add(blankScreenImg)
@@ -489,9 +490,8 @@ export default class EpisodesCanvasComponent extends Component {
       this.anim.stop()
     }
 
-    const resizeFit = () => {
+    this.resizeFit = () =>
       fitStageIntoParentContainer(`#episodes-canvas`, this.stage, 1461, 1920)
-    }
 
     function setCursorD() {
       document.body.style.cursor = `default`
@@ -557,7 +557,7 @@ export default class EpisodesCanvasComponent extends Component {
       tape13Img
     )
 
-    resizeFit()
+    this.resizeFit()
 
     bgLayer.on(`click`, togglePauseTrailer)
 
@@ -592,10 +592,12 @@ export default class EpisodesCanvasComponent extends Component {
       tapeLayer.draw()
     })
 
-    window.addEventListener(`resize`, resizeFit)
+    window.addEventListener(`resize`, this.resizeFit)
   }
 
   teardown = async () => {
+    document.body.style.cursor = 'default'
+    window.removeEventListener('resize', this.resizeFit)
     this.anim.stop()
     this.stage.destroy()
   }

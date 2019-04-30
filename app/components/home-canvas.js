@@ -3,16 +3,17 @@ import Konva from 'konva'
 import { inject as service } from '@ember/service'
 import {
   buildImage,
+  buildLoadingImage,
   fitStageIntoParentContainer,
   imagePromise,
   makeLayer,
   makeStage
 } from 'shangri-lashow/util/canvas-utils'
 
-const LOADING_SRC =
-  'https://res.cloudinary.com/aliencyborg-llc/image/upload/c_scale,h_1600,w_1920/v1555911626/shangri-lashow/extras/shangri-la-01.png'
 const INTERIOR_SRC =
   'https://res.cloudinary.com/aliencyborg-llc/image/upload/v1555123412/shangri-lashow/Home%20Page/Home_Page_Canvas_02_1920x1600.png'
+const INTERIOR_MOBILE_SRC =
+  'https://res.cloudinary.com/aliencyborg-llc/image/upload/v1556514884/shangri-lashow/Home%20Page/MobileHomeCropped.png'
 const CAST_CREW_SRC =
   'https://res.cloudinary.com/aliencyborg-llc/image/upload/v1555109007/shangri-lashow/Home%20Page/CAST_CREW_01.png'
 const CAST_CREW_B_SRC =
@@ -51,14 +52,17 @@ const YOUTOPIA_B_SRC =
   'https://res.cloudinary.com/aliencyborg-llc/image/upload/v1554831012/shangri-lashow/Home%20Page/YOUTOPIA_button_01.png'
 
 export default class HomeCanvasComponent extends Component {
+  @service media
   @service router
+
+  resizeFit
+  stage
 
   navigate = path => {
     this.router.transitionTo(path)
   }
 
   setup = async () => {
-    const loadingImageObj = new Image()
     const interiorImageObj = new Image()
 
     const castCrewBtnImageObj = new Image()
@@ -80,26 +84,29 @@ export default class HomeCanvasComponent extends Component {
     const youtopiaBtnImageObj = new Image()
     const youtopiaImageObj = new Image()
 
+    const { isMobile } = this.media
+
+    let stageHeight = 1600
+    let stageWidth = 1920
+
+    if (isMobile) {
+      stageHeight = 667 // 1400
+      stageWidth = 375 // 787
+    }
+
     const bgLayer = makeLayer()
     const fgLayer = makeLayer()
-    const stage = makeStage('home-canvas', 1600, 1920)
+    this.stage = makeStage('home-canvas', stageHeight, stageWidth)
 
-    const loadingImg = new Konva.Image({
-      height: 1600,
-      image: loadingImageObj,
-      width: 1920,
-      x: 0,
-      y: 0
-    })
+    const loadingImg = await buildLoadingImage(stageHeight, stageWidth)
 
-    await imagePromise(loadingImageObj, LOADING_SRC)
     bgLayer.add(loadingImg)
-    stage.add(bgLayer)
+    this.stage.add(bgLayer)
 
     const interiorImg = new Konva.Image({
-      height: 1600,
+      height: stageHeight,
       image: interiorImageObj,
-      width: 1920,
+      width: stageWidth,
       x: 0,
       y: 0
     })
@@ -195,11 +202,19 @@ export default class HomeCanvasComponent extends Component {
     )
     const youtopiaImg = buildImage(youtopiaImageObj, 'youtopia', 1462, 733)
 
-    function resizeFit() {
-      fitStageIntoParentContainer('#home-canvas', stage, 1600, 1920)
-    }
+    this.resizeFit = () =>
+      fitStageIntoParentContainer(
+        '#home-canvas',
+        this.stage,
+        stageHeight,
+        stageWidth
+      )
 
-    await imagePromise(interiorImageObj, INTERIOR_SRC)
+    if (isMobile) {
+      await imagePromise(interiorImageObj, INTERIOR_MOBILE_SRC)
+    } else {
+      await imagePromise(interiorImageObj, INTERIOR_SRC)
+    }
 
     bgLayer.removeChildren()
     bgLayer.add(interiorImg)
@@ -256,9 +271,9 @@ export default class HomeCanvasComponent extends Component {
       youtopiaBtnImg
     )
 
-    stage.add(fgLayer)
+    this.stage.add(fgLayer)
 
-    resizeFit()
+    this.resizeFit()
 
     fgLayer.on('mouseover', evt => {
       const {
@@ -271,7 +286,7 @@ export default class HomeCanvasComponent extends Component {
       document.body.style.cursor = 'pointer'
       originalImage.hide()
       btnImage.show()
-      stage.draw()
+      this.stage.draw()
     })
 
     fgLayer.on('mouseout', evt => {
@@ -285,13 +300,15 @@ export default class HomeCanvasComponent extends Component {
       document.body.style.cursor = 'default'
       btnImage.hide()
       originalImage.show()
-      stage.draw()
+      this.stage.draw()
     })
 
-    window.addEventListener('resize', resizeFit)
+    window.addEventListener('resize', this.resizeFit)
   }
 
   teardown = () => {
-    // console.log('teardown')
+    document.body.style.cursor = 'default'
+    window.removeEventListener('resize', this.resizeFit)
+    this.stage.destroy()
   }
 }
