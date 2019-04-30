@@ -3,7 +3,9 @@
 @import 'not-found';
 
 html {
-  body { 
+  body {
+    overflow-x: hidden;
+    overflow-y: visible;
     a, a:hover {
       text-decoration: none;
       color: inherit;
