@@ -3,53 +3,12 @@ import Konva from 'konva'
 import { inject as service } from '@ember/service'
 import {
   buildImage,
-  buildLoadingImage,
   fitStageIntoParentContainer,
   imagePromise,
   makeLayer,
   makeStage
 } from 'shangri-lashow/util/canvas-utils'
-
-const INTERIOR_SRC =
-  'https://res.cloudinary.com/aliencyborg-llc/image/upload/v1555123412/shangri-lashow/Home%20Page/Home_Page_Canvas_02_1920x1600.png'
-const INTERIOR_MOBILE_SRC =
-  'https://res.cloudinary.com/aliencyborg-llc/image/upload/v1556514884/shangri-lashow/Home%20Page/MobileHomeCropped.png'
-const CAST_CREW_SRC =
-  'https://res.cloudinary.com/aliencyborg-llc/image/upload/v1555109007/shangri-lashow/Home%20Page/CAST_CREW_01.png'
-const CAST_CREW_B_SRC =
-  'https://res.cloudinary.com/aliencyborg-llc/image/upload/v1554831012/shangri-lashow/Home%20Page/CAST_CREW_button_01.png'
-const EPISODES_SRC =
-  'https://res.cloudinary.com/aliencyborg-llc/image/upload/v1555109008/shangri-lashow/Home%20Page/EPISODES_01.png'
-const EPISODES_B_SRC =
-  'https://res.cloudinary.com/aliencyborg-llc/image/upload/v1554831011/shangri-lashow/Home%20Page/EPISODES_button_01.png'
-const GAMES_SRC =
-  'https://res.cloudinary.com/aliencyborg-llc/image/upload/v1555109006/shangri-lashow/Home%20Page/GAMES_01.png'
-const GAMES_B_SRC =
-  'https://res.cloudinary.com/aliencyborg-llc/image/upload/v1554831011/shangri-lashow/Home%20Page/GAMES_button_01.png'
-const GIVE_BACK_SRC =
-  'https://res.cloudinary.com/aliencyborg-llc/image/upload/v1555109006/shangri-lashow/Home%20Page/GIVE_BACK_01.png'
-const GIVE_BACK_B_SRC =
-  'https://res.cloudinary.com/aliencyborg-llc/image/upload/v1554831011/shangri-lashow/Home%20Page/GIVE_BACK_button_01.png'
-const MUSIC_SRC =
-  'https://res.cloudinary.com/aliencyborg-llc/image/upload/v1555109007/shangri-lashow/Home%20Page/MUSIC_01.png'
-const MUSIC_B_SRC =
-  'https://res.cloudinary.com/aliencyborg-llc/image/upload/v1554831012/shangri-lashow/Home%20Page/MUSIC_button_01.png'
-const PHOTOS_SRC =
-  'https://res.cloudinary.com/aliencyborg-llc/image/upload/v1555109007/shangri-lashow/Home%20Page/PHOTOS_01.png'
-const PHOTOS_B_SRC =
-  'https://res.cloudinary.com/aliencyborg-llc/image/upload/v1554831011/shangri-lashow/Home%20Page/PHOTOS_button_01.png'
-const SHOP_SRC =
-  'https://res.cloudinary.com/aliencyborg-llc/image/upload/v1555109007/shangri-lashow/Home%20Page/SHOP_01.png'
-const SHOP_B_SRC =
-  'https://res.cloudinary.com/aliencyborg-llc/image/upload/v1554831012/shangri-lashow/Home%20Page/SHOP_button_01.png'
-const TRAILER_SRC =
-  'https://res.cloudinary.com/aliencyborg-llc/image/upload/v1555109008/shangri-lashow/Home%20Page/TRAILER_01.png'
-const TRAILER_B_SRC =
-  'https://res.cloudinary.com/aliencyborg-llc/image/upload/v1554831011/shangri-lashow/Home%20Page/TRAILER_button_01.png'
-const YOUTOPIA_SRC =
-  'https://res.cloudinary.com/aliencyborg-llc/image/upload/v1555109008/shangri-lashow/Home%20Page/YOUTOPIA_01.png'
-const YOUTOPIA_B_SRC =
-  'https://res.cloudinary.com/aliencyborg-llc/image/upload/v1554831012/shangri-lashow/Home%20Page/YOUTOPIA_button_01.png'
+import images from 'shangri-lashow/util/images'
 
 export default class HomeCanvasComponent extends Component {
   @service media
@@ -63,6 +22,7 @@ export default class HomeCanvasComponent extends Component {
   }
 
   setup = async () => {
+    const loadingImageObj = new Image()
     const interiorImageObj = new Image()
 
     const castCrewBtnImageObj = new Image()
@@ -90,15 +50,27 @@ export default class HomeCanvasComponent extends Component {
     let stageWidth = 1920
 
     if (isMobile) {
-      stageHeight = 667 // 1400
-      stageWidth = 375 // 787
+      // stageHeight = 667 // 1400
+      // stageWidth = 375 // 1080
+      stageHeight = window.innerHeight
+      stageWidth = window.innerWidth
     }
+
+    const imageSources = images.home(stageHeight, stageWidth, isMobile)
 
     const bgLayer = makeLayer()
     const fgLayer = makeLayer()
     this.stage = makeStage('home-canvas', stageHeight, stageWidth)
 
-    const loadingImg = await buildLoadingImage(stageHeight, stageWidth)
+    const loadingImg = new Konva.Image({
+      height: stageHeight,
+      image: loadingImageObj,
+      width: stageWidth,
+      x: 0,
+      y: 0
+    })
+
+    await imagePromise(loadingImageObj, imageSources.loading)
 
     bgLayer.add(loadingImg)
     this.stage.add(bgLayer)
@@ -210,33 +182,32 @@ export default class HomeCanvasComponent extends Component {
         stageWidth
       )
 
-    if (isMobile) {
-      await imagePromise(interiorImageObj, INTERIOR_MOBILE_SRC)
-    } else {
-      await imagePromise(interiorImageObj, INTERIOR_SRC)
-    }
+    await imagePromise(interiorImageObj, imageSources.interior)
 
     bgLayer.removeChildren()
     bgLayer.add(interiorImg)
+    this.resizeFit()
 
-    await imagePromise(castCrewBtnImageObj, CAST_CREW_B_SRC)
-    await imagePromise(castCrewImageObj, CAST_CREW_SRC)
-    await imagePromise(episodesBtnImageObj, EPISODES_B_SRC)
-    await imagePromise(episodesImageObj, EPISODES_SRC)
-    await imagePromise(gamesBtnImageObj, GAMES_B_SRC)
-    await imagePromise(gamesImageObj, GAMES_SRC)
-    await imagePromise(giveBackBtnImageObj, GIVE_BACK_B_SRC)
-    await imagePromise(giveBackImageObj, GIVE_BACK_SRC)
-    await imagePromise(musicBtnImageObj, MUSIC_B_SRC)
-    await imagePromise(musicImageObj, MUSIC_SRC)
-    await imagePromise(photosBtnImageObj, PHOTOS_B_SRC)
-    await imagePromise(photosImageObj, PHOTOS_SRC)
-    await imagePromise(shopBtnImageObj, SHOP_B_SRC)
-    await imagePromise(shopImageObj, SHOP_SRC)
-    await imagePromise(trailerBtnImageObj, TRAILER_B_SRC)
-    await imagePromise(trailerImageObj, TRAILER_SRC)
-    await imagePromise(youtopiaBtnImageObj, YOUTOPIA_B_SRC)
-    await imagePromise(youtopiaImageObj, YOUTOPIA_SRC)
+    await Promise.all([
+      imagePromise(castCrewBtnImageObj, imageSources.castCrewBtn),
+      imagePromise(castCrewImageObj, imageSources.castCrew),
+      imagePromise(episodesBtnImageObj, imageSources.episodesBtn),
+      imagePromise(episodesImageObj, imageSources.episodes),
+      imagePromise(gamesBtnImageObj, imageSources.gamesBtn),
+      imagePromise(gamesImageObj, imageSources.games),
+      imagePromise(giveBackBtnImageObj, imageSources.giveBackBtn),
+      imagePromise(giveBackImageObj, imageSources.giveBack),
+      imagePromise(musicBtnImageObj, imageSources.musicBtn),
+      imagePromise(musicImageObj, imageSources.music),
+      imagePromise(photosBtnImageObj, imageSources.photosBtn),
+      imagePromise(photosImageObj, imageSources.photos),
+      imagePromise(shopBtnImageObj, imageSources.shopBtn),
+      imagePromise(shopImageObj, imageSources.shop),
+      imagePromise(trailerBtnImageObj, imageSources.trailerBtn),
+      imagePromise(trailerImageObj, imageSources.trailer),
+      imagePromise(youtopiaBtnImageObj, imageSources.youtopiaBtn),
+      imagePromise(youtopiaImageObj, imageSources.youtopia)
+    ])
 
     const imageMap = {
       castCrew: [castCrewImg, castCrewBtnImg],
@@ -272,7 +243,6 @@ export default class HomeCanvasComponent extends Component {
     )
 
     this.stage.add(fgLayer)
-
     this.resizeFit()
 
     fgLayer.on('mouseover', evt => {
