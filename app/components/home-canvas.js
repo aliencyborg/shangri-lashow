@@ -88,6 +88,7 @@ export default class HomeCanvasComponent extends Component {
 
     bgLayer.add(loadingImg)
     this.stage.add(bgLayer)
+    this.stage.add(fgLayer)
 
     const interiorImg = new Konva.Image({
       height: stageHeight,
@@ -274,6 +275,8 @@ export default class HomeCanvasComponent extends Component {
 
     if (isMobile) {
       await imagePromise(titleImageObj, imageSources.title)
+      fgLayer.add(titleImg)
+      this.resizeFit()
     }
 
     await Promise.all([
@@ -325,14 +328,12 @@ export default class HomeCanvasComponent extends Component {
       photosImg,
       shopBtnImg,
       shopImg,
-      titleImg,
       trailerBtnImg,
       trailerImg,
       youtopiaBtnImg,
       youtopiaImg
     )
 
-    this.stage.add(fgLayer)
     this.resizeFit()
 
     const resetImages = () => {
