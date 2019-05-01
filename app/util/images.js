@@ -82,6 +82,37 @@ const home = (height, width, baseHeight, baseWidth, mobile = false) => {
   }
 }
 
+const loci = isMobile => {
+  if (isMobile) {
+    return {
+      castCrew: { x: 1350, y: 1200 },
+      episodes: { x: 1330, y: 900 },
+      games: { x: 410, y: 530 },
+      giveBack: { x: 50, y: 1400 },
+      music: { x: 1250, y: 795 },
+      photos: { x: 1630, y: 350 },
+      shop: { x: 0, y: 750 },
+      title: { x: 330, y: 270 },
+      trailer: { x: 550, y: 765 },
+      youtopia: { x: 1287, y: 605 }
+    }
+  }
+
+  return {
+    castCrew: { x: 1470, y: 1130 },
+    episodes: { x: 560, y: 1160 },
+    games: { x: 485, y: 640 },
+    giveBack: { x: 1545, y: 1445 },
+    music: { x: 500, y: 1020 },
+    photos: { x: 1730, y: 450 },
+    shop: { x: 20, y: 910 },
+    title: { x: 0, y: 0 }, // mobile only
+    trailer: { x: 850, y: 870 },
+    youtopia: { x: 1462, y: 733 }
+  }
+}
+
 export default {
-  home
+  home,
+  loci
 }

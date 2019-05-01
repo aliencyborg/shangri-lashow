@@ -39,6 +39,7 @@ export default class HomeCanvasComponent extends Component {
     const photosImageObj = new Image()
     const shopBtnImageObj = new Image()
     const shopImageObj = new Image()
+    const titleImageObj = new Image()
     const trailerBtnImageObj = new Image()
     const trailerImageObj = new Image()
     const youtopiaBtnImageObj = new Image()
@@ -58,10 +59,18 @@ export default class HomeCanvasComponent extends Component {
       stageWidth = window.innerWidth
     }
 
-    const imageSources = images.home(stageHeight, stageWidth, baseHeight, baseWidth, isMobile)
+    const imageSources = images.home(
+      stageHeight,
+      stageWidth,
+      baseHeight,
+      baseWidth,
+      isMobile
+    )
+
     const xFactor = Number((stageWidth / 1920).toFixed(2))
-    const yFactor = Number((stageWidth / 1600).toFixed(2))
+    const yFactor = Number((stageHeight / 1600).toFixed(2))
     const imageScale = { x: xFactor, y: yFactor }
+    const imageLoci = images.loci(isMobile)
 
     const bgLayer = makeLayer()
     const fgLayer = makeLayer()
@@ -91,102 +100,163 @@ export default class HomeCanvasComponent extends Component {
     const castCrewBtnImg = buildImage(
       castCrewBtnImageObj,
       'castCrew',
-      1390,
-      1060,
+      imageLoci.castCrew.x - 80,
+      imageLoci.castCrew.y - 70,
       imageScale,
       false,
       this.navigate,
-      'cast_crew',
+      'cast_crew'
     )
-    const castCrewImg = buildImage(castCrewImageObj, 'castCrew', 1470, 1130, imageScale)
+    const castCrewImg = buildImage(
+      castCrewImageObj,
+      'castCrew',
+      imageLoci.castCrew.x,
+      imageLoci.castCrew.y,
+      imageScale
+    )
     const episodesBtnImg = buildImage(
       episodesBtnImageObj,
       'episodes',
-      500,
-      1100,
+      imageLoci.episodes.x - 80,
+      imageLoci.episodes.y - 70,
       imageScale,
       false,
       this.navigate,
-      'episodes',
+      'episodes'
     )
-    const episodesImg = buildImage(episodesImageObj, 'episodes', 560, 1130, imageScale)
+    const episodesImg = buildImage(
+      episodesImageObj,
+      'episodes',
+      imageLoci.episodes.x,
+      imageLoci.episodes.y,
+      imageScale
+    )
     const gamesBtnImg = buildImage(
       gamesBtnImageObj,
       'games',
-      455,
-      600,
+      imageLoci.games.x - 50,
+      imageLoci.games.y - 70,
       imageScale,
       false,
       this.navigate,
-      'games',
+      'games'
     )
-    const gamesImg = buildImage(gamesImageObj, 'games', 485, 640, imageScale)
+    const gamesImg = buildImage(
+      gamesImageObj,
+      'games',
+      imageLoci.games.x,
+      imageLoci.games.y,
+      imageScale
+    )
     const giveBackBtnImg = buildImage(
       giveBackBtnImageObj,
       'giveBack',
-      1520,
-      1410,
+      imageLoci.giveBack.x - 80,
+      imageLoci.giveBack.y - 70,
       imageScale,
       false,
       this.navigate,
-      'give_back',
+      'give_back'
     )
-    const giveBackImg = buildImage(giveBackImageObj, 'giveBack', 1545, 1445, imageScale)
+    const giveBackImg = buildImage(
+      giveBackImageObj,
+      'giveBack',
+      imageLoci.giveBack.x,
+      imageLoci.giveBack.y,
+      imageScale
+    )
     const musicBtnImg = buildImage(
       musicBtnImageObj,
       'music',
-      470,
-      960,
+      imageLoci.music.x - 50,
+      imageLoci.music.y - 70,
       imageScale,
       false,
       this.navigate,
-      'music',
+      'music'
     )
-    const musicImg = buildImage(musicImageObj, 'music', 500, 1020, imageScale)
+    const musicImg = buildImage(
+      musicImageObj,
+      'music',
+      imageLoci.music.x,
+      imageLoci.music.y,
+      imageScale
+    )
     const photosBtnImg = buildImage(
       photosBtnImageObj,
       'photos',
-      1610,
-      420,
+      imageLoci.photos.x - 120,
+      imageLoci.photos.y - 70,
       imageScale,
       false,
       this.navigate,
-      'photos',
+      'photos'
     )
-    const photosImg = buildImage(photosImageObj, 'photos', 1730, 450, imageScale)
+    const photosImg = buildImage(
+      photosImageObj,
+      'photos',
+      imageLoci.photos.x,
+      imageLoci.photos.y,
+      imageScale
+    )
     const shopBtnImg = buildImage(
       shopBtnImageObj,
       'shop',
-      0,
-      850,
+      imageLoci.shop.x - 80,
+      imageLoci.shop.y - 70,
       imageScale,
       false,
       this.navigate,
-      'shop',
+      'shop'
     )
-    const shopImg = buildImage(shopImageObj, 'shop', 20, 910, imageScale)
+    const shopImg = buildImage(
+      shopImageObj,
+      'shop',
+      imageLoci.shop.x,
+      imageLoci.shop.y,
+      imageScale
+    )
+    const titleImg = buildImage(
+      titleImageObj,
+      'title',
+      imageLoci.title.x,
+      imageLoci.title.y,
+      imageScale
+    )
     const trailerBtnImg = buildImage(
       trailerBtnImageObj,
       'trailer',
-      820,
-      820,
+      imageLoci.trailer.x - 50,
+      imageLoci.trailer.y - 70,
       imageScale,
       false,
       this.navigate,
-      'trailer',
+      'trailer'
     )
-    const trailerImg = buildImage(trailerImageObj, 'trailer', 850, 870, imageScale)
+    const trailerImg = buildImage(
+      trailerImageObj,
+      'trailer',
+      imageLoci.trailer.x,
+      imageLoci.trailer.y,
+      imageScale
+    )
     const youtopiaBtnImg = buildImage(
       youtopiaBtnImageObj,
       'youtopia',
-      1370,
-      685,
+      imageLoci.youtopia.x - 80,
+      imageLoci.youtopia.y - 70,
       imageScale,
       false,
       this.navigate,
-      'youtopia',
+      'youtopia'
     )
-    const youtopiaImg = buildImage(youtopiaImageObj, 'youtopia', 1462, 733, imageScale)
+    const youtopiaImg = buildImage(
+      youtopiaImageObj,
+      'youtopia',
+      imageLoci.youtopia.x,
+      imageLoci.youtopia.y,
+      imageScale
+    )
 
     this.resizeFit = () =>
       fitStageIntoParentContainer(
@@ -201,6 +271,10 @@ export default class HomeCanvasComponent extends Component {
     bgLayer.removeChildren()
     bgLayer.add(interiorImg)
     this.resizeFit()
+
+    if (isMobile) {
+      await imagePromise(titleImageObj, imageSources.title)
+    }
 
     await Promise.all([
       imagePromise(castCrewBtnImageObj, imageSources.castCrewBtn),
@@ -231,35 +305,48 @@ export default class HomeCanvasComponent extends Component {
       music: [musicImg, musicBtnImg],
       photos: [photosImg, photosBtnImg],
       shop: [shopImg, shopBtnImg],
+      title: [titleImg, titleImg],
       trailer: [trailerImg, trailerBtnImg],
       youtopia: [youtopiaImg, youtopiaBtnImg]
     }
 
     fgLayer.add(
-      castCrewImg,
-      episodesImg,
-      gamesImg,
-      giveBackImg,
-      musicImg,
-      photosImg,
-      shopImg,
-      trailerImg,
-      youtopiaImg,
       castCrewBtnImg,
+      castCrewImg,
       episodesBtnImg,
+      episodesImg,
       gamesBtnImg,
+      gamesImg,
       giveBackBtnImg,
+      giveBackImg,
       musicBtnImg,
+      musicImg,
       photosBtnImg,
+      photosImg,
       shopBtnImg,
+      shopImg,
+      titleImg,
       trailerBtnImg,
-      youtopiaBtnImg
+      trailerImg,
+      youtopiaBtnImg,
+      youtopiaImg
     )
 
     this.stage.add(fgLayer)
     this.resizeFit()
 
-    fgLayer.on('mouseover', evt => {
+    const resetImages = () => {
+      for (let imageName in imageMap) {
+        const [originalImage, btnImage] = imageMap[imageName]
+        btnImage.hide()
+        originalImage.show()
+        this.stage.draw()
+      }
+    }
+
+    bgLayer.on('touchstart', resetImages)
+
+    fgLayer.on('mouseover touchstart', evt => {
       const {
         target: {
           attrs: { name }
@@ -268,6 +355,7 @@ export default class HomeCanvasComponent extends Component {
       const [originalImage, btnImage] = imageMap[name]
 
       document.body.style.cursor = 'pointer'
+      resetImages()
       originalImage.hide()
       btnImage.show()
       this.stage.draw()

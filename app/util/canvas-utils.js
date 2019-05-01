@@ -8,9 +8,9 @@ function buildImage(
   imageScale = {},
   visible = true,
   callback,
-  callbackArg,
+  callbackArg
 ) {
-  const { x: xFactor = 1.00, y: yFactor = 1.00 } = imageScale
+  const { x: xFactor = 1.0, y: yFactor = 1.0 } = imageScale
   const scaledX = parseInt(x * xFactor, 10)
   const scaledY = parseInt(y * yFactor, 10)
 
@@ -24,9 +24,9 @@ function buildImage(
 
   if (callback) {
     if (callbackArg) {
-      konvaImg.on('click', () => callback(callbackArg))
+      konvaImg.on('click touchstart', () => callback(callbackArg))
     } else {
-      konvaImg.on('click', () => callback())
+      konvaImg.on('click touchstart', () => callback())
     }
   }
 
