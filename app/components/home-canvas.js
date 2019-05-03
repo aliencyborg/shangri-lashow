@@ -14,6 +14,7 @@ export default class HomeCanvasComponent extends Component {
   @service media
   @service router
 
+  isMobile = this.media.isMobile
   resizeFit
   stage
 
@@ -40,23 +41,22 @@ export default class HomeCanvasComponent extends Component {
     const shopBtnImageObj = new Image()
     const shopImageObj = new Image()
     const titleImageObj = new Image()
+    const titleBtnImageObj = new Image()
     const trailerBtnImageObj = new Image()
     const trailerImageObj = new Image()
     const youtopiaBtnImageObj = new Image()
     const youtopiaImageObj = new Image()
-
-    const { isMobile } = this.media
 
     let baseHeight = 1600
     let stageHeight = 1600
     let baseWidth = 1920
     let stageWidth = 1920
 
-    if (isMobile) {
+    if (this.isMobile) {
       baseHeight = 1400
       baseWidth = 1080
-      stageHeight = window.innerHeight
       stageWidth = window.innerWidth
+      stageHeight = Math.floor((stageWidth / baseWidth) * baseHeight)
     }
 
     const imageSources = images.home(
@@ -64,17 +64,17 @@ export default class HomeCanvasComponent extends Component {
       stageWidth,
       baseHeight,
       baseWidth,
-      isMobile
+      this.isMobile
     )
 
     const xFactor = Number((stageWidth / 1920).toFixed(2))
     const yFactor = Number((stageHeight / 1600).toFixed(2))
     const imageScale = { x: xFactor, y: yFactor }
-    const imageLoci = images.loci(isMobile)
+    const imageLoci = images.loci(this.isMobile)
 
     const bgLayer = makeLayer()
     const fgLayer = makeLayer()
-    this.stage = makeStage('home-canvas', stageHeight, stageWidth)
+    this.stage = makeStage('home-container', stageHeight, stageWidth)
 
     const loadingImg = new Konva.Image({
       height: stageHeight,
@@ -101,8 +101,8 @@ export default class HomeCanvasComponent extends Component {
     const castCrewBtnImg = buildImage(
       castCrewBtnImageObj,
       'castCrew',
-      imageLoci.castCrew.x - 80,
-      imageLoci.castCrew.y - 70,
+      imageLoci.castCrewBtn.x,
+      imageLoci.castCrewBtn.y,
       imageScale,
       false,
       this.navigate,
@@ -118,8 +118,8 @@ export default class HomeCanvasComponent extends Component {
     const episodesBtnImg = buildImage(
       episodesBtnImageObj,
       'episodes',
-      imageLoci.episodes.x - 80,
-      imageLoci.episodes.y - 70,
+      imageLoci.episodesBtn.x,
+      imageLoci.episodesBtn.y,
       imageScale,
       false,
       this.navigate,
@@ -135,8 +135,8 @@ export default class HomeCanvasComponent extends Component {
     const gamesBtnImg = buildImage(
       gamesBtnImageObj,
       'games',
-      imageLoci.games.x - 50,
-      imageLoci.games.y - 70,
+      imageLoci.gamesBtn.x,
+      imageLoci.gamesBtn.y,
       imageScale,
       false,
       this.navigate,
@@ -152,8 +152,8 @@ export default class HomeCanvasComponent extends Component {
     const giveBackBtnImg = buildImage(
       giveBackBtnImageObj,
       'giveBack',
-      imageLoci.giveBack.x - 80,
-      imageLoci.giveBack.y - 70,
+      imageLoci.giveBackBtn.x,
+      imageLoci.giveBackBtn.y,
       imageScale,
       false,
       this.navigate,
@@ -169,8 +169,8 @@ export default class HomeCanvasComponent extends Component {
     const musicBtnImg = buildImage(
       musicBtnImageObj,
       'music',
-      imageLoci.music.x - 50,
-      imageLoci.music.y - 70,
+      imageLoci.musicBtn.x,
+      imageLoci.musicBtn.y,
       imageScale,
       false,
       this.navigate,
@@ -186,8 +186,8 @@ export default class HomeCanvasComponent extends Component {
     const photosBtnImg = buildImage(
       photosBtnImageObj,
       'photos',
-      imageLoci.photos.x - 120,
-      imageLoci.photos.y - 70,
+      imageLoci.photosBtn.x,
+      imageLoci.photosBtn.y,
       imageScale,
       false,
       this.navigate,
@@ -203,8 +203,8 @@ export default class HomeCanvasComponent extends Component {
     const shopBtnImg = buildImage(
       shopBtnImageObj,
       'shop',
-      imageLoci.shop.x - 80,
-      imageLoci.shop.y - 70,
+      imageLoci.shopBtn.x,
+      imageLoci.shopBtn.y,
       imageScale,
       false,
       this.navigate,
@@ -217,6 +217,15 @@ export default class HomeCanvasComponent extends Component {
       imageLoci.shop.y,
       imageScale
     )
+    const titleBtnImg = buildImage(
+      titleBtnImageObj,
+      'title',
+      imageLoci.titleBtn.x,
+      imageLoci.titleBtn.y,
+      imageScale,
+      false
+      // Action / Navigate ?
+    )
     const titleImg = buildImage(
       titleImageObj,
       'title',
@@ -227,8 +236,8 @@ export default class HomeCanvasComponent extends Component {
     const trailerBtnImg = buildImage(
       trailerBtnImageObj,
       'trailer',
-      imageLoci.trailer.x - 50,
-      imageLoci.trailer.y - 70,
+      imageLoci.trailerBtn.x,
+      imageLoci.trailerBtn.y,
       imageScale,
       false,
       this.navigate,
@@ -244,8 +253,8 @@ export default class HomeCanvasComponent extends Component {
     const youtopiaBtnImg = buildImage(
       youtopiaBtnImageObj,
       'youtopia',
-      imageLoci.youtopia.x - 80,
-      imageLoci.youtopia.y - 70,
+      imageLoci.youtopiaBtn.x,
+      imageLoci.youtopiaBtn.y,
       imageScale,
       false,
       this.navigate,
@@ -261,7 +270,7 @@ export default class HomeCanvasComponent extends Component {
 
     this.resizeFit = () =>
       fitStageIntoParentContainer(
-        '#home-canvas',
+        '#home-container',
         this.stage,
         stageHeight,
         stageWidth
@@ -273,9 +282,10 @@ export default class HomeCanvasComponent extends Component {
     bgLayer.add(interiorImg)
     this.resizeFit()
 
-    if (isMobile) {
+    if (this.isMobile) {
       await imagePromise(titleImageObj, imageSources.title)
-      fgLayer.add(titleImg)
+      await imagePromise(titleBtnImageObj, imageSources.titleBtn)
+      fgLayer.add(titleBtnImg, titleImg)
       this.resizeFit()
     }
 
@@ -308,7 +318,7 @@ export default class HomeCanvasComponent extends Component {
       music: [musicImg, musicBtnImg],
       photos: [photosImg, photosBtnImg],
       shop: [shopImg, shopBtnImg],
-      title: [titleImg, titleImg],
+      title: [titleImg, titleBtnImg],
       trailer: [trailerImg, trailerBtnImg],
       youtopia: [youtopiaImg, youtopiaBtnImg]
     }

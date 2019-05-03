@@ -23,11 +23,9 @@ function buildImage(
   })
 
   if (callback) {
-    if (callbackArg) {
-      konvaImg.on('click touchstart', () => callback(callbackArg))
-    } else {
-      konvaImg.on('click touchstart', () => callback())
-    }
+    konvaImg.on('click touchstart', () => {
+      callback(callbackArg)
+    })
   }
 
   return konvaImg
