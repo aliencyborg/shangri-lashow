@@ -27,11 +27,13 @@ const makeScaleUrl = (baseHeight, baseWidth, height, width, modifier = 1) => {
 const home = (height, width, baseHeight, baseWidth, mobile = false) => {
   const scaleUrl = makeScaleUrl(baseHeight, baseWidth, height, width)
   const upscaleUrl = makeScaleUrl(baseHeight, baseWidth, height, width, 1.1)
+  const halfHeight = Math.floor(height / 2)
+  const halfWidth = Math.floor(width / 2)
 
   if (mobile) {
     return {
       interior: `${scaleUrl}/v1556853392/shangri-lashow/Home%20Page/Home_Page_Canvas_02_MOBILE_1080x1400.png`,
-      loading: `${baseUrl}/c_scale,h_${height},w_${width}/v1556844699/shangri-lashow/extras/loading.gif`,
+      loading: `${baseUrl}/c_scale,h_${halfHeight},w_${halfWidth}/v1556844699/shangri-lashow/extras/loading.gif`,
       castCrew: `${scaleUrl}/v1556592856/shangri-lashow/Home%20Page/Cast_and_Crew_01_MOBILE.png`,
       castCrewBtn: `${upscaleUrl}/v1556592856/shangri-lashow/Home%20Page/Cast_and_Crew_Button_01_MOBILE.png`,
       episodes: `${scaleUrl}/v1556592856/shangri-lashow/Home%20Page/Episodes_01_MOBILE.png`,
@@ -57,7 +59,7 @@ const home = (height, width, baseHeight, baseWidth, mobile = false) => {
 
   return {
     interior: `${scaleUrl}/v1555123412/shangri-lashow/Home%20Page/Home_Page_Canvas_02_1920x1600.png`,
-    loading: `${baseUrl}/c_scale,h_${height},w_${width}/v1556844699/shangri-lashow/extras/loading.gif`,
+    loading: `${baseUrl}/c_scale,h_${halfHeight},w_${halfWidth}/v1556844699/shangri-lashow/extras/loading.gif`,
     castCrew: `${scaleUrl}/v1555109007/shangri-lashow/Home%20Page/CAST_CREW_01.png`,
     castCrewBtn: `${scaleUrl}/v1554831012/shangri-lashow/Home%20Page/CAST_CREW_button_01.png`,
     episodes: `${scaleUrl}/v1555109008/shangri-lashow/Home%20Page/EPISODES_01.png`,

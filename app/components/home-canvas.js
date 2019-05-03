@@ -77,11 +77,9 @@ export default class HomeCanvasComponent extends Component {
     this.stage = makeStage('home-container', stageHeight, stageWidth)
 
     const loadingImg = new Konva.Image({
-      height: stageHeight,
       image: loadingImageObj,
-      width: stageWidth,
-      x: 0,
-      y: 0
+      x: Math.floor(stageWidth / 4),
+      y: Math.floor(stageHeight / 8)
     })
 
     await imagePromise(loadingImageObj, imageSources.loading)
