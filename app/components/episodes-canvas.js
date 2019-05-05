@@ -51,7 +51,6 @@ export default class EpisodesCanvasComponent extends Component {
   }
 
   setup = async () => {
-    const loadingImageObj = new Image()
     const backgroundImageObj = new Image()
     const blankScreenImageObj = new Image()
 
@@ -147,28 +146,9 @@ export default class EpisodesCanvasComponent extends Component {
     const titleLayer = makeLayer()
     this.stage = makeStage('episodes-container', stageHeight, stageWidth)
 
-    let loadingImg
-
-    if (this.isMobile) {
-      loadingImg = new Konva.Image({
-        image: loadingImageObj,
-        x: Math.floor(stageWidth / 4),
-        y: 0
-      })
-    } else {
-      loadingImg = new Konva.Image({
-        image: loadingImageObj,
-        x: Math.floor(stageWidth / 4),
-        y: Math.floor(stageHeight / 8)
-      })
-    }
-
-    await imagePromise(loadingImageObj, imageSources.loading)
-
     // do nothing, animation just need to update the layer
     this.anim = new Konva.Animation(() => {}, videoLayer)
 
-    bgLayer.add(loadingImg)
     this.stage.add(bgLayer)
 
     const backgroundImg = new Konva.Image({
@@ -183,7 +163,8 @@ export default class EpisodesCanvasComponent extends Component {
       blankScreenImageObj,
       `blankScreen`,
       imageLoci.blankScreen.x,
-      imageLoci.blankScreen.y
+      imageLoci.blankScreen.y,
+      imageScale
     )
 
     const ep01TitleImg = buildImage(ep01TitleImageObj, `ep01title`, 0, 0)
@@ -534,8 +515,8 @@ export default class EpisodesCanvasComponent extends Component {
       playTrailer(name)
     }
 
-    bgLayer.destroyChildren()
-    this.stage.remove(bgLayer)
+    this.args.stopLoading()
+
     this.stage.add(videoLayer)
     this.stage.add(bgLayer)
     this.stage.add(tapeLayer)
@@ -581,9 +562,9 @@ export default class EpisodesCanvasComponent extends Component {
 
     this.resizeFit()
 
-    bgLayer.on(`click`, togglePauseTrailer)
+    bgLayer.on(`click touchstart`, togglePauseTrailer)
 
-    tapeLayer.on(`click`, evt => {
+    tapeLayer.on(`click touchstart`, evt => {
       const {
         target: {
           attrs: { name }

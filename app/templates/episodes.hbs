@@ -1,6 +1,9 @@
 <div id="episodes" class="h-screen w-screen bg-blackest">
-  <EpisodesCanvas>
+  {{#if isLoading}}
+    <LoadingSpinner />
+  {{/if}}
+  <EpisodesCanvas @stopLoading={{stopLoading}}>
     {{outlet}}
   </EpisodesCanvas>
-  <IconRow id="episodes-icon-row"></IconRow>
+  <IconRow></IconRow>
 </div>
