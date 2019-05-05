@@ -31,20 +31,17 @@ function buildImage(
   return konvaImg
 }
 
-async function buildLoadingImage(height, width) {
-  const LOADING_SRC = `https://res.cloudinary.com/aliencyborg-llc/image/upload/c_scale,h_${height},w_${width}/v1555911626/shangri-lashow/extras/shangri-la-01.png`
-  const imageObj = new Image()
+async function buildVideo(videoObj, name, src) {
+  const video = buildImage(videoObj, name, 144, 300)
 
-  const image = new Konva.Image({
-    height,
-    image: imageObj,
-    width,
-    x: 0,
-    y: 0
+  return new Promise(resolve => {
+    videoObj.addEventListener(`loadedmetadata`, () => {
+      video.width(videoObj.videoWidth)
+      video.height(videoObj.videoHeight)
+      resolve(video)
+    })
+    videoObj.src = src
   })
-
-  await imagePromise(imageObj, LOADING_SRC)
-  return image
 }
 
 function fitStageIntoParentContainer(id, stage, stageHeight, stageWidth) {
@@ -52,6 +49,14 @@ function fitStageIntoParentContainer(id, stage, stageHeight, stageWidth) {
 
   const containerWidth = container.offsetWidth
   const xScale = containerWidth / stageWidth
+  console.log('fitStage', {
+    id,
+    stage,
+    stageHeight,
+    stageWidth,
+    containerWidth,
+    xScale
+  })
 
   stage.width(stageWidth * xScale)
   stage.height(stageHeight * xScale)
@@ -76,7 +81,7 @@ function makeStage(canvasName, height, width) {
   return stage
 }
 
-function imagePromise(imageObj, src) {
+async function imagePromise(imageObj, src) {
   return new Promise(resolve => {
     imageObj.onload = () => resolve()
     imageObj.src = src
@@ -85,7 +90,7 @@ function imagePromise(imageObj, src) {
 
 export {
   buildImage,
-  buildLoadingImage,
+  buildVideo,
   fitStageIntoParentContainer,
   imagePromise,
   makeLayer,

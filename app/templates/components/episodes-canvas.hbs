@@ -1,5 +1,17 @@
-<div id="episodes-canvas" class="w-full">
+<div id="episodes-canvas" class="h-full w-full">
+  {{#if this.isMobile}}
+    <MobileNavbar>
+      <div class="h-12 bg-blackest">
+        {{yield}}
+      </div>
+    </MobileNavbar>
+  {{/if}}
   <div {{did-insert this.setup}} {{will-destroy this.teardown}} id="episodes-container">
     {{yield}}
   </div>
+  <BottomBar>
+    <div class="bg-blackest h-24">
+      {{yield}}
+    </div>
+  </BottomBar>
 </div>

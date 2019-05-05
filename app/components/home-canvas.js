@@ -59,18 +59,19 @@ export default class HomeCanvasComponent extends Component {
       stageHeight = Math.floor((stageWidth / baseWidth) * baseHeight)
     }
 
+    const xFactor = Number((stageWidth / 1920).toFixed(2))
+    const yFactor = Number((stageHeight / 1600).toFixed(2))
+    const imageScale = { x: xFactor, y: yFactor }
+    const imageLoci = images.homeLoci(this.isMobile)
+
     const imageSources = images.home(
       stageHeight,
       stageWidth,
       baseHeight,
       baseWidth,
+      imageScale,
       this.isMobile
     )
-
-    const xFactor = Number((stageWidth / 1920).toFixed(2))
-    const yFactor = Number((stageHeight / 1600).toFixed(2))
-    const imageScale = { x: xFactor, y: yFactor }
-    const imageLoci = images.loci(this.isMobile)
 
     const bgLayer = makeLayer()
     const fgLayer = makeLayer()
