@@ -1,5 +1,5 @@
 <div id="home" class="h-screen w-screen">
-  {{#if isLoading}}
+  {{#if this.isLoading}}
     <LoadingSpinner />
   {{/if}}
   <HomeCanvas @stopLoading={{this.stopLoading}}>

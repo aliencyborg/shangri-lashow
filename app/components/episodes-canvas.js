@@ -530,6 +530,7 @@ export default class EpisodesCanvasComponent extends Component {
         this.anim.start()
         return this.currentTape.play()
       }
+
       if (_isPlaying(this.currentTape)) {
         this.anim.stop()
         return this.currentTape.pause()
@@ -538,6 +539,7 @@ export default class EpisodesCanvasComponent extends Component {
 
     const playTrailer = name => {
       const { trailer, trailerObj } = imageMap[name]
+      stopTrailer()
 
       videoLayer.removeChildren()
       videoLayer.add(trailer)
@@ -630,7 +632,8 @@ export default class EpisodesCanvasComponent extends Component {
 
     this.stage.draw()
 
-    bgLayer.on('click tap', () => debounce({}, togglePauseTrailer, 150))
+    // TODO make this work better and add a paused visual
+    // bgLayer.on('click tap', () => debounce({}, togglePauseTrailer, 150))
 
     tapeLayer.on('click tap', evt => {
       const {

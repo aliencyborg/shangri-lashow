@@ -1,5 +1,5 @@
 <div id="episodes" class="h-screen w-screen bg-blackest">
-  {{#if isLoading}}
+  {{#if this.isLoading}}
     <LoadingSpinner />
   {{/if}}
   <EpisodesCanvas @stopLoading={{this.stopLoading}}>
