@@ -93,10 +93,10 @@ export default class EpisodesCanvasComponent extends Component {
     const tape12ImageObj = new Image()
     const tape13ImageObj = new Image()
 
-    const stationaryWidth = 3840 // 1920
-    const stationaryHeight = 2992 // 1498
+    const stationaryWidth = 1920 // 1920 // 3840
+    const stationaryHeight = 1498 // 1498 // 2992
 
-    let factorX = 1.0
+    let factorX = 1
     let mainHeight = 1282
     let titleHeight = 216
     let baseHeight = stationaryHeight
@@ -106,7 +106,7 @@ export default class EpisodesCanvasComponent extends Component {
     let stageWidth = stationaryWidth
 
     if (this.isMobile) {
-      const tapesHeight = 500
+      const tapesHeight = 1800
       baseWidth = 1080
       mainHeight = 1400
       titleHeight = 122
@@ -117,18 +117,10 @@ export default class EpisodesCanvasComponent extends Component {
       stageHeight = Math.floor(factorX * baseHeight)
     }
 
-    const xFactor = Number((baseWidth / stationaryWidth).toFixed(3))
-    const yFactor = Number((baseHeight / stationaryHeight).toFixed(3))
+    const xFactor = Number((stageWidth / baseWidth).toFixed(3))
+    const yFactor = Number((stageHeight / baseHeight).toFixed(3))
     const imageScale = { x: xFactor, y: yFactor }
     const imageLoci = images.episodesLoci(this.isMobile)
-    console.log({
-      stageHeight,
-      stageWidth,
-      xFactor,
-      yFactor,
-      imageScale,
-      factorX
-    })
 
     const imageSources = images.episodes(
       stageHeight,
@@ -138,7 +130,7 @@ export default class EpisodesCanvasComponent extends Component {
       imageScale,
       this.isMobile
     )
-    const videoSources = images.videos()
+    const videoSources = images.videos(factorX)
 
     const videoLayer = makeLayer() // behind the "background"
     const bgLayer = makeLayer()
@@ -149,12 +141,8 @@ export default class EpisodesCanvasComponent extends Component {
     // do nothing, animation just need to update the layer
     this.anim = new Konva.Animation(() => {}, videoLayer)
 
-    this.stage.add(bgLayer)
-
     const backgroundImg = new Konva.Image({
-      // height: mainHeight,
       image: backgroundImageObj,
-      // width: stageWidth,
       x: 0,
       y: Math.floor(titleHeight * factorX)
     })
@@ -331,7 +319,6 @@ export default class EpisodesCanvasComponent extends Component {
       imagePromise(ep13LockedImageObj, imageSources.ep13Locked)
     ])
 
-    // maybe don`t start with this
     titleLayer.add(ep01TitleImg)
 
     const [
@@ -349,19 +336,97 @@ export default class EpisodesCanvasComponent extends Component {
       ep12TrailerVideo,
       ep13TrailerVideo
     ] = await Promise.all([
-      buildVideo(ep01TrailerVideoObj, `ep01Trailer`, videoSources.ep01Trailer),
-      buildVideo(ep02TrailerVideoObj, `ep02Trailer`, videoSources.ep02Trailer),
-      buildVideo(ep03TrailerVideoObj, `ep03Trailer`, videoSources.ep03Trailer),
-      buildVideo(ep04TrailerVideoObj, `ep04Trailer`, videoSources.ep04Trailer),
-      buildVideo(ep05TrailerVideoObj, `ep05Trailer`, videoSources.ep05Trailer),
-      buildVideo(ep06TrailerVideoObj, `ep06Trailer`, videoSources.ep06Trailer),
-      buildVideo(ep07TrailerVideoObj, `ep07Trailer`, videoSources.ep07Trailer),
-      buildVideo(ep08TrailerVideoObj, `ep08Trailer`, videoSources.ep08Trailer),
-      buildVideo(ep09TrailerVideoObj, `ep09Trailer`, videoSources.ep09Trailer),
-      buildVideo(ep10TrailerVideoObj, `ep10Trailer`, videoSources.ep10Trailer),
-      buildVideo(ep11TrailerVideoObj, `ep11Trailer`, videoSources.ep11Trailer),
-      buildVideo(ep12TrailerVideoObj, `ep12Trailer`, videoSources.ep12Trailer),
-      buildVideo(ep13TrailerVideoObj, `ep13Trailer`, videoSources.ep13Trailer)
+      buildVideo(
+        ep01TrailerVideoObj,
+        `ep01Trailer`,
+        videoSources.ep01Trailer,
+        this.isMobile,
+        imageScale
+      ),
+      buildVideo(
+        ep02TrailerVideoObj,
+        `ep02Trailer`,
+        videoSources.ep02Trailer,
+        this.isMobile,
+        imageScale
+      ),
+      buildVideo(
+        ep03TrailerVideoObj,
+        `ep03Trailer`,
+        videoSources.ep03Trailer,
+        this.isMobile,
+        imageScale
+      ),
+      buildVideo(
+        ep04TrailerVideoObj,
+        `ep04Trailer`,
+        videoSources.ep04Trailer,
+        this.isMobile,
+        imageScale
+      ),
+      buildVideo(
+        ep05TrailerVideoObj,
+        `ep05Trailer`,
+        videoSources.ep05Trailer,
+        this.isMobile,
+        imageScale
+      ),
+      buildVideo(
+        ep06TrailerVideoObj,
+        `ep06Trailer`,
+        videoSources.ep06Trailer,
+        this.isMobile,
+        imageScale
+      ),
+      buildVideo(
+        ep07TrailerVideoObj,
+        `ep07Trailer`,
+        videoSources.ep07Trailer,
+        this.isMobile,
+        imageScale
+      ),
+      buildVideo(
+        ep08TrailerVideoObj,
+        `ep08Trailer`,
+        videoSources.ep08Trailer,
+        this.isMobile,
+        imageScale
+      ),
+      buildVideo(
+        ep09TrailerVideoObj,
+        `ep09Trailer`,
+        videoSources.ep09Trailer,
+        this.isMobile,
+        imageScale
+      ),
+      buildVideo(
+        ep10TrailerVideoObj,
+        `ep10Trailer`,
+        videoSources.ep10Trailer,
+        this.isMobile,
+        imageScale
+      ),
+      buildVideo(
+        ep11TrailerVideoObj,
+        `ep11Trailer`,
+        videoSources.ep11Trailer,
+        this.isMobile,
+        imageScale
+      ),
+      buildVideo(
+        ep12TrailerVideoObj,
+        `ep12Trailer`,
+        videoSources.ep12Trailer,
+        this.isMobile,
+        imageScale
+      ),
+      buildVideo(
+        ep13TrailerVideoObj,
+        `ep13Trailer`,
+        videoSources.ep13Trailer,
+        this.isMobile,
+        imageScale
+      )
     ])
 
     const imageMap = {
@@ -516,6 +581,7 @@ export default class EpisodesCanvasComponent extends Component {
     }
 
     this.args.stopLoading()
+    this.resizeFit()
 
     this.stage.add(videoLayer)
     this.stage.add(bgLayer)
@@ -560,7 +626,7 @@ export default class EpisodesCanvasComponent extends Component {
       tape13Img
     )
 
-    this.resizeFit()
+    this.stage.draw()
 
     bgLayer.on(`click touchstart`, togglePauseTrailer)
 

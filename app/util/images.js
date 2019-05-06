@@ -23,16 +23,6 @@ const makeScaleUrl = (baseHeight, baseWidth, height, width, modifier = 1) => {
   const hScale = ((height / baseHeight) * modifier).toFixed(3)
   const wScale = ((width / baseWidth) * modifier).toFixed(3)
   const scaleParam = makeScaleParam(hScale, wScale)
-  // console.log('makeScaleUrl', {
-  //   baseHeight,
-  //   baseWidth,
-  //   height,
-  //   width,
-  //   modifier,
-  //   hScale,
-  //   wScale,
-  //   scaleParam
-  // })
 
   return `${baseUrl}/${scaleParam}`
 }
@@ -65,25 +55,11 @@ const episodes = (
     halfWidth
   )
   const widthUrl = makeWidthUrl(width)
-  console.log({
-    height,
-    width,
-    baseHeight,
-    baseWidth,
-    mobile,
-    halfHeight,
-    halfWidth,
-    scaleUrl,
-    scaleDownUrl,
-    widthUrl
-  })
-
   const shared = {}
 
   if (mobile) {
     return {
       ...shared,
-      loading: `${baseUrl}/v1556844699/shangri-lashow/extras/loading.gif`,
       ep01Title: `${widthUrl}/v1554831220/shangri-lashow/Episodes%20Page/Episode_1_-_Row_01_3840x432.png`,
       ep02Title: `${widthUrl}/v1554831226/shangri-lashow/Episodes%20Page/Episode_2_-_Row_01_3840x432.png`,
       ep03Title: `${widthUrl}/v1554831221/shangri-lashow/Episodes%20Page/Episode_3_-_Row_01_3840x432.png`,
@@ -131,7 +107,6 @@ const episodes = (
 
   return {
     ...shared,
-    loading: `${baseUrl}/c_scale,h_${halfHeight},w_${halfWidth}/v1556844699/shangri-lashow/extras/loading.gif`,
     ep01Title: `${widthUrl}/v1554831220/shangri-lashow/Episodes%20Page/Episode_1_-_Row_01_3840x432.png`,
     ep02Title: `${widthUrl}/v1554831226/shangri-lashow/Episodes%20Page/Episode_2_-_Row_01_3840x432.png`,
     ep03Title: `${widthUrl}/v1554831221/shangri-lashow/Episodes%20Page/Episode_3_-_Row_01_3840x432.png`,
@@ -156,39 +131,47 @@ const episodes = (
     ep12Locked: `${widthUrl}/v1554831228/shangri-lashow/Episodes%20Page/Episode_12_-_Row_01_3840x432_LOCKED.png`,
     ep13Title: `${widthUrl}/v1554831217/shangri-lashow/Episodes%20Page/Episode_13_-_Row_01_3840x432.png`,
     ep13Locked: `${widthUrl}/v1554831216/shangri-lashow/Episodes%20Page/Episode_13_-_Row_01_3840x432_LOCKED.png`,
-    tape01: `${widthUrl}/v1555733625/shangri-lashow/Episodes%20Page/Tape01.png`,
-    tape02: `${widthUrl}/v1555733625/shangri-lashow/Episodes%20Page/Tape02.png`,
-    tape03: `${widthUrl}/v1555733625/shangri-lashow/Episodes%20Page/Tape03.png`,
-    tape04: `${widthUrl}/v1555733625/shangri-lashow/Episodes%20Page/Tape04.png`,
-    tape05: `${widthUrl}/v1555733625/shangri-lashow/Episodes%20Page/Tape05.png`,
-    tape06: `${widthUrl}/v1555733625/shangri-lashow/Episodes%20Page/Tape06.png`,
-    tape07: `${widthUrl}/v1555733625/shangri-lashow/Episodes%20Page/Tape07.png`,
-    tape08: `${widthUrl}/v1555733625/shangri-lashow/Episodes%20Page/Tape08.png`,
-    tape09: `${widthUrl}/v1555733625/shangri-lashow/Episodes%20Page/Tape09.png`,
-    tape10: `${widthUrl}/v1555733625/shangri-lashow/Episodes%20Page/Tape10.png`,
-    tape11: `${widthUrl}/v1555733625/shangri-lashow/Episodes%20Page/Tape11.png`,
-    tape12: `${widthUrl}/v1555733625/shangri-lashow/Episodes%20Page/Tape12.png`,
-    tape13: `${widthUrl}/v1555733625/shangri-lashow/Episodes%20Page/Tape13.png`,
-    blankScreen: `${scaleUrl}/v1554831220/shangri-lashow/Episodes%20Page/Blank_Screen_01.png`,
-    tvWithBackground: `${scaleUrl}/v1555452236/shangri-lashow/Episodes%20Page/TVwithBackground1920w.png`
+    tape01: `${scaleDownUrl}/v1555733625/shangri-lashow/Episodes%20Page/Tape01.png`,
+    tape02: `${scaleDownUrl}/v1555733625/shangri-lashow/Episodes%20Page/Tape02.png`,
+    tape03: `${scaleDownUrl}/v1555733625/shangri-lashow/Episodes%20Page/Tape03.png`,
+    tape04: `${scaleDownUrl}/v1555733625/shangri-lashow/Episodes%20Page/Tape04.png`,
+    tape05: `${scaleDownUrl}/v1555733625/shangri-lashow/Episodes%20Page/Tape05.png`,
+    tape06: `${scaleDownUrl}/v1555733625/shangri-lashow/Episodes%20Page/Tape06.png`,
+    tape07: `${scaleDownUrl}/v1555733625/shangri-lashow/Episodes%20Page/Tape07.png`,
+    tape08: `${scaleDownUrl}/v1555733625/shangri-lashow/Episodes%20Page/Tape08.png`,
+    tape09: `${scaleDownUrl}/v1555733625/shangri-lashow/Episodes%20Page/Tape09.png`,
+    tape10: `${scaleDownUrl}/v1555733625/shangri-lashow/Episodes%20Page/Tape10.png`,
+    tape11: `${scaleDownUrl}/v1555733625/shangri-lashow/Episodes%20Page/Tape11.png`,
+    tape12: `${scaleDownUrl}/v1555733625/shangri-lashow/Episodes%20Page/Tape12.png`,
+    tape13: `${scaleDownUrl}/v1555733625/shangri-lashow/Episodes%20Page/Tape13.png`,
+    blankScreen: `${scaleDownUrl}/v1554831220/shangri-lashow/Episodes%20Page/Blank_Screen_01.png`,
+    tvWithBackground: `${widthUrl}/v1555452236/shangri-lashow/Episodes%20Page/TVwithBackground1920w.png`
   }
 }
 
-const videos = () => {
+const videos = (xFactor = null) => {
+  const adjustment = 1.1
+  let scaleParam = ''
+
+  if (xFactor && xFactor !== 1) {
+    const wScale = (xFactor * adjustment).toFixed(2)
+    scaleParam = xFactor ? `/c_scale,w_${wScale}` : ''
+  }
+
   return {
-    ep01Trailer: `${baseVideoUrl}/v1555731904/shangri-lashow/video/Episode01Trailer.mp4`,
-    ep02Trailer: `${baseVideoUrl}/v1555809472/shangri-lashow/video/Episode04Trailer.mp4`,
-    ep03Trailer: `${baseVideoUrl}/v1555809473/shangri-lashow/video/Episode11Trailer.mp4`,
-    ep04Trailer: `${baseVideoUrl}/v1555809475/shangri-lashow/video/Episode02Trailer.mp4`,
-    ep05Trailer: `${baseVideoUrl}/v1555809476/shangri-lashow/video/Episode07Trailer.mp4`,
-    ep06Trailer: `${baseVideoUrl}/v1555809478/shangri-lashow/video/Episode05Trailer.mp4`,
-    ep07Trailer: `${baseVideoUrl}/v1555809479/shangri-lashow/video/Episode06Trailer.mp4`,
-    ep08Trailer: `${baseVideoUrl}/v1555809479/shangri-lashow/video/Episode08Trailer.mp4`,
-    ep09Trailer: `${baseVideoUrl}/v1555809480/shangri-lashow/video/Episode03Trailer.mp4`,
-    ep10Trailer: `${baseVideoUrl}/v1555809481/shangri-lashow/video/Episode09Trailer.mp4`,
-    ep11Trailer: `${baseVideoUrl}/v1555809481/shangri-lashow/video/Episode10Trailer.mp4`,
-    ep12Trailer: `${baseVideoUrl}/v1555809483/shangri-lashow/video/Episode12Trailer.mp4`,
-    ep13Trailer: `${baseVideoUrl}/v1555809484/shangri-lashow/video/Episode13Trailer.mp4`
+    ep01Trailer: `${baseVideoUrl}${scaleParam}/v1555731904/shangri-lashow/video/Episode01Trailer.mp4`,
+    ep02Trailer: `${baseVideoUrl}${scaleParam}/v1555809472/shangri-lashow/video/Episode04Trailer.mp4`,
+    ep03Trailer: `${baseVideoUrl}${scaleParam}/v1555809473/shangri-lashow/video/Episode11Trailer.mp4`,
+    ep04Trailer: `${baseVideoUrl}${scaleParam}/v1555809475/shangri-lashow/video/Episode02Trailer.mp4`,
+    ep05Trailer: `${baseVideoUrl}${scaleParam}/v1555809476/shangri-lashow/video/Episode07Trailer.mp4`,
+    ep06Trailer: `${baseVideoUrl}${scaleParam}/v1555809478/shangri-lashow/video/Episode05Trailer.mp4`,
+    ep07Trailer: `${baseVideoUrl}${scaleParam}/v1555809479/shangri-lashow/video/Episode06Trailer.mp4`,
+    ep08Trailer: `${baseVideoUrl}${scaleParam}/v1555809479/shangri-lashow/video/Episode08Trailer.mp4`,
+    ep09Trailer: `${baseVideoUrl}${scaleParam}/v1555809480/shangri-lashow/video/Episode03Trailer.mp4`,
+    ep10Trailer: `${baseVideoUrl}${scaleParam}/v1555809481/shangri-lashow/video/Episode09Trailer.mp4`,
+    ep11Trailer: `${baseVideoUrl}${scaleParam}/v1555809481/shangri-lashow/video/Episode10Trailer.mp4`,
+    ep12Trailer: `${baseVideoUrl}${scaleParam}/v1555809483/shangri-lashow/video/Episode12Trailer.mp4`,
+    ep13Trailer: `${baseVideoUrl}${scaleParam}/v1555809484/shangri-lashow/video/Episode13Trailer.mp4`
   }
 }
 
@@ -198,20 +181,20 @@ const episodesLoci = isMobile => {
   if (isMobile) {
     return {
       ...shared,
-      blankScreen: { x: 10, y: 63 },
-      tape01: { x: 100, y: 285 + 1100 },
-      tape02: { x: 100, y: 371 + 1100 },
-      tape03: { x: 100, y: 453 + 1100 },
-      tape04: { x: 100, y: 539 + 1100 },
-      tape05: { x: 100, y: 628 + 1100 },
-      tape06: { x: 100, y: 710 + 1100 },
-      tape07: { x: 600, y: 793 + 500 },
-      tape08: { x: 600, y: 874 + 500 },
-      tape09: { x: 600, y: 959 + 500 },
-      tape10: { x: 600, y: 1043 + 500 },
-      tape11: { x: 600, y: 1130 + 500 },
-      tape12: { x: 600, y: 1210 + 500 },
-      tape13: { x: 600, y: 1296 + 500 }
+      blankScreen: { x: 10, y: 110 },
+      tape01: { x: 0, y: 1500 },
+      tape02: { x: 0, y: 1642 },
+      tape03: { x: 0, y: 1779 },
+      tape04: { x: 0, y: 1916 },
+      tape05: { x: 0, y: 2053 },
+      tape06: { x: 0, y: 2190 },
+      tape07: { x: 0, y: 2327 },
+      tape08: { x: 0, y: 2464 },
+      tape09: { x: 0, y: 2600 },
+      tape10: { x: 0, y: 2738 },
+      tape11: { x: 0, y: 2875 },
+      tape12: { x: 0, y: 3002 },
+      tape13: { x: 0, y: 3150 }
     }
   }
 

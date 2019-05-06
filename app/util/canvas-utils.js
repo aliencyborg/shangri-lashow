@@ -31,8 +31,15 @@ function buildImage(
   return konvaImg
 }
 
-async function buildVideo(videoObj, name, src) {
-  const video = buildImage(videoObj, name, 144, 300)
+async function buildVideo(videoObj, name, src, isMobile = false, imageScale) {
+  let x = 144
+  let y = 300
+
+  if (isMobile) {
+    x = 120
+    y = 230
+  }
+  const video = buildImage(videoObj, name, x, y, imageScale)
 
   return new Promise(resolve => {
     videoObj.addEventListener(`loadedmetadata`, () => {
@@ -49,14 +56,6 @@ function fitStageIntoParentContainer(id, stage, stageHeight, stageWidth) {
 
   const containerWidth = container.offsetWidth
   const xScale = containerWidth / stageWidth
-  console.log('fitStage', {
-    id,
-    stage,
-    stageHeight,
-    stageWidth,
-    containerWidth,
-    xScale
-  })
 
   stage.width(stageWidth * xScale)
   stage.height(stageHeight * xScale)
