@@ -328,10 +328,28 @@ const homeLoci = isMobile => {
   }
 }
 
+const icons = isMobile => {
+  return {
+    amazon: `${baseUrl}/v1554831022/shangri-lashow/Icon%20Buttons/Amazon_Icon_01.png`,
+    bandcamp: `${baseUrl}/v1554831022/shangri-lashow/Icon%20Buttons/Bandcamp_Icon_01.png`,
+    facebook: `${baseUrl}/v1554831022/shangri-lashow/Icon%20Buttons/Facebook_Icon_01.png`,
+    home: `${baseUrl}/v1555818651/shangri-lashow/Icon%20Buttons/Home_Icon_01.png`,
+    instagram: `${baseUrl}/v1554831022/shangri-lashow/Icon%20Buttons/Instagram_Icon_01.png`,
+    mail: `${baseUrl}/v1554831022/shangri-lashow/Icon%20Buttons/Mail_Icon_01.png`,
+    patreon: `${baseUrl}/v1554831022/shangri-lashow/Icon%20Buttons/Patreon_Icon_01.png`,
+    shopify: `${baseUrl}/v1554831022/shangri-lashow/Icon%20Buttons/Shopify_Icon_01.png`,
+    surgery: `${baseUrl}/v1554831022/shangri-lashow/Icon%20Buttons/The_Surgery_Room_Icon_01.png`,
+    twitter: `${baseUrl}/v1554831022/shangri-lashow/Icon%20Buttons/Twitter_Icon_01.png`,
+    vimeo: `${baseUrl}/v1554831022/shangri-lashow/Icon%20Buttons/Vimeo_Icon_01.png`,
+    youtube: `${baseUrl}/v1554831022/shangri-lashow/Icon%20Buttons/YouTube_Icon_01.png`
+  }
+}
+
 export default {
   episodes,
   episodesLoci,
   home,
   homeLoci,
+  icons,
   videos
 }

@@ -1,11 +1,4 @@
 <div id="episodes-canvas" class="h-full w-full">
-  {{#if this.isMobile}}
-    <MobileNavbar>
-      <div class="h-12 bg-black">
-        {{yield}}
-      </div>
-    </MobileNavbar>
-  {{/if}}
   <div {{did-insert this.setup}} {{will-destroy this.teardown}} id="episodes-container" class="bg-blackest">
     {{yield}}
   </div>
