@@ -1,5 +1,6 @@
 import Component from '@glimmer/component'
 import Konva from 'konva'
+import { debounce } from '@ember/runloop'
 import { inject as service } from '@ember/service'
 import {
   buildImage,
@@ -143,6 +144,7 @@ export default class EpisodesCanvasComponent extends Component {
 
     const backgroundImg = new Konva.Image({
       image: backgroundImageObj,
+      preventDefault: false,
       x: 0,
       y: Math.floor(titleHeight * factorX)
     })
@@ -568,6 +570,7 @@ export default class EpisodesCanvasComponent extends Component {
     }
 
     function selectTape(name) {
+      console.log('selectTape', name)
       const titleImg = imageMap[name].isLocked
         ? imageMap[name].lockedTitle
         : imageMap[name].title
@@ -628,18 +631,25 @@ export default class EpisodesCanvasComponent extends Component {
 
     this.stage.draw()
 
-    bgLayer.on(`click touchstart`, togglePauseTrailer)
+    bgLayer.on('tap', () => {
+      // bgLayer.on('click tap', () => {
+      console.log('click tap bgLayer')
+      debounce({}, togglePauseTrailer, 150)
+    })
 
-    tapeLayer.on(`click touchstart`, evt => {
+    tapeLayer.on('tap', evt => {
+      // tapeLayer.on('click tap', evt => {
+      console.log('click tap tapeLayer')
       const {
         target: {
           attrs: { name }
         }
       } = evt
-      selectTape(name)
+
+      debounce({}, selectTape, name, 150)
     })
 
-    tapeLayer.on(`mouseover`, evt => {
+    tapeLayer.on('mouseover', evt => {
       const { target } = evt
 
       setCursorP()
@@ -650,7 +660,7 @@ export default class EpisodesCanvasComponent extends Component {
       tapeLayer.draw()
     })
 
-    tapeLayer.on(`mouseout`, evt => {
+    tapeLayer.on('mouseout', evt => {
       const { target } = evt
 
       setCursorD()
@@ -661,7 +671,7 @@ export default class EpisodesCanvasComponent extends Component {
       tapeLayer.draw()
     })
 
-    window.addEventListener(`resize`, this.resizeFit)
+    window.addEventListener('resize', this.resizeFit)
   }
 
   teardown = async () => {

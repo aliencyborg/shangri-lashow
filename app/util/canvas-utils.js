@@ -17,13 +17,14 @@ function buildImage(
   const konvaImg = new Konva.Image({
     image: imageObj,
     name,
+    preventDefault: false,
     visible,
     x: scaledX,
     y: scaledY
   })
 
   if (callback) {
-    konvaImg.on('click touchstart', () => {
+    konvaImg.on('click tap', () => {
       callback(callbackArg)
     })
   }
