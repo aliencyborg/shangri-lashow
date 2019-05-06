@@ -2,7 +2,7 @@
   {{#if isLoading}}
     <LoadingSpinner />
   {{/if}}
-  <EpisodesCanvas @stopLoading={{stopLoading}}>
+  <EpisodesCanvas @stopLoading={{this.stopLoading}}>
     {{outlet}}
   </EpisodesCanvas>
   <IconRow></IconRow>

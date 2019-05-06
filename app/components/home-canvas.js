@@ -23,7 +23,6 @@ export default class HomeCanvasComponent extends Component {
   }
 
   setup = async () => {
-    const loadingImageObj = new Image()
     const interiorImageObj = new Image()
 
     const castCrewBtnImageObj = new Image()
@@ -76,18 +75,6 @@ export default class HomeCanvasComponent extends Component {
     const bgLayer = makeLayer()
     const fgLayer = makeLayer()
     this.stage = makeStage('home-container', stageHeight, stageWidth)
-
-    const loadingImg = new Konva.Image({
-      image: loadingImageObj,
-      x: Math.floor(stageWidth / 4),
-      y: Math.floor(stageHeight / 8)
-    })
-
-    await imagePromise(loadingImageObj, imageSources.loading)
-
-    bgLayer.add(loadingImg)
-    this.stage.add(bgLayer)
-    this.stage.add(fgLayer)
 
     const interiorImg = new Konva.Image({
       height: stageHeight,
@@ -277,7 +264,6 @@ export default class HomeCanvasComponent extends Component {
 
     await imagePromise(interiorImageObj, imageSources.interior)
 
-    bgLayer.removeChildren()
     bgLayer.add(interiorImg)
     this.resizeFit()
 
@@ -343,7 +329,10 @@ export default class HomeCanvasComponent extends Component {
       youtopiaImg
     )
 
+    this.args.stopLoading()
     this.resizeFit()
+    this.stage.add(bgLayer)
+    this.stage.add(fgLayer)
 
     const resetImages = () => {
       for (let imageName in imageMap) {

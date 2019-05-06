@@ -570,7 +570,6 @@ export default class EpisodesCanvasComponent extends Component {
     }
 
     function selectTape(name) {
-      console.log('selectTape', name)
       const titleImg = imageMap[name].isLocked
         ? imageMap[name].lockedTitle
         : imageMap[name].title
@@ -631,15 +630,9 @@ export default class EpisodesCanvasComponent extends Component {
 
     this.stage.draw()
 
-    bgLayer.on('tap', () => {
-      // bgLayer.on('click tap', () => {
-      console.log('click tap bgLayer')
-      debounce({}, togglePauseTrailer, 150)
-    })
+    bgLayer.on('click tap', () => debounce({}, togglePauseTrailer, 150))
 
-    tapeLayer.on('tap', evt => {
-      // tapeLayer.on('click tap', evt => {
-      console.log('click tap tapeLayer')
+    tapeLayer.on('click tap', evt => {
       const {
         target: {
           attrs: { name }
@@ -675,6 +668,9 @@ export default class EpisodesCanvasComponent extends Component {
   }
 
   teardown = async () => {
+    if (this.currentTape) {
+      this.currentTape.pause()
+    }
     document.body.style.cursor = 'default'
     window.removeEventListener('resize', this.resizeFit)
     this.anim.stop()

@@ -41,13 +41,6 @@ const episodes = (
 ) => {
   const halfHeight = Math.floor(height / 2)
   const halfWidth = Math.floor(width / 2)
-  const scaleUrl = makeScaleUrl(
-    baseHeight,
-    baseWidth,
-    height,
-    width,
-    imageScale.x
-  )
   const scaleDownUrl = makeScaleUrl(
     baseHeight,
     baseWidth,

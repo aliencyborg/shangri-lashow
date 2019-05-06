@@ -1,5 +1,9 @@
 <div id="home" class="h-screen w-screen">
-  <HomeCanvas>
+  {{#if isLoading}}
+    <LoadingSpinner />
+  {{/if}}
+  <HomeCanvas @stopLoading={{this.stopLoading}}>
     {{outlet}}
   </HomeCanvas>
+  <IconRow></IconRow>
 </div>

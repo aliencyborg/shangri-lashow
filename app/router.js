@@ -11,7 +11,7 @@ Router.map(function() {
   this.route('episodes')
   this.route('games')
   this.route('give_back')
-  this.route('home')
+  this.route('home', { path: '/' })
   this.route('music')
   this.route('photos')
   this.route('shop')
