@@ -134,9 +134,13 @@ export default class EpisodesCanvasComponent extends Component {
     )
 
     let videoSuffix = 'webm'
-    const { browser } = this.userAgent
+    const { browser, os } = this.userAgent
 
     if (browser.isSafari) {
+      videoSuffix = 'mp4'
+    }
+
+    if (os.isIOS) {
       videoSuffix = 'mp4'
     }
 
