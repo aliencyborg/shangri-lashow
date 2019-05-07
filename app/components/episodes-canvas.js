@@ -135,7 +135,11 @@ export default class EpisodesCanvasComponent extends Component {
 
     let videoSuffix = 'webm'
     const { browser } = this.userAgent
-    console.log(browser)
+
+    if (browser.isSafari) {
+      videoSuffix = 'mp4'
+    }
+
     const videoSources = images.videos(factorX, videoSuffix)
 
     const videoLayer = makeLayer() // behind the "background"

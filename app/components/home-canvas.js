@@ -18,6 +18,10 @@ export default class HomeCanvasComponent extends Component {
   resizeFit
   stage
 
+  external = url => {
+    window.location.href = url
+  }
+
   navigate = path => {
     this.router.transitionTo(path)
   }
@@ -243,8 +247,8 @@ export default class HomeCanvasComponent extends Component {
       imageLoci.youtopiaBtn.y,
       imageScale,
       false,
-      this.navigate,
-      'youtopia'
+      this.external,
+      'http://www.youtopiaindustries.com'
     )
     const youtopiaImg = buildImage(
       youtopiaImageObj,
