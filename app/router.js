@@ -16,7 +16,6 @@ Router.map(function() {
   this.route('photos')
   this.route('shop')
   this.route('trailer')
-  this.route('youtopia')
 
   // 404 page catch-all
   this.route('not-found', { path: '/*path' })

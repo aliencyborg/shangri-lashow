@@ -146,8 +146,8 @@ export default class HomeCanvasComponent extends Component {
       imageLoci.giveBackBtn.y,
       imageScale,
       false,
-      this.navigate,
-      'give_back'
+      this.external,
+      'https://www.calfund.org/homela/'
     )
     const giveBackImg = buildImage(
       giveBackImageObj,

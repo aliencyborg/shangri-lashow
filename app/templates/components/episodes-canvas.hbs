@@ -1,10 +1,5 @@
-<div id="episodes-canvas" class="h-full w-full">
+<div id="episodes-canvas" class="w-full">
   <div {{did-insert this.setup}} {{will-destroy this.teardown}} id="episodes-container" class="bg-blackest">
     {{yield}}
   </div>
-  <BottomBar>
-    <div class="h-24 bg-black">
-      {{yield}}
-    </div>
-  </BottomBar>
 </div>
