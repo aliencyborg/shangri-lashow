@@ -1,4 +1,17 @@
-<div id="music" class="h-full w-screen flex">
-  <MusicPlayer class="flex-1"/>
-  <div class="bg-contain bg-tape-player bg-black bg-no-repeat flex-1"></div>
+<div id="music" class="min-h-full w-full flex flex-col">
+  {{#if this.isMobile}}
+    <div class="flex flex-col flex-grow">
+      <div class="flex flex-col min-h-full">
+        <MusicPlayer />
+      </div>
+      <img class="flex-shrink" src={{this.bgSource}} />
+    </div>
+  {{else}}
+    <div class="flex flex-grow">
+      <div class="flex flex-col min-h-full">
+        <MusicPlayer />
+      </div>
+      <img class="flex-shrink" src={{this.bgSource}} />
+    </div>
+  {{/if}}
 </div>

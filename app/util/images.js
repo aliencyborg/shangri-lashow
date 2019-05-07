@@ -346,7 +346,14 @@ const icons = () => {
   }
 }
 
+const backgrounds = () => {
+  return {
+    music: `${baseUrl}/v1556501535/shangri-lashow/Music%20Page/Music_Page_01_1920x1080.png`
+  }
+}
+
 export default {
+  backgrounds,
   episodes,
   episodesLoci,
   home,
