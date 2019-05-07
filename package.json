@@ -45,6 +45,7 @@
     "ember-resolver": "^5.1.3",
     "ember-responsive": "^3.0.0",
     "ember-source": "https://s3.amazonaws.com/builds.emberjs.com/canary/shas/27255073091ef4c020ed8bf552c54f5b3f54d25b.tgz",
+    "ember-useragent": "^0.9.1",
     "eslint-config-prettier": "^2.9.0",
     "eslint-config-prettier-standard": "^2.0.0",
     "eslint-config-standard": "^11.0.0",

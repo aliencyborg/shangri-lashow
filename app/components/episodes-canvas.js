@@ -40,6 +40,7 @@ function _isPaused(videoObj) {
 export default class EpisodesCanvasComponent extends Component {
   @service media
   @service router
+  @service userAgent
 
   anim
   currentTape
@@ -131,7 +132,11 @@ export default class EpisodesCanvasComponent extends Component {
       imageScale,
       this.isMobile
     )
-    const videoSources = images.videos(factorX)
+
+    let videoSuffix = 'webm'
+    const { browser } = this.userAgent
+    console.log(browser)
+    const videoSources = images.videos(factorX, videoSuffix)
 
     const videoLayer = makeLayer() // behind the "background"
     const bgLayer = makeLayer()
@@ -592,10 +597,12 @@ export default class EpisodesCanvasComponent extends Component {
     this.stage.add(tapeLayer)
     this.stage.add(titleLayer)
 
-    await imagePromise(blankScreenImageObj, imageSources.blankScreen)
-    videoLayer.add(blankScreenImg)
+    await Promise.all([
+      imagePromise(blankScreenImageObj, imageSources.blankScreen),
+      imagePromise(backgroundImageObj, imageSources.tvWithBackground)
+    ])
 
-    await imagePromise(backgroundImageObj, imageSources.tvWithBackground)
+    videoLayer.add(blankScreenImg)
     bgLayer.add(backgroundImg)
 
     await Promise.all([
@@ -632,8 +639,10 @@ export default class EpisodesCanvasComponent extends Component {
 
     this.stage.draw()
 
-    // TODO make this work better and add a paused visual
-    // bgLayer.on('click tap', () => debounce({}, togglePauseTrailer, 150))
+    // TODO make this work better and add a paused visual on mobile
+    if (!this.isMobile) {
+      bgLayer.on('click tap', () => debounce({}, togglePauseTrailer, 150))
+    }
 
     tapeLayer.on('click tap', evt => {
       const {

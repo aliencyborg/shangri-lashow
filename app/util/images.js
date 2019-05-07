@@ -1,5 +1,5 @@
 const baseUrl = 'https://res.cloudinary.com/aliencyborg-llc/image/upload'
-const baseVideoUrl = 'https://res.cloudinary.com/aliencyborg-llc/video/upload'
+const baseVideoUrl = 'https://res.cloudinary.com/aliencyborg-llc/video/upload/'
 const makeScaleParam = (hScale, wScale) => {
   let hParam = ''
   let wParam = ''
@@ -142,29 +142,29 @@ const episodes = (
   }
 }
 
-const videos = (xFactor = null) => {
-  const adjustment = 1.1
-  let scaleParam = ''
+const videos = (xFactor = null, suffix = 'webm') => {
+  let scaleParam = 'q_auto:eco'
 
   if (xFactor && xFactor !== 1) {
+    const adjustment = 1.1
     const wScale = (xFactor * adjustment).toFixed(2)
-    scaleParam = xFactor ? `/c_scale,w_${wScale}` : ''
+    scaleParam = xFactor ? `q_auto:eco,c_scale,w_${wScale}` : ''
   }
 
   return {
-    ep01Trailer: `${baseVideoUrl}${scaleParam}/v1555731904/shangri-lashow/video/Episode01Trailer.mp4`,
-    ep02Trailer: `${baseVideoUrl}${scaleParam}/v1555809472/shangri-lashow/video/Episode04Trailer.mp4`,
-    ep03Trailer: `${baseVideoUrl}${scaleParam}/v1555809473/shangri-lashow/video/Episode11Trailer.mp4`,
-    ep04Trailer: `${baseVideoUrl}${scaleParam}/v1555809475/shangri-lashow/video/Episode02Trailer.mp4`,
-    ep05Trailer: `${baseVideoUrl}${scaleParam}/v1555809476/shangri-lashow/video/Episode07Trailer.mp4`,
-    ep06Trailer: `${baseVideoUrl}${scaleParam}/v1555809478/shangri-lashow/video/Episode05Trailer.mp4`,
-    ep07Trailer: `${baseVideoUrl}${scaleParam}/v1555809479/shangri-lashow/video/Episode06Trailer.mp4`,
-    ep08Trailer: `${baseVideoUrl}${scaleParam}/v1555809479/shangri-lashow/video/Episode08Trailer.mp4`,
-    ep09Trailer: `${baseVideoUrl}${scaleParam}/v1555809480/shangri-lashow/video/Episode03Trailer.mp4`,
-    ep10Trailer: `${baseVideoUrl}${scaleParam}/v1555809481/shangri-lashow/video/Episode09Trailer.mp4`,
-    ep11Trailer: `${baseVideoUrl}${scaleParam}/v1555809481/shangri-lashow/video/Episode10Trailer.mp4`,
-    ep12Trailer: `${baseVideoUrl}${scaleParam}/v1555809483/shangri-lashow/video/Episode12Trailer.mp4`,
-    ep13Trailer: `${baseVideoUrl}${scaleParam}/v1555809484/shangri-lashow/video/Episode13Trailer.mp4`
+    ep01Trailer: `${baseVideoUrl}${scaleParam}/v1555731904/shangri-lashow/video/Episode01Trailer.${suffix}`,
+    ep04Trailer: `${baseVideoUrl}${scaleParam}/v1555809472/shangri-lashow/video/Episode04Trailer.${suffix}`,
+    ep11Trailer: `${baseVideoUrl}${scaleParam}/v1555809473/shangri-lashow/video/Episode11Trailer.${suffix}`,
+    ep02Trailer: `${baseVideoUrl}${scaleParam}/v1555809475/shangri-lashow/video/Episode02Trailer.${suffix}`,
+    ep07Trailer: `${baseVideoUrl}${scaleParam}/v1555809476/shangri-lashow/video/Episode07Trailer.${suffix}`,
+    ep05Trailer: `${baseVideoUrl}${scaleParam}/v1555809478/shangri-lashow/video/Episode05Trailer.${suffix}`,
+    ep06Trailer: `${baseVideoUrl}${scaleParam}/v1555809479/shangri-lashow/video/Episode06Trailer.${suffix}`,
+    ep08Trailer: `${baseVideoUrl}${scaleParam}/v1555809479/shangri-lashow/video/Episode08Trailer.${suffix}`,
+    ep03Trailer: `${baseVideoUrl}${scaleParam}/v1555809480/shangri-lashow/video/Episode03Trailer.${suffix}`,
+    ep09Trailer: `${baseVideoUrl}${scaleParam}/v1555809481/shangri-lashow/video/Episode09Trailer.${suffix}`,
+    ep10Trailer: `${baseVideoUrl}${scaleParam}/v1555809481/shangri-lashow/video/Episode10Trailer.${suffix}`,
+    ep12Trailer: `${baseVideoUrl}${scaleParam}/v1555809483/shangri-lashow/video/Episode12Trailer.${suffix}`,
+    ep13Trailer: `${baseVideoUrl}${scaleParam}/v1555809484/shangri-lashow/video/Episode13Trailer.${suffix}`
   }
 }
 
