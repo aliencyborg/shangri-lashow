@@ -28,8 +28,6 @@ export default class HomeCanvasComponent extends Component {
   setup = async () => {
     const interiorImageObj = new Image()
 
-    const castCrewBtnImageObj = new Image()
-    const castCrewImageObj = new Image()
     const episodesBtnImageObj = new Image()
     const episodesImageObj = new Image()
     const gamesBtnImageObj = new Image()
@@ -87,24 +85,6 @@ export default class HomeCanvasComponent extends Component {
       y: 0
     })
 
-    const castCrewBtnImg = buildImage(
-      castCrewBtnImageObj,
-      'castCrew',
-      imageLoci.castCrewBtn.x,
-      imageLoci.castCrewBtn.y,
-      imageScale,
-      false,
-      this.isMobile,
-      this.navigate,
-      'cast_crew'
-    )
-    const castCrewImg = buildImage(
-      castCrewImageObj,
-      'castCrew',
-      imageLoci.castCrew.x,
-      imageLoci.castCrew.y,
-      imageScale
-    )
     const episodesBtnImg = buildImage(
       episodesBtnImageObj,
       'episodes',
@@ -287,8 +267,6 @@ export default class HomeCanvasComponent extends Component {
     }
 
     await Promise.all([
-      imagePromise(castCrewBtnImageObj, imageSources.castCrewBtn),
-      imagePromise(castCrewImageObj, imageSources.castCrew),
       imagePromise(episodesBtnImageObj, imageSources.episodesBtn),
       imagePromise(episodesImageObj, imageSources.episodes),
       imagePromise(gamesBtnImageObj, imageSources.gamesBtn),
@@ -308,8 +286,6 @@ export default class HomeCanvasComponent extends Component {
     ])
 
     const imageMap = {
-      castCrew: [castCrewImg, castCrewBtnImg],
-      episodes: [episodesImg, episodesBtnImg],
       games: [gamesImg, gamesBtnImg],
       giveBack: [giveBackImg, giveBackBtnImg],
       music: [musicImg, musicBtnImg],
@@ -321,8 +297,6 @@ export default class HomeCanvasComponent extends Component {
     }
 
     fgLayer.add(
-      castCrewBtnImg,
-      castCrewImg,
       episodesBtnImg,
       episodesImg,
       gamesBtnImg,
