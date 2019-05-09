@@ -352,10 +352,33 @@ const backgrounds = () => {
   }
 }
 
+const games = isMobile => {
+  if (isMobile) {
+    return {
+      page: `${baseUrl}/v1556593009/shangri-lashow/Games%20Page/Games_Page_01_MOBILE.png`
+    }
+  }
+
+  return {
+    page: `${baseUrl}//v1556593380/shangri-lashow/Games%20Page/Games_Page_01.psd`
+  }
+}
+
+const bigTime = () => {
+  return {
+    button: `${baseUrl}/v1556593006/shangri-lashow/Games%20Page/Big_Time_Button_01.png`,
+    clapperSprite: `${baseUrl}/v1557270332/shangri-lashow/Games%20Page/Clapper_Sprite_01.png`,
+    mainSprite: `${baseUrl}/v1557270332/shangri-lashow/Games%20Page/Big_Time_Video_Game_Sprites_TEST_04.png`,
+    titleCard: `${baseUrl}/v1557270336/shangri-lashow/Games%20Page/Big_Time_Title_Card_01.png`
+  }
+}
+
 export default {
   backgrounds,
+  bigTime,
   episodes,
   episodesLoci,
+  games,
   home,
   homeLoci,
   icons,
