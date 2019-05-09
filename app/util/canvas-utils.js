@@ -25,7 +25,7 @@ function buildImage(
   })
 
   if (callback) {
-    const action = isMobile ? 'tap' : 'touchstart'
+    const action = isMobile ? 'tap' : 'click'
     konvaImg.on(action, () => callback(callbackArg))
   }
 

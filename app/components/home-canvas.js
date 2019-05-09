@@ -286,6 +286,7 @@ export default class HomeCanvasComponent extends Component {
     ])
 
     const imageMap = {
+      episodes: [episodesImg, episodesBtnImg],
       games: [gamesImg, gamesBtnImg],
       giveBack: [giveBackImg, giveBackBtnImg],
       music: [musicImg, musicBtnImg],
