@@ -148,6 +148,7 @@ export default class HomeCanvasComponent extends Component {
       imageLoci.giveBackBtn.y,
       imageScale,
       false,
+      this.isMobile,
       this.external,
       'https://www.calfund.org/homela/'
     )
@@ -253,6 +254,7 @@ export default class HomeCanvasComponent extends Component {
       imageLoci.youtopiaBtn.y,
       imageScale,
       false,
+      this.isMobile,
       this.external,
       'http://www.youtopiaindustries.com'
     )
