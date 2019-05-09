@@ -1,5 +1,6 @@
 const baseUrl = 'https://res.cloudinary.com/aliencyborg-llc/image/upload'
 const baseVideoUrl = 'https://res.cloudinary.com/aliencyborg-llc/video/upload/'
+const ecoUrl = `${baseUrl}/q_auto:eco`
 const makeScaleParam = (hScale, wScale) => {
   let hParam = ''
   let wParam = ''
@@ -360,7 +361,7 @@ const games = isMobile => {
   }
 
   return {
-    page: `${baseUrl}//v1556593380/shangri-lashow/Games%20Page/Games_Page_01.psd`
+    page: `${baseUrl}//v1556593380/shangri-lashow/Games%20Page/Games_Page_01.png`
   }
 }
 
@@ -373,6 +374,57 @@ const bigTime = () => {
   }
 }
 
+const photos = (width = 540) => {
+  const scaleParam = `c_scale,w_${width}`
+  const scaleUrl = `${ecoUrl},${scaleParam}`
+
+  return {
+    bethEatingHotdog: `${scaleUrl}/v1557376175/shangri-lashow/Photos/Beth_Eating_Hotdog_01.png`,
+    bethSisterKitchen: `${scaleUrl}/v1557376176/shangri-lashow/Photos/Beth_Sister_Kitchen_01.png`,
+    bethOnCar: `${scaleUrl}/v1557376176/shangri-lashow/Photos/Beth_on_Car_01.png`,
+    cityWorkers: `${scaleUrl}/v1557376176/shangri-lashow/Photos/City_Workers_02.png`,
+    drMarvinNestor: `${scaleUrl}/v1557376177/shangri-lashow/Photos/Dr._Marvin_Nestor_01.png`,
+    fish: `${scaleUrl}/v1557376176/shangri-lashow/Photos/Fish_04.png`,
+    gilHeadshots: `${scaleUrl}/v1557376177/shangri-lashow/Photos/Gil_Headshots_02.png`,
+    gilLepreConHeadshot: `${scaleUrl}/v1557376178/shangri-lashow/Photos/Gil_Lepre-Con_Headshot_01.png`,
+    gilWithUke: `${scaleUrl}/v1557376179/shangri-lashow/Photos/Gil_With_Uke_01_FIND_YOUR.png`,
+    gilAtCarwash: `${scaleUrl}/v1557376177/shangri-lashow/Photos/Gil_at_Carwash_02_FX.png`,
+    gilOnTrain: `${scaleUrl}/v1557378713/shangri-lashow/Photos/Gil_on_Train_02b.png`,
+    handsomeRobHotdot: `${scaleUrl}/v1557376178/shangri-lashow/Photos/Handsome_Rob_Hotdog_01_1920x1080.png`,
+    handsomeRobTableRead: `${scaleUrl}/v1557376180/shangri-lashow/Photos/Handsome_Rob_Table_Read_01.png`,
+    hotdogAndJew: `${scaleUrl}/v1557376180/shangri-lashow/Photos/Hotdog_and_Jew-C_03.png`,
+    hotdogAndNina: `${scaleUrl}/v1557376179/shangri-lashow/Photos/Hotdog_and_Nina_01.png`,
+    jewCCDs: `${scaleUrl}/v1557376180/shangri-lashow/Photos/Jew-C_CDs_01.png`,
+    jewCStarKiss: `${scaleUrl}/v1557376182/shangri-lashow/Photos/Jew-C_Star_Kiss_01.png`,
+    jewCOnCar: `${scaleUrl}/v1557376182/shangri-lashow/Photos/Jew-C_on_Car_01.png`,
+    judySuntan: `${scaleUrl}/v1557376182/shangri-lashow/Photos/Judy_Suntan_03.png`,
+    juicyOnIpod: `${scaleUrl}/v1557376182/shangri-lashow/Photos/Juicy_on_Ipod_01.png`,
+    laSkyline: `${scaleUrl}/v1557376184/shangri-lashow/Photos/LA_Skyline_03.png`,
+    maxAndNickInfo: `${scaleUrl}/v1557376184/shangri-lashow/Photos/Max_and_Nick_Info_01.png`,
+    maxAndNickMansion: `${scaleUrl}/v1557376184/shangri-lashow/Photos/Max_and_Nick_Mansion_05.png`,
+    nickMilkshake: `${scaleUrl}/v1557376187/shangri-lashow/Photos/Nick_Milkshake_02.png`,
+    nickShackInt: `${scaleUrl}/v1557376189/shangri-lashow/Photos/Nick_Shack_INT_04.png`,
+    nickSmokeOUt: `${scaleUrl}/v1557376189/shangri-lashow/Photos/Nick_Smoke_Out_05.png`,
+    nickAndGilStreet: `${scaleUrl}/v1557376184/shangri-lashow/Photos/Nick_and_Gil_Steet_01.png`,
+    nickAndGilTunnel: `${scaleUrl}/v1557376185/shangri-lashow/Photos/Nick_and_Gil_Tunnel_1_01.png`,
+    nickAndShack: `${scaleUrl}/v1557376185/shangri-lashow/Photos/Nick_and_Shack_02.png`,
+    nickAtCarwash: `${scaleUrl}/v1557376186/shangri-lashow/Photos/Nick_at_Carwash_01_FX.png`,
+    nickAtRiver: `${scaleUrl}/v1557376187/shangri-lashow/Photos/Nick_at_River_03.png`,
+    nickInDumpster: `${scaleUrl}/v1557376187/shangri-lashow/Photos/Nick_in_Dumpster_01_TREATED.png`,
+    nickOnToilet: `${scaleUrl}/v1557376188/shangri-lashow/Photos/Nick_on_Toilet_01.png`,
+    nickYellsAtFish: `${scaleUrl}/v1557376189/shangri-lashow/Photos/Nick_yells_at_Fish_01.png`,
+    nickYouAreHere: `${scaleUrl}/v1557376191/shangri-lashow/Photos/Nick_you_are_here_03.png`,
+    nickyKaplow: `${scaleUrl}/v1557376190/shangri-lashow/Photos/Nicky_Kaplow_02.png`,
+    scibsCU: `${scaleUrl}/v1557376252/shangri-lashow/Photos/Scribs_CU_02.png`,
+    scribsStudioNight: `${scaleUrl}/v1557376253/shangri-lashow/Photos/Scribs_Studio_Night_01.png`,
+    scribsTrimmingBush: `${scaleUrl}/v1557376254/shangri-lashow/Photos/Scribs_Trimming_Bush_05.png`,
+    scribsAndCar: `${scaleUrl}/v1557376250/shangri-lashow/Photos/Scribs_and_Car_06.png`,
+    scribsAndHotdot: `${scaleUrl}/v1557376251/shangri-lashow/Photos/Scribs_and_Hotdog_2_01.png`,
+    // shackExtNight: `${scaleUrl}/v1557376255/shangri-lashow/Photos/Shack_EXT_Night_01.png`,
+    tableRead: `${scaleUrl}/v1557376256/shangri-lashow/Photos/Table_Read_01.png`
+  }
+}
+
 export default {
   backgrounds,
   bigTime,
@@ -382,5 +434,6 @@ export default {
   home,
   homeLoci,
   icons,
+  photos,
   videos
 }

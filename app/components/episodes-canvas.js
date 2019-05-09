@@ -27,15 +27,15 @@ function _isPlaying(videoObj) {
   )
 }
 
-function _isPaused(videoObj) {
-  if (!videoObj) return false
-  return !!(
-    videoObj.currentTime > 0 &&
-    videoObj.paused &&
-    !videoObj.ended &&
-    videoObj.readyState > 2
-  )
-}
+// function _isPaused(videoObj) {
+//   if (!videoObj) return false
+//   return !!(
+//     videoObj.currentTime > 0 &&
+//     videoObj.paused &&
+//     !videoObj.ended &&
+//     videoObj.readyState > 2
+//   )
+// }
 
 export default class EpisodesCanvasComponent extends Component {
   @service media
@@ -539,17 +539,17 @@ export default class EpisodesCanvasComponent extends Component {
       }
     }
 
-    const togglePauseTrailer = () => {
-      if (_isPaused(this.currentTape)) {
-        this.anim.start()
-        return this.currentTape.play()
-      }
+    // const togglePauseTrailer = () => {
+    //   if (_isPaused(this.currentTape)) {
+    //     this.anim.start()
+    //     return this.currentTape.play()
+    //   }
 
-      if (_isPlaying(this.currentTape)) {
-        this.anim.stop()
-        return this.currentTape.pause()
-      }
-    }
+    //   if (_isPlaying(this.currentTape)) {
+    //     this.anim.stop()
+    //     return this.currentTape.pause()
+    //   }
+    // }
 
     const playTrailer = name => {
       const { trailer, trailerObj } = imageMap[name]
