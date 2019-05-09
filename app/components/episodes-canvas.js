@@ -301,13 +301,14 @@ export default class EpisodesCanvasComponent extends Component {
     const ep12TrailerVideoObj = document.createElement(`video`)
     const ep13TrailerVideoObj = document.createElement(`video`)
 
-    this.resizeFit = () =>
+    this.resizeFit = () => {
       fitStageIntoParentContainer(
         `#episodes-container`,
         this.stage,
         stageHeight,
         stageWidth
       )
+    }
 
     await Promise.all([
       imagePromise(ep01TitleImageObj, imageSources.ep01Title),
@@ -647,12 +648,9 @@ export default class EpisodesCanvasComponent extends Component {
 
     this.stage.draw()
 
-    // TODO make this work better and add a paused visual on mobile
-    if (!this.isMobile) {
-      bgLayer.on('click tap', () => debounce({}, togglePauseTrailer, 150))
-    }
+    const action = this.isMobile ? 'tap' : 'click'
 
-    tapeLayer.on('click tap', evt => {
+    tapeLayer.on(action, evt => {
       const {
         target: {
           attrs: { name }

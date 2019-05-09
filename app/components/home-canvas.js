@@ -1,5 +1,6 @@
 import Component from '@glimmer/component'
 import Konva from 'konva'
+import { debounce } from '@ember/runloop'
 import { inject as service } from '@ember/service'
 import {
   buildImage,
@@ -22,9 +23,7 @@ export default class HomeCanvasComponent extends Component {
     window.location.href = url
   }
 
-  navigate = path => {
-    this.router.transitionTo(path)
-  }
+  navigate = path => this.router.transitionTo(path)
 
   setup = async () => {
     const interiorImageObj = new Image()
@@ -95,6 +94,7 @@ export default class HomeCanvasComponent extends Component {
       imageLoci.castCrewBtn.y,
       imageScale,
       false,
+      this.isMobile,
       this.navigate,
       'cast_crew'
     )
@@ -112,6 +112,7 @@ export default class HomeCanvasComponent extends Component {
       imageLoci.episodesBtn.y,
       imageScale,
       false,
+      this.isMobile,
       this.navigate,
       'episodes'
     )
@@ -129,6 +130,7 @@ export default class HomeCanvasComponent extends Component {
       imageLoci.gamesBtn.y,
       imageScale,
       false,
+      this.isMobile,
       this.navigate,
       'games'
     )
@@ -163,6 +165,7 @@ export default class HomeCanvasComponent extends Component {
       imageLoci.musicBtn.y,
       imageScale,
       false,
+      this.isMobile,
       this.navigate,
       'music'
     )
@@ -180,6 +183,7 @@ export default class HomeCanvasComponent extends Component {
       imageLoci.photosBtn.y,
       imageScale,
       false,
+      this.isMobile,
       this.navigate,
       'photos'
     )
@@ -197,6 +201,7 @@ export default class HomeCanvasComponent extends Component {
       imageLoci.shopBtn.y,
       imageScale,
       false,
+      this.isMobile,
       this.navigate,
       'shop'
     )
@@ -230,8 +235,9 @@ export default class HomeCanvasComponent extends Component {
       imageLoci.trailerBtn.y,
       imageScale,
       false,
-      this.navigate,
-      'trailer'
+      this.isMobile
+      // this.navigate,
+      // 'trailer'
     )
     const trailerImg = buildImage(
       trailerImageObj,
@@ -347,9 +353,14 @@ export default class HomeCanvasComponent extends Component {
       }
     }
 
-    bgLayer.on('touchstart', resetImages)
+    let action = 'mouseover'
 
-    fgLayer.on('mouseover touchstart', evt => {
+    if (this.isMobile) {
+      action = 'tap'
+      bgLayer.on(action, () => debounce({}, resetImages, 150))
+    }
+
+    fgLayer.on(action, evt => {
       const {
         target: {
           attrs: { name }
@@ -358,25 +369,33 @@ export default class HomeCanvasComponent extends Component {
       const [originalImage, btnImage] = imageMap[name]
 
       document.body.style.cursor = 'pointer'
-      resetImages()
-      originalImage.hide()
-      btnImage.show()
-      this.stage.draw()
+      debounce(
+        {},
+        () => {
+          resetImages()
+          originalImage.hide()
+          btnImage.show()
+          this.stage.draw()
+        },
+        150
+      )
     })
 
-    fgLayer.on('mouseout', evt => {
-      const {
-        target: {
-          attrs: { name }
-        }
-      } = evt
-      const [originalImage, btnImage] = imageMap[name]
+    if (!this.isMobile) {
+      fgLayer.on('mouseout', evt => {
+        const {
+          target: {
+            attrs: { name }
+          }
+        } = evt
+        const [originalImage, btnImage] = imageMap[name]
 
-      document.body.style.cursor = 'default'
-      btnImage.hide()
-      originalImage.show()
-      this.stage.draw()
-    })
+        document.body.style.cursor = 'default'
+        btnImage.hide()
+        originalImage.show()
+        this.stage.draw()
+      })
+    }
 
     window.addEventListener('resize', this.resizeFit)
   }

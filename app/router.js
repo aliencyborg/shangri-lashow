@@ -9,7 +9,9 @@ const Router = EmberRouter.extend({
 Router.map(function() {
   this.route('cast_crew')
   this.route('episodes')
-  this.route('games')
+  this.route('games', function() {
+    this.route('big-time')
+  })
   this.route('give_back')
   this.route('home', { path: '/' })
   this.route('music')
