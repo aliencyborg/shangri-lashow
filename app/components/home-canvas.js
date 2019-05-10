@@ -28,6 +28,7 @@ export default class HomeCanvasComponent extends Component {
   showTrailer = () => this.modal.showModal()
 
   setup = async () => {
+    console.log(this.media)
     const interiorImageObj = new Image()
 
     const episodesBtnImageObj = new Image()
