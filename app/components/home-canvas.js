@@ -200,8 +200,9 @@ export default class HomeCanvasComponent extends Component {
       imageLoci.titleBtn.x,
       imageLoci.titleBtn.y,
       imageScale,
-      false
-      // Action / Navigate ?
+      false,
+      this.isMobile,
+      this.showTrailer
     )
     const titleImg = buildImage(
       titleImageObj,
@@ -259,13 +260,6 @@ export default class HomeCanvasComponent extends Component {
     bgLayer.add(interiorImg)
     this.resizeFit()
 
-    if (this.isMobile) {
-      await imagePromise(titleImageObj, imageSources.title)
-      await imagePromise(titleBtnImageObj, imageSources.titleBtn)
-      fgLayer.add(titleBtnImg, titleImg)
-      this.resizeFit()
-    }
-
     await Promise.all([
       imagePromise(episodesBtnImageObj, imageSources.episodesBtn),
       imagePromise(episodesImageObj, imageSources.episodes),
@@ -279,6 +273,8 @@ export default class HomeCanvasComponent extends Component {
       imagePromise(photosImageObj, imageSources.photos),
       imagePromise(shopBtnImageObj, imageSources.shopBtn),
       imagePromise(shopImageObj, imageSources.shop),
+      imagePromise(titleImageObj, imageSources.title),
+      imagePromise(titleBtnImageObj, imageSources.titleBtn),
       imagePromise(trailerBtnImageObj, imageSources.trailerBtn),
       imagePromise(trailerImageObj, imageSources.trailer),
       imagePromise(youtopiaBtnImageObj, imageSources.youtopiaBtn),
@@ -315,6 +311,10 @@ export default class HomeCanvasComponent extends Component {
       youtopiaBtnImg,
       youtopiaImg
     )
+
+    if (this.isMobile) {
+      fgLayer.add(titleBtnImg, titleImg)
+    }
 
     this.args.stopLoading()
     this.resizeFit()

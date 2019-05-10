@@ -2,8 +2,7 @@ import Service from '@ember/service'
 import { tracked } from '@glimmer/tracking'
 
 export default class ModalService extends Service {
-  // @tracked isShowing = false
-  @tracked isShowing = true
+  @tracked isShowing = false
 
   hideModal = () => (this.isShowing = false)
   showModal = () => (this.isShowing = true)
