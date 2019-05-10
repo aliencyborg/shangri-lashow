@@ -225,9 +225,7 @@ const home = (
   const halfWidth = Math.floor(width / 2)
 
   const shared = {
-    loading: `${baseUrl}/c_scale,h_${halfHeight},w_${halfWidth}/v1556844699/shangri-lashow/extras/loading.gif`,
-    title: `${scaleUrl}/v1556592857/shangri-lashow/Home%20Page/Shangri-LA_Title_01_MOBILE.png`,
-    titleBtn: `${scaleUrl}/v1556592857/shangri-lashow/Home%20Page/Watch_Now_Button_01_MOBILE.png`
+    loading: `${baseUrl}/c_scale,h_${halfHeight},w_${halfWidth}/v1556844699/shangri-lashow/extras/loading.gif`
   }
 
   if (mobile) {
@@ -248,6 +246,8 @@ const home = (
       photosBtn: `${upscaleUrl}/v1556592857/shangri-lashow/Home%20Page/Photos_Button_01_MOBILE.png`,
       shop: `${scaleUrl}/v1556853392/shangri-lashow/Home%20Page/Shop_02_MOBILE.png`,
       shopBtn: `${upscaleUrl}/v1556853392/shangri-lashow/Home%20Page/Shop_Button_02_MOBILE.png`,
+      title: `${scaleUrl}/v1556592857/shangri-lashow/Home%20Page/Shangri-LA_Title_01_MOBILE.png`,
+      titleBtn: `${scaleUrl}/v1556592857/shangri-lashow/Home%20Page/Watch_Now_Button_01_MOBILE.png`,
       trailer: `${scaleUrl}/v1556592857/shangri-lashow/Home%20Page/Trailer_01_MOBILE.png`,
       trailerBtn: `${upscaleUrl}/v1556592857/shangri-lashow/Home%20Page/Trailer_Button_01_MOBILE.png`,
       youtopia: `${scaleUrl}/v1556592857/shangri-lashow/Home%20Page/You_Topia_01_MOBILE.png`,
@@ -257,7 +257,7 @@ const home = (
 
   return {
     ...shared,
-    interior: `${scaleUrl}/v1555123412/shangri-lashow/Home%20Page/Home_Page_Canvas_02_1920x1600.png`,
+    interior: `${scaleUrl}/v1557457425/shangri-lashow/Home%20Page/Home_Page_Canvas_03_1920x1600.png`,
     castCrew: `${scaleUrl}/v1555109007/shangri-lashow/Home%20Page/CAST_CREW_01.png`,
     castCrewBtn: `${scaleUrl}/v1554831012/shangri-lashow/Home%20Page/CAST_CREW_button_01.png`,
     episodes: `${scaleUrl}/v1555109008/shangri-lashow/Home%20Page/EPISODES_01.png`,
@@ -272,6 +272,8 @@ const home = (
     photosBtn: `${scaleUrl}/v1554831011/shangri-lashow/Home%20Page/PHOTOS_button_01.png`,
     shop: `${scaleUrl}/v1555109007/shangri-lashow/Home%20Page/SHOP_01.png`,
     shopBtn: `${scaleUrl}/v1554831012/shangri-lashow/Home%20Page/SHOP_button_01.png`,
+    title: `${scaleUrl}/v1556592857/shangri-lashow/Home%20Page/Shangri-LA_Title_01_MOBILE.png`,
+    titleBtn: `${scaleUrl}/v1556592857/shangri-lashow/Home%20Page/Watch_Now_Button_01_MOBILE.png`,
     trailer: `${scaleUrl}/v1555109008/shangri-lashow/Home%20Page/TRAILER_01.png`,
     trailerBtn: `${scaleUrl}/v1554831011/shangri-lashow/Home%20Page/TRAILER_button_01.png`,
     youtopia: `${scaleUrl}/v1555109008/shangri-lashow/Home%20Page/YOUTOPIA_01.png`,
@@ -320,8 +322,8 @@ const homeLoci = isMobile => {
     photosBtn: { x: 1610, y: 380 },
     shop: { x: 20, y: 910 },
     shopBtn: { x: 0, y: 840 },
-    title: { x: 0, y: 0 }, // mobile only
-    titleBtn: { x: 0, y: 0 }, // mobile only
+    title: { x: 680, y: 450 },
+    titleBtn: { x: 680, y: 450 },
     trailer: { x: 850, y: 870 },
     trailerBtn: { x: 800, y: 800 },
     youtopia: { x: 1462, y: 733 },

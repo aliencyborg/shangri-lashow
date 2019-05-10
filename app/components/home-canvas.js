@@ -306,15 +306,13 @@ export default class HomeCanvasComponent extends Component {
       photosImg,
       shopBtnImg,
       shopImg,
+      titleBtnImg,
+      titleImg,
       trailerBtnImg,
       trailerImg,
       youtopiaBtnImg,
       youtopiaImg
     )
-
-    if (this.isMobile) {
-      fgLayer.add(titleBtnImg, titleImg)
-    }
 
     this.args.stopLoading()
     this.resizeFit()
