@@ -28,7 +28,6 @@ export default class HomeCanvasComponent extends Component {
   showTrailer = () => this.modal.showModal()
 
   setup = async () => {
-    console.log(this.media)
     const interiorImageObj = new Image()
 
     const episodesBtnImageObj = new Image()
@@ -203,7 +202,8 @@ export default class HomeCanvasComponent extends Component {
       imageScale,
       false,
       this.isMobile,
-      this.showTrailer
+      this.external,
+      'https://vimeo.com/ondemand/shangrilashow/333403952'
     )
     const titleImg = buildImage(
       titleImageObj,
