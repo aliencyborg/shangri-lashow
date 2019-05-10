@@ -13,6 +13,7 @@ import images from 'shangri-lashow/util/images'
 
 export default class HomeCanvasComponent extends Component {
   @service media
+  @service modal
   @service router
 
   isMobile = this.media.isMobile
@@ -24,6 +25,7 @@ export default class HomeCanvasComponent extends Component {
   }
 
   navigate = path => this.router.transitionTo(path)
+  showTrailer = () => this.modal.showModal()
 
   setup = async () => {
     const interiorImageObj = new Image()
@@ -215,9 +217,8 @@ export default class HomeCanvasComponent extends Component {
       imageLoci.trailerBtn.y,
       imageScale,
       false,
-      this.isMobile
-      // this.navigate,
-      // 'trailer'
+      this.isMobile,
+      this.showTrailer
     )
     const trailerImg = buildImage(
       trailerImageObj,
@@ -332,8 +333,13 @@ export default class HomeCanvasComponent extends Component {
     let action = 'mouseover'
     const debounceMs = 50
 
-    action = 'click tap'
-    bgLayer.on(action, () => debounce({}, resetImages, 150))
+    if (this.isMobile) {
+      action = 'tap'
+    }
+
+    bgLayer.on('click tap', () => {
+      debounce({}, resetImages, debounceMs)
+    })
 
     fgLayer.on(action, evt => {
       const {

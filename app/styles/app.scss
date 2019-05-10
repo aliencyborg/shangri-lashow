@@ -1,9 +1,11 @@
-@import 'tailwind';
-@import 'ember-photoswipe';
+@import "tailwind";
+@import "ember-photoswipe";
+@import "ember-modal-dialog/ember-modal-structure";
+@import "ember-modal-dialog/ember-modal-appearance";
 
-@import 'loading-spinner';
-@import 'music';
-@import 'not-found';
+@import "loading-spinner";
+@import "music";
+@import "not-found";
 
 html {
   body {
