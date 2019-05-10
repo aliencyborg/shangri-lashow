@@ -351,7 +351,7 @@ const icons = () => {
 
 const backgrounds = () => {
   return {
-    music: `${baseUrl}/v1556501535/shangri-lashow/Music%20Page/Music_Page_01_1920x1080.png`
+    music: `${baseUrl}/v1557462068/shangri-lashow/Music%20Page/Music_Page_02_1920x1080.png`
   }
 }
 
