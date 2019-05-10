@@ -48,16 +48,15 @@ export default class HomeCanvasComponent extends Component {
     const youtopiaImageObj = new Image()
 
     let baseHeight = 1600
-    let stageHeight = 1600
     let baseWidth = 1920
-    let stageWidth = 1920
 
     if (this.isMobile) {
       baseHeight = 1400
       baseWidth = 1080
-      stageWidth = window.innerWidth
-      stageHeight = Math.floor((stageWidth / baseWidth) * baseHeight)
     }
+
+    let stageWidth = window.innerWidth
+    let stageHeight = Math.floor((stageWidth / baseWidth) * baseHeight)
 
     const xFactor = Number((stageWidth / 1920).toFixed(2))
     const yFactor = Number((stageHeight / 1600).toFixed(2))
@@ -333,10 +332,8 @@ export default class HomeCanvasComponent extends Component {
     let action = 'mouseover'
     const debounceMs = 50
 
-    if (this.isMobile) {
-      action = 'tap'
-      bgLayer.on(action, () => debounce({}, resetImages, 150))
-    }
+    action = 'click tap'
+    bgLayer.on(action, () => debounce({}, resetImages, 150))
 
     fgLayer.on(action, evt => {
       const {
