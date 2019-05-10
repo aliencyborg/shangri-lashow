@@ -1,10 +1,15 @@
-<div id="not-found" class="bg-yellow h-full w-screen bg-no-repeat bg-cover flex flex-col-reverse">
-  <div class="text-center bg-grey-light p-2 lg:p-12 m-2">
-    <p class="text-blue-dark text-xl md:text-4xl">
-      That which you seek cannot be found.
-    </p>
-    <p class="text-blue-darker text-lg md:text-3xl hover:underline">
-      {{link-to "Return Home" "home"}}
-    </p>
+<div id="not-found" class="min-h-screen flex flex-col">
+  <TopBar />
+  <div class="bg-yellow bg-no-repeat bg-cover flex-grow flex flex-col">
+    <div class="bg-not-found flex-1"></div>
+    <div class="text-center bg-grey-light p-2 lg:p-12 m-2">
+      <p class="text-blue-dark text-xl md:text-4xl">
+        That which you seek cannot be found.
+      </p>
+      <p class="text-blue-darker text-lg md:text-3xl hover:underline">
+        {{link-to "Find Your Paradise" "home"}}
+      </p>
+    </div>
   </div>
+  <BottomBar />
 </div>

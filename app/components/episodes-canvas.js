@@ -98,14 +98,10 @@ export default class EpisodesCanvasComponent extends Component {
     const stationaryWidth = 1920 // 1920 // 3840
     const stationaryHeight = 1498 // 1498 // 2992
 
-    let factorX = 1
     let mainHeight = 1282
     let titleHeight = 216
     let baseHeight = stationaryHeight
-    let stageHeight = stationaryHeight
-
     let baseWidth = stationaryWidth
-    let stageWidth = stationaryWidth
 
     if (this.isMobile) {
       const tapesHeight = 1800
@@ -114,10 +110,11 @@ export default class EpisodesCanvasComponent extends Component {
       titleHeight = 122
 
       baseHeight = mainHeight + titleHeight + tapesHeight
-      stageWidth = window.innerWidth
-      factorX = (stageWidth / baseWidth).toFixed(3)
-      stageHeight = Math.floor(factorX * baseHeight)
     }
+
+    let stageWidth = window.innerWidth
+    let factorX = (stageWidth / baseWidth).toFixed(3)
+    let stageHeight = Math.floor(factorX * baseHeight)
 
     const xFactor = Number((stageWidth / baseWidth).toFixed(3))
     const yFactor = Number((stageHeight / baseHeight).toFixed(3))
@@ -552,8 +549,11 @@ export default class EpisodesCanvasComponent extends Component {
     // }
 
     const playTrailer = name => {
-      const { trailer, trailerObj } = imageMap[name]
+      const { isLocked, trailer, trailerObj } = imageMap[name]
       stopTrailer()
+      if (isLocked) {
+        return
+      }
 
       videoLayer.removeChildren()
       videoLayer.add(trailer)

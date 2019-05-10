@@ -1,7 +1,11 @@
-<div id="photos" class="">
-  {{#photo-swipe classNames="bg-blackest" items=this.items history=false as |photoswipe|}}
-    {{#each this.items as |item index|}}
-      <img src={{item.src}} alt={{item.alt}} {{action photoswipe.actions.open (hash index=index)}} >
-    {{/each}}
-  {{/photo-swipe}}
+<div id="photos" class="h-screen flex flex-col">
+  <TopBar />
+  <div class="overflow-y-scroll">
+    {{#photo-swipe items=this.items history=false as |photoswipe|}}
+      {{#each this.items as |item index|}}
+        <img src={{item.src}} alt={{item.alt}} {{action photoswipe.actions.open (hash index=index)}} >
+      {{/each}}
+    {{/photo-swipe}}
+  </div>
+  <BottomBar />
 </div>
