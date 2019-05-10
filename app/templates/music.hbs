@@ -1,9 +1,8 @@
-<div id="music" class="min-h-full w-full flex flex-col">
+<div id="music" class="min-h-screen w-full flex flex-col">
+  <TopBar />
   {{#if this.isMobile}}
     <div class="flex flex-col flex-grow">
-      <div class="flex flex-col min-h-full">
-        <MusicPlayer />
-      </div>
+      <MusicPlayer />
     </div>
   {{else}}
     <div class="flex flex-grow">
@@ -13,4 +12,5 @@
       <img class="flex-shrink" src={{this.bgSource}} alt="Old Tape Player" >
     </div>
   {{/if}}
+  <BottomBar />
 </div>

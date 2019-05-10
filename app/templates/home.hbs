@@ -1,8 +1,18 @@
-<div id="home" class="w-screen">
-  {{#if this.isLoading}}
-    <LoadingSpinner />
-  {{/if}}
-  <HomeCanvas @stopLoading={{this.stopLoading}}>
-    {{outlet}}
-  </HomeCanvas>
+<div id="home" class="w-screen h-screen flex flex-col">
+  <TopBar />
+  <div class="overflow-x-hidden overflow-y-auto flex-grow">
+    <div class="flex bg-blackest">
+      <div class="xl:w-1/5"></div>
+      <div class="xl:flex-grow">
+        {{#if this.isLoading}}
+          <LoadingSpinner />
+        {{/if}}
+        <HomeCanvas @stopLoading={{this.stopLoading}}>
+          {{outlet}}
+        </HomeCanvas>
+      </div>
+      <div class="xl:w-1/5"></div>
+    </div>
+  </div>
+  <BottomBar />
 </div>

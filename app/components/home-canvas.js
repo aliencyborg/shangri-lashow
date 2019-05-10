@@ -331,6 +331,7 @@ export default class HomeCanvasComponent extends Component {
     }
 
     let action = 'mouseover'
+    const debounceMs = 50
 
     if (this.isMobile) {
       action = 'tap'
@@ -345,16 +346,16 @@ export default class HomeCanvasComponent extends Component {
       } = evt
       const [originalImage, btnImage] = imageMap[name]
 
-      document.body.style.cursor = 'pointer'
       debounce(
         {},
         () => {
+          document.body.style.cursor = 'pointer'
           resetImages()
           originalImage.hide()
           btnImage.show()
           this.stage.draw()
         },
-        150
+        debounceMs
       )
     })
 
@@ -367,10 +368,16 @@ export default class HomeCanvasComponent extends Component {
         } = evt
         const [originalImage, btnImage] = imageMap[name]
 
-        document.body.style.cursor = 'default'
-        btnImage.hide()
-        originalImage.show()
-        this.stage.draw()
+        debounce(
+          {},
+          () => {
+            document.body.style.cursor = 'default'
+            btnImage.hide()
+            originalImage.show()
+            this.stage.draw()
+          },
+          debounceMs
+        )
       })
     }
 
