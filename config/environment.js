@@ -24,7 +24,36 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-    }
+    },
+    metricsAdapters: [
+      {
+        name: 'GoogleAnalytics',
+        environments: ['development', 'production'],
+        config: {
+          id: 'UA-135499270-3',
+          debug: environment === 'development',
+          trace: environment === 'development',
+          sendHitTask: environment !== 'development'
+        }
+      },
+      {
+        name: 'GoogleAnalytics',
+        environments: ['development', 'production'],
+        config: {
+          id: 'UA-65851442-1',
+          debug: environment === 'development',
+          trace: environment === 'development',
+          sendHitTask: environment !== 'development'
+        }
+      },
+      {
+        name: 'FacebookPixel',
+        environments: ['production'],
+        config: {
+          id: '280144942606218'
+        }
+      }
+    ]
   }
 
   if (environment === 'development') {
