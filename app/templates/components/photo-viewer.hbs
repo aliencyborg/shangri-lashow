@@ -1,0 +1,7 @@
+<div id="photo-viewer" {{did-insert this.setup}}>
+  {{#photo-swipe items=this.items history=false as |photoswipe|}}
+    {{#each this.items as |item index|}}
+      <img src={{item.src}} alt={{item.alt}} {{action photoswipe.actions.open (hash index=index)}} >
+    {{/each}}
+  {{/photo-swipe}}
+</div>

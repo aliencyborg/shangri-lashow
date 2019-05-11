@@ -380,84 +380,84 @@ export default class EpisodesCanvasComponent extends Component {
         videoSources.ep02Trailer,
         this.isMobile,
         imageScale
-      ),
-      buildVideo(
-        ep03TrailerVideoObj,
-        `ep03Trailer`,
-        videoSources.ep03Trailer,
-        this.isMobile,
-        imageScale
-      ),
-      buildVideo(
-        ep04TrailerVideoObj,
-        `ep04Trailer`,
-        videoSources.ep04Trailer,
-        this.isMobile,
-        imageScale
-      ),
-      buildVideo(
-        ep05TrailerVideoObj,
-        `ep05Trailer`,
-        videoSources.ep05Trailer,
-        this.isMobile,
-        imageScale
-      ),
-      buildVideo(
-        ep06TrailerVideoObj,
-        `ep06Trailer`,
-        videoSources.ep06Trailer,
-        this.isMobile,
-        imageScale
-      ),
-      buildVideo(
-        ep07TrailerVideoObj,
-        `ep07Trailer`,
-        videoSources.ep07Trailer,
-        this.isMobile,
-        imageScale
-      ),
-      buildVideo(
-        ep08TrailerVideoObj,
-        `ep08Trailer`,
-        videoSources.ep08Trailer,
-        this.isMobile,
-        imageScale
-      ),
-      buildVideo(
-        ep09TrailerVideoObj,
-        `ep09Trailer`,
-        videoSources.ep09Trailer,
-        this.isMobile,
-        imageScale
-      ),
-      buildVideo(
-        ep10TrailerVideoObj,
-        `ep10Trailer`,
-        videoSources.ep10Trailer,
-        this.isMobile,
-        imageScale
-      ),
-      buildVideo(
-        ep11TrailerVideoObj,
-        `ep11Trailer`,
-        videoSources.ep11Trailer,
-        this.isMobile,
-        imageScale
-      ),
-      buildVideo(
-        ep12TrailerVideoObj,
-        `ep12Trailer`,
-        videoSources.ep12Trailer,
-        this.isMobile,
-        imageScale
-      ),
-      buildVideo(
-        ep13TrailerVideoObj,
-        `ep13Trailer`,
-        videoSources.ep13Trailer,
-        this.isMobile,
-        imageScale
       )
+      // buildVideo(
+      // ep03TrailerVideoObj,
+      // `ep03Trailer`,
+      // videoSources.ep03Trailer,
+      // this.isMobile,
+      // imageScale
+      // ),
+      // buildVideo(
+      // ep04TrailerVideoObj,
+      // `ep04Trailer`,
+      // videoSources.ep04Trailer,
+      // this.isMobile,
+      // imageScale
+      // ),
+      // buildVideo(
+      // ep05TrailerVideoObj,
+      // `ep05Trailer`,
+      // videoSources.ep05Trailer,
+      // this.isMobile,
+      // imageScale
+      // ),
+      // buildVideo(
+      // ep06TrailerVideoObj,
+      // `ep06Trailer`,
+      // videoSources.ep06Trailer,
+      // this.isMobile,
+      // imageScale
+      // ),
+      // buildVideo(
+      // ep07TrailerVideoObj,
+      // `ep07Trailer`,
+      // videoSources.ep07Trailer,
+      // this.isMobile,
+      // imageScale
+      // ),
+      // buildVideo(
+      // ep08TrailerVideoObj,
+      // `ep08Trailer`,
+      // videoSources.ep08Trailer,
+      // this.isMobile,
+      // imageScale
+      // ),
+      // buildVideo(
+      // ep09TrailerVideoObj,
+      // `ep09Trailer`,
+      // videoSources.ep09Trailer,
+      // this.isMobile,
+      // imageScale
+      // ),
+      // buildVideo(
+      // ep10TrailerVideoObj,
+      // `ep10Trailer`,
+      // videoSources.ep10Trailer,
+      // this.isMobile,
+      // imageScale
+      // ),
+      // buildVideo(
+      // ep11TrailerVideoObj,
+      // `ep11Trailer`,
+      // videoSources.ep11Trailer,
+      // this.isMobile,
+      // imageScale
+      // ),
+      // buildVideo(
+      // ep12TrailerVideoObj,
+      // `ep12Trailer`,
+      // videoSources.ep12Trailer,
+      // this.isMobile,
+      // imageScale
+      // ),
+      // buildVideo(
+      // ep13TrailerVideoObj,
+      // `ep13Trailer`,
+      // videoSources.ep13Trailer,
+      // this.isMobile,
+      // imageScale
+      // )
     ])
 
     const imageMap = {

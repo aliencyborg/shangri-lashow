@@ -1,6 +1,6 @@
 <div id="home" class="w-screen h-screen flex flex-col">
   <TopBar />
-  <div class="overflow-x-auto overflow-y-auto flex-grow">
+  <div class="overflow-x-auto overflow-y-auto flex-auto">
     <div class="flex bg-blackest">
       <div class="xl:w-1/5"></div>
       <div class="xl:w-3/5">
@@ -11,7 +11,8 @@
           {{outlet}}
         </HomeCanvas>
       </div>
-      <div class="xl:w-1/5"></div>
+      <div class="xl:w-1/5">
+      </div>
     </div>
   </div>
   <BottomBar />

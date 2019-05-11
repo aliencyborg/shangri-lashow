@@ -1,11 +1,10 @@
 <div id="photos" class="h-screen flex flex-col">
   <TopBar />
   <div class="overflow-y-scroll">
-    {{#photo-swipe items=this.items history=false as |photoswipe|}}
-      {{#each this.items as |item index|}}
-        <img src={{item.src}} alt={{item.alt}} {{action photoswipe.actions.open (hash index=index)}} >
-      {{/each}}
-    {{/photo-swipe}}
+    {{#if this.isLoading}}
+      <LoadingSpinner />
+    {{/if}}
+    <PhotoViewer @stopLoading={{this.stopLoading}} />
   </div>
   <BottomBar />
 </div>

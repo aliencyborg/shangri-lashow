@@ -1,6 +1,6 @@
 const baseUrl = 'https://res.cloudinary.com/aliencyborg-llc/image/upload'
 const baseVideoUrl = 'https://res.cloudinary.com/aliencyborg-llc/video/upload/'
-const ecoUrl = `${baseUrl}/q_auto:eco`
+const ecoUrl = `${baseUrl}/f_auto,fl_lossy,q_auto`
 const makeScaleParam = (hScale, wScale) => {
   let hParam = ''
   let wParam = ''
@@ -25,11 +25,11 @@ const makeScaleUrl = (baseHeight, baseWidth, height, width, modifier = 1) => {
   const wScale = ((width / baseWidth) * modifier).toFixed(3)
   const scaleParam = makeScaleParam(hScale, wScale)
 
-  return `${baseUrl}/${scaleParam}`
+  return `${ecoUrl},${scaleParam}`
 }
 
 const makeWidthUrl = width => {
-  return `${baseUrl}/c_scale,w_${width}`
+  return `${ecoUrl},c_scale,w_${width}`
 }
 
 const episodes = (
@@ -98,8 +98,8 @@ const episodes = (
       tape13: `${widthUrl}/v1555733625/shangri-lashow/Episodes%20Page/Tape13.png`,
       blankScreen: `${widthUrl}/v1556592923/shangri-lashow/Episodes%20Page/Black_Screen_01_MOBILE.png`,
       tvWithBackground: `${widthUrl}/v1557537728/shangri-lashow/Episodes%20Page/Episodes_Page_Canvas_2_02_1080x1400_MOBILE.png`,
-      watchNow: `${baseUrl}/c_scale,w_${downScale}/v1557015095/shangri-lashow/Episodes%20Page/Episodes_Page_Mobile_WATCH_NOW_screen.png`,
-      unlock: `${baseUrl}/c_scale,w_${downScale}/v1557015095/shangri-lashow/Episodes%20Page/Episodes_Page_Mobile_UNLOCK_EPISODE_screen.png`
+      watchNow: `${ecoUrl},c_scale,w_${downScale}/v1557015095/shangri-lashow/Episodes%20Page/Episodes_Page_Mobile_WATCH_NOW_screen.png`,
+      unlock: `${ecoUrl},c_scale,w_${downScale}/v1557015095/shangri-lashow/Episodes%20Page/Episodes_Page_Mobile_UNLOCK_EPISODE_screen.png`
     }
   }
 
@@ -144,8 +144,8 @@ const episodes = (
     tape13: `${scaleDownUrl}/v1555733625/shangri-lashow/Episodes%20Page/Tape13.png`,
     blankScreen: `${scaleDownUrl}/v1554831220/shangri-lashow/Episodes%20Page/Blank_Screen_01.png`,
     tvWithBackground: `${widthUrl}/v1555452236/shangri-lashow/Episodes%20Page/TVwithBackground1920w.png`,
-    watchNow: `${baseUrl}/c_scale,w_${upScale}/v1557015095/shangri-lashow/Episodes%20Page/Episodes_Page_Mobile_WATCH_NOW_screen.png`,
-    unlock: `${baseUrl}/c_scale,w_${upScale}/v1557015095/shangri-lashow/Episodes%20Page/Episodes_Page_Mobile_UNLOCK_EPISODE_screen.png`
+    watchNow: `${ecoUrl},c_scale,w_${upScale}/v1557015095/shangri-lashow/Episodes%20Page/Episodes_Page_Mobile_WATCH_NOW_screen.png`,
+    unlock: `${ecoUrl},c_scale,w_${upScale}/v1557015095/shangri-lashow/Episodes%20Page/Episodes_Page_Mobile_UNLOCK_EPISODE_screen.png`
   }
 }
 
@@ -233,12 +233,7 @@ const home = (
 ) => {
   const scaleUrl = makeScaleUrl(baseHeight, baseWidth, height, width)
   const upscaleUrl = makeScaleUrl(baseHeight, baseWidth, height, width, 1.1)
-  const halfHeight = Math.floor(height / 2)
-  const halfWidth = Math.floor(width / 2)
-
-  const shared = {
-    loading: `${baseUrl}/c_scale,h_${halfHeight},w_${halfWidth}/v1556844699/shangri-lashow/extras/loading.gif`
-  }
+  const shared = {}
 
   if (mobile) {
     return {
@@ -344,7 +339,7 @@ const homeLoci = isMobile => {
 }
 
 const icons = () => {
-  const iconUrl = `${baseUrl}/c_scale,w_100`
+  const iconUrl = `${ecoUrl},c_scale,w_100`
   return {
     amazon: `${iconUrl}/v1554831022/shangri-lashow/Icon%20Buttons/Amazon_Icon_01.png`,
     bandcamp: `${iconUrl}/v1554831022/shangri-lashow/Icon%20Buttons/Bandcamp_Icon_01.png`,
@@ -363,28 +358,28 @@ const icons = () => {
 
 const backgrounds = () => {
   return {
-    music: `${baseUrl}/v1557462068/shangri-lashow/Music%20Page/Music_Page_02_1920x1080.png`
+    music: `${ecoUrl}/v1557462068/shangri-lashow/Music%20Page/Music_Page_02_1920x1080.png`
   }
 }
 
 const games = isMobile => {
   if (isMobile) {
     return {
-      page: `${baseUrl}/v1556593009/shangri-lashow/Games%20Page/Games_Page_01_MOBILE.png`
+      page: `${ecoUrl}/v1556593009/shangri-lashow/Games%20Page/Games_Page_01_MOBILE.png`
     }
   }
 
   return {
-    page: `${baseUrl}//v1556593380/shangri-lashow/Games%20Page/Games_Page_01.png`
+    page: `${ecoUrl}//v1556593380/shangri-lashow/Games%20Page/Games_Page_01.png`
   }
 }
 
 const bigTime = () => {
   return {
-    button: `${baseUrl}/v1556593006/shangri-lashow/Games%20Page/Big_Time_Button_01.png`,
-    clapperSprite: `${baseUrl}/v1557270332/shangri-lashow/Games%20Page/Clapper_Sprite_01.png`,
-    mainSprite: `${baseUrl}/v1557270332/shangri-lashow/Games%20Page/Big_Time_Video_Game_Sprites_TEST_04.png`,
-    titleCard: `${baseUrl}/v1557270336/shangri-lashow/Games%20Page/Big_Time_Title_Card_01.png`
+    button: `${ecoUrl}/v1556593006/shangri-lashow/Games%20Page/Big_Time_Button_01.png`,
+    clapperSprite: `${ecoUrl}/v1557270332/shangri-lashow/Games%20Page/Clapper_Sprite_01.png`,
+    mainSprite: `${ecoUrl}/v1557270332/shangri-lashow/Games%20Page/Big_Time_Video_Game_Sprites_TEST_04.png`,
+    titleCard: `${ecoUrl}/v1557270336/shangri-lashow/Games%20Page/Big_Time_Title_Card_01.png`
   }
 }
 
