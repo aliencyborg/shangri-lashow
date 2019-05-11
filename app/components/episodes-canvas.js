@@ -14,6 +14,7 @@ import images from 'shangri-lashow/util/images'
 
 function _isLocked(episode) {
   // TODO put this on a calendar
+
   return episode > 2
 }
 
@@ -26,16 +27,6 @@ function _isPlaying(videoObj) {
     videoObj.readyState > 2
   )
 }
-
-// function _isPaused(videoObj) {
-//   if (!videoObj) return false
-//   return !!(
-//     videoObj.currentTime > 0 &&
-//     videoObj.paused &&
-//     !videoObj.ended &&
-//     videoObj.readyState > 2
-//   )
-// }
 
 export default class EpisodesCanvasComponent extends Component {
   @service media
@@ -55,6 +46,9 @@ export default class EpisodesCanvasComponent extends Component {
   setup = async () => {
     const backgroundImageObj = new Image()
     const blankScreenImageObj = new Image()
+    const watchNowImageObj = new Image()
+    const stopBtnImageObj = new Image()
+    const unlockImageObj = new Image()
 
     const ep01TitleImageObj = new Image()
     const ep02TitleImageObj = new Image()
@@ -164,6 +158,30 @@ export default class EpisodesCanvasComponent extends Component {
       `blankScreen`,
       imageLoci.blankScreen.x,
       imageLoci.blankScreen.y,
+      imageScale
+    )
+
+    const watchNowImg = buildImage(
+      watchNowImageObj,
+      `watchNow`,
+      imageLoci.watchNow.x,
+      imageLoci.watchNow.y,
+      imageScale
+    )
+
+    const unlockImg = buildImage(
+      unlockImageObj,
+      `unlock`,
+      imageLoci.unlock.x,
+      imageLoci.unlock.y,
+      imageScale
+    )
+
+    const stopBtnImg = buildImage(
+      stopBtnImageObj,
+      `stop`,
+      imageLoci.stop.x,
+      imageLoci.stop.y,
       imageScale
     )
 
@@ -536,43 +554,38 @@ export default class EpisodesCanvasComponent extends Component {
       }
     }
 
-    // const togglePauseTrailer = () => {
-    //   if (_isPaused(this.currentTape)) {
-    //     this.anim.start()
-    //     return this.currentTape.play()
-    //   }
-
-    //   if (_isPlaying(this.currentTape)) {
-    //     this.anim.stop()
-    //     return this.currentTape.pause()
-    //   }
-    // }
-
     const playTrailer = name => {
       const { isLocked, trailer, trailerObj } = imageMap[name]
-      stopTrailer()
+
       if (isLocked) {
+        tapeLayer.add(unlockImg)
+        tapeLayer.draw()
         return
       }
 
-      videoLayer.removeChildren()
       videoLayer.add(trailer)
 
       trailerObj.load()
       trailerObj.play()
       trailerObj.addEventListener(`ended`, () => {
         stopTrailer()
+        tapeLayer.add(watchNowImg)
+        tapeLayer.draw()
       })
       this.currentTape = trailerObj
       this.anim.start()
     }
 
     const stopTrailer = () => {
+      unlockImg.remove()
+      watchNowImg.remove()
+      tapeLayer.draw()
+
       if (_isPlaying(this.currentTape)) {
         this.currentTape.pause()
       }
+
       videoLayer.removeChildren()
-      videoLayer.add(blankScreenImg)
       videoLayer.draw()
       this.anim.stop()
     }
@@ -586,6 +599,18 @@ export default class EpisodesCanvasComponent extends Component {
     }
 
     function selectTape(name) {
+      stopTrailer()
+
+      if (name === 'stop') {
+        tapeLayer.add(watchNowImg)
+        tapeLayer.draw()
+      }
+
+      if (['unlock', 'watchNow'].includes(name)) {
+        return (window.location.href =
+          'https://vimeo.com/ondemand/shangrilashow')
+      }
+
       const titleImg = imageMap[name].isLocked
         ? imageMap[name].lockedTitle
         : imageMap[name].title
@@ -594,17 +619,19 @@ export default class EpisodesCanvasComponent extends Component {
       titleLayer.add(titleImg)
       titleLayer.draw()
 
-      stopTrailer()
       playTrailer(name)
     }
 
     this.stage.add(videoLayer)
     this.stage.add(bgLayer)
-    this.stage.add(tapeLayer)
     this.stage.add(titleLayer)
+    this.stage.add(tapeLayer)
 
     await Promise.all([
       imagePromise(blankScreenImageObj, imageSources.blankScreen),
+      imagePromise(watchNowImageObj, imageSources.watchNow),
+      imagePromise(unlockImageObj, imageSources.unlock),
+      imagePromise(stopBtnImageObj, imageSources.stop),
       imagePromise(backgroundImageObj, imageSources.tvWithBackground)
     ])
 
@@ -640,7 +667,8 @@ export default class EpisodesCanvasComponent extends Component {
       tape10Img,
       tape11Img,
       tape12Img,
-      tape13Img
+      tape13Img,
+      stopBtnImg
     )
 
     this.args.stopLoading()
@@ -660,9 +688,17 @@ export default class EpisodesCanvasComponent extends Component {
     })
 
     tapeLayer.on('mouseover', evt => {
-      const { target } = evt
+      const {
+        target,
+        target: {
+          attrs: { name }
+        }
+      } = evt
 
       setCursorP()
+
+      if (['stop', 'unlock', 'watchNow'].includes(name)) return
+
       target.move({ x: -50 })
       target.scaleX(1.1)
       target.scaleY(1.1)
@@ -671,9 +707,17 @@ export default class EpisodesCanvasComponent extends Component {
     })
 
     tapeLayer.on('mouseout', evt => {
-      const { target } = evt
+      const {
+        target,
+        target: {
+          attrs: { name }
+        }
+      } = evt
 
       setCursorD()
+
+      if (['stop', 'unlock', 'watchNow'].includes(name)) return
+
       target.move({ x: 50 })
       target.scaleX(1)
       target.scaleY(1)

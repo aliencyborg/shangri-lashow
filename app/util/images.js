@@ -49,10 +49,11 @@ const episodes = (
     halfWidth
   )
   const widthUrl = makeWidthUrl(width)
+  const upScale = (width / 2160).toFixed(2)
+  const downScale = (width / 1100).toFixed(2)
+
   const shared = {
-    watchNow: `${widthUrl}/v1557015095/shangri-lashow/Episodes%20Page/Episodes_Page_Mobile_WATCH_NOW_screen.png`,
-    unlock: `${widthUrl}/v1557015095/shangri-lashow/Episodes%20Page/Episodes_Page_Mobile_UNLOCK_EPISODE_screen.png`,
-    stopButton: `${widthUrl}/v1557015093/shangri-lashow/Episodes%20Page/Episodes_Page_Mobile_STOP_button.png`
+    stop: `${scaleDownUrl}/v1557015093/shangri-lashow/Episodes%20Page/Episodes_Page_Mobile_STOP_button.png`
   }
 
   if (mobile) {
@@ -96,7 +97,9 @@ const episodes = (
       tape12: `${widthUrl}/v1555733625/shangri-lashow/Episodes%20Page/Tape12.png`,
       tape13: `${widthUrl}/v1555733625/shangri-lashow/Episodes%20Page/Tape13.png`,
       blankScreen: `${widthUrl}/v1556592923/shangri-lashow/Episodes%20Page/Black_Screen_01_MOBILE.png`,
-      tvWithBackground: `${widthUrl}/v1557537728/shangri-lashow/Episodes%20Page/Episodes_Page_Canvas_2_02_1080x1400_MOBILE.png`
+      tvWithBackground: `${widthUrl}/v1557537728/shangri-lashow/Episodes%20Page/Episodes_Page_Canvas_2_02_1080x1400_MOBILE.png`,
+      watchNow: `${baseUrl}/c_scale,w_${downScale}/v1557015095/shangri-lashow/Episodes%20Page/Episodes_Page_Mobile_WATCH_NOW_screen.png`,
+      unlock: `${baseUrl}/c_scale,w_${downScale}/v1557015095/shangri-lashow/Episodes%20Page/Episodes_Page_Mobile_UNLOCK_EPISODE_screen.png`
     }
   }
 
@@ -140,7 +143,9 @@ const episodes = (
     tape12: `${scaleDownUrl}/v1555733625/shangri-lashow/Episodes%20Page/Tape12.png`,
     tape13: `${scaleDownUrl}/v1555733625/shangri-lashow/Episodes%20Page/Tape13.png`,
     blankScreen: `${scaleDownUrl}/v1554831220/shangri-lashow/Episodes%20Page/Blank_Screen_01.png`,
-    tvWithBackground: `${widthUrl}/v1555452236/shangri-lashow/Episodes%20Page/TVwithBackground1920w.png`
+    tvWithBackground: `${widthUrl}/v1555452236/shangri-lashow/Episodes%20Page/TVwithBackground1920w.png`,
+    watchNow: `${baseUrl}/c_scale,w_${upScale}/v1557015095/shangri-lashow/Episodes%20Page/Episodes_Page_Mobile_WATCH_NOW_screen.png`,
+    unlock: `${baseUrl}/c_scale,w_${upScale}/v1557015095/shangri-lashow/Episodes%20Page/Episodes_Page_Mobile_UNLOCK_EPISODE_screen.png`
   }
 }
 
@@ -190,9 +195,9 @@ const episodesLoci = isMobile => {
       tape11: { x: 0, y: 2875 },
       tape12: { x: 0, y: 3002 },
       tape13: { x: 0, y: 3150 },
-      watchNow: { x: 100, y: 100 },
-      unlock: { x: 100, y: 100 },
-      stop: { x: 100, y: 100 }
+      watchNow: { x: 130, y: 250 },
+      unlock: { x: 130, y: 250 },
+      stop: { x: 165, y: 1030 }
     }
   }
 
@@ -212,9 +217,9 @@ const episodesLoci = isMobile => {
     tape11: { x: 1200, y: 1130 },
     tape12: { x: 1200, y: 1210 },
     tape13: { x: 1200, y: 1296 },
-    watchNow: { x: 100, y: 100 },
-    unlock: { x: 100, y: 100 },
-    stop: { x: 100, y: 100 }
+    watchNow: { x: 180, y: 330 },
+    unlock: { x: 180, y: 330 },
+    stop: { x: 195, y: 1030 }
   }
 }
 
