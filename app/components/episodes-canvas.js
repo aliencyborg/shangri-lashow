@@ -598,9 +598,6 @@ export default class EpisodesCanvasComponent extends Component {
       playTrailer(name)
     }
 
-    this.args.stopLoading()
-    this.resizeFit()
-
     this.stage.add(videoLayer)
     this.stage.add(bgLayer)
     this.stage.add(tapeLayer)
@@ -646,6 +643,8 @@ export default class EpisodesCanvasComponent extends Component {
       tape13Img
     )
 
+    this.args.stopLoading()
+    this.resizeFit()
     this.stage.draw()
 
     const action = this.isMobile ? 'tap' : 'click'

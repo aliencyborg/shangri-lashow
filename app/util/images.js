@@ -49,7 +49,11 @@ const episodes = (
     halfWidth
   )
   const widthUrl = makeWidthUrl(width)
-  const shared = {}
+  const shared = {
+    watchNow: `${widthUrl}/v1557015095/shangri-lashow/Episodes%20Page/Episodes_Page_Mobile_WATCH_NOW_screen.png`,
+    unlock: `${widthUrl}/v1557015095/shangri-lashow/Episodes%20Page/Episodes_Page_Mobile_UNLOCK_EPISODE_screen.png`,
+    stopButton: `${widthUrl}/v1557015093/shangri-lashow/Episodes%20Page/Episodes_Page_Mobile_STOP_button.png`
+  }
 
   if (mobile) {
     return {
@@ -91,11 +95,8 @@ const episodes = (
       tape11: `${widthUrl}/v1555733625/shangri-lashow/Episodes%20Page/Tape11.png`,
       tape12: `${widthUrl}/v1555733625/shangri-lashow/Episodes%20Page/Tape12.png`,
       tape13: `${widthUrl}/v1555733625/shangri-lashow/Episodes%20Page/Tape13.png`,
-      watchNow: `${widthUrl}/v1557015095/shangri-lashow/Episodes%20Page/Episodes_Page_Mobile_WATCH_NOW_screen.png`,
-      unlock: `${widthUrl}/v1557015095/shangri-lashow/Episodes%20Page/Episodes_Page_Mobile_UNLOCK_EPISODE_screen.png`,
-      stopButton: `${widthUrl}/v1557015093/shangri-lashow/Episodes%20Page/Episodes_Page_Mobile_STOP_button.png`,
       blankScreen: `${widthUrl}/v1556592923/shangri-lashow/Episodes%20Page/Black_Screen_01_MOBILE.png`,
-      tvWithBackground: `${widthUrl}/v1556592923/shangri-lashow/Episodes%20Page/Episodes_Page_Canvas_2_01_1080x1400_MOBILE.png`
+      tvWithBackground: `${widthUrl}/v1557537728/shangri-lashow/Episodes%20Page/Episodes_Page_Canvas_2_02_1080x1400_MOBILE.png`
     }
   }
 
@@ -188,7 +189,10 @@ const episodesLoci = isMobile => {
       tape10: { x: 0, y: 2738 },
       tape11: { x: 0, y: 2875 },
       tape12: { x: 0, y: 3002 },
-      tape13: { x: 0, y: 3150 }
+      tape13: { x: 0, y: 3150 },
+      watchNow: { x: 100, y: 100 },
+      unlock: { x: 100, y: 100 },
+      stop: { x: 100, y: 100 }
     }
   }
 
@@ -207,7 +211,10 @@ const episodesLoci = isMobile => {
     tape10: { x: 1200, y: 1043 },
     tape11: { x: 1200, y: 1130 },
     tape12: { x: 1200, y: 1210 },
-    tape13: { x: 1200, y: 1296 }
+    tape13: { x: 1200, y: 1296 },
+    watchNow: { x: 100, y: 100 },
+    unlock: { x: 100, y: 100 },
+    stop: { x: 100, y: 100 }
   }
 }
 
