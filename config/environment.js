@@ -50,7 +50,7 @@ module.exports = function(environment) {
         name: 'FacebookPixel',
         environments: ['production'],
         config: {
-          id: '280144942606218'
+          id: '296552141280217'
         }
       }
     ]
