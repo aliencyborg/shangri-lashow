@@ -30,16 +30,6 @@ module.exports = function(environment) {
         name: 'GoogleAnalytics',
         environments: ['development', 'production'],
         config: {
-          id: 'UA-135499270-3',
-          debug: environment === 'development',
-          trace: environment === 'development',
-          sendHitTask: environment !== 'development'
-        }
-      },
-      {
-        name: 'GoogleAnalytics',
-        environments: ['development', 'production'],
-        config: {
           id: 'UA-65851442-1',
           debug: environment === 'development',
           trace: environment === 'development',
