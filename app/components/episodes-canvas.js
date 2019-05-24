@@ -15,7 +15,7 @@ import images from 'shangri-lashow/util/images'
 function _isLocked(episode) {
   // TODO put this on a calendar
 
-  return episode > 2
+  return episode > 3
 }
 
 function _isPlaying(videoObj) {
@@ -380,14 +380,14 @@ export default class EpisodesCanvasComponent extends Component {
         videoSources.ep02Trailer,
         this.isMobile,
         imageScale
+      ),
+      buildVideo(
+        ep03TrailerVideoObj,
+        `ep03Trailer`,
+        videoSources.ep03Trailer,
+        this.isMobile,
+        imageScale
       )
-      // buildVideo(
-      // ep03TrailerVideoObj,
-      // `ep03Trailer`,
-      // videoSources.ep03Trailer,
-      // this.isMobile,
-      // imageScale
-      // ),
       // buildVideo(
       // ep04TrailerVideoObj,
       // `ep04Trailer`,
@@ -604,6 +604,7 @@ export default class EpisodesCanvasComponent extends Component {
       if (name === 'stop') {
         tapeLayer.add(watchNowImg)
         tapeLayer.draw()
+        return
       }
 
       if (['unlock', 'watchNow'].includes(name)) {
