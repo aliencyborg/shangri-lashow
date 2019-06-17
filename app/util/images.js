@@ -362,6 +362,24 @@ const backgrounds = () => {
   }
 }
 
+const behindTheScenes = isMobile => {
+  if (isMobile) {
+    return {
+      background: `${ecoUrl}/v1560751622/shangri-lashow/BehindTheScenes/Wood_wall_background_01_MOBILE.png`,
+      intro: `${ecoUrl}/v1560751622/shangri-lashow/BehindTheScenes/01_Behind_the_Scenes_title___Intro_01_MOBILE.png`,
+      creators: `${ecoUrl}/v1560751622/shangri-lashow/BehindTheScenes/02_Behind_the_Scenes_Creators_01_MOBILE.png`,
+      description: `${ecoUrl}/v1560751622/shangri-lashow/BehindTheScenes/03_Behind_the_Scenes_Description_01_MOBILE.png`
+    }
+  }
+
+  return {
+    background: `${ecoUrl}/v1560751725/shangri-lashow/BehindTheScenes/Wood_wall_background_01.png`,
+    intro: `${ecoUrl}/v1560751725/shangri-lashow/BehindTheScenes/01_Behind_the_Scenes_title___Intro_01.png`,
+    creators: `${ecoUrl}/v1560751725/shangri-lashow/BehindTheScenes/02_Behind_the_Scenes_Creators_01.png`,
+    description: `${ecoUrl}/v1560751726/shangri-lashow/BehindTheScenes/03_Behind_the_Scenes_Description_01.png`
+  }
+}
+
 const games = isMobile => {
   if (isMobile) {
     return {
@@ -436,6 +454,7 @@ const photos = (width = 540) => {
 
 export default {
   backgrounds,
+  behindTheScenes,
   bigTime,
   episodes,
   episodesLoci,
