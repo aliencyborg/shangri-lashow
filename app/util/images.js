@@ -238,7 +238,7 @@ const home = (
   if (mobile) {
     return {
       ...shared,
-      interior: `${scaleUrl}/v1558673882/shangri-lashow/Home%20Page/Home_Page_Canvas_03_MOBILE_1080x1400.png`,
+      interior: `${scaleUrl}/v1560746835/shangri-lashow/Home%20Page/Home_Page_Canvas_04_MOBILE_1080x1400.png`,
       castCrew: `${scaleUrl}/v1556592856/shangri-lashow/Home%20Page/Cast_and_Crew_01_MOBILE.png`,
       castCrewBtn: `${upscaleUrl}/v1556592856/shangri-lashow/Home%20Page/Cast_and_Crew_Button_01_MOBILE.png`,
       episodes: `${scaleUrl}/v1556592856/shangri-lashow/Home%20Page/Episodes_01_MOBILE.png`,
@@ -264,7 +264,7 @@ const home = (
 
   return {
     ...shared,
-    interior: `${scaleUrl}/v1558673882/shangri-lashow/Home%20Page/Home_Page_Canvas_04_1920x1600.png`,
+    interior: `${scaleUrl}/v1560746707/shangri-lashow/Home%20Page/Home_Page_Canvas_05_1920x1600.png`,
     castCrew: `${scaleUrl}/v1555109007/shangri-lashow/Home%20Page/CAST_CREW_01.png`,
     castCrewBtn: `${scaleUrl}/v1554831012/shangri-lashow/Home%20Page/CAST_CREW_button_01.png`,
     episodes: `${scaleUrl}/v1555109008/shangri-lashow/Home%20Page/EPISODES_01.png`,
