@@ -30,6 +30,8 @@ export default class HomeCanvasComponent extends Component {
   setup = async () => {
     const interiorImageObj = new Image()
 
+    const behindScenesBtnImageObj = new Image()
+    const behindScenesImageObj = new Image()
     const episodesBtnImageObj = new Image()
     const episodesImageObj = new Image()
     const gamesBtnImageObj = new Image()
@@ -86,6 +88,24 @@ export default class HomeCanvasComponent extends Component {
       y: 0
     })
 
+    const behindScenesBtnImg = buildImage(
+      behindScenesBtnImageObj,
+      'behindScenes',
+      imageLoci.behindScenesBtn.x,
+      imageLoci.behindScenesBtn.y,
+      imageScale,
+      false,
+      this.isMobile,
+      this.navigate,
+      'behind-the-scenes'
+    )
+    const behindScenesImg = buildImage(
+      behindScenesImageObj,
+      'behindScenes',
+      imageLoci.behindScenes.x,
+      imageLoci.behindScenes.y,
+      imageScale
+    )
     const episodesBtnImg = buildImage(
       episodesBtnImageObj,
       'episodes',
@@ -262,6 +282,8 @@ export default class HomeCanvasComponent extends Component {
     this.resizeFit()
 
     await Promise.all([
+      imagePromise(behindScenesBtnImageObj, imageSources.behindScenesBtn),
+      imagePromise(behindScenesImageObj, imageSources.behindScenes),
       imagePromise(episodesBtnImageObj, imageSources.episodesBtn),
       imagePromise(episodesImageObj, imageSources.episodes),
       imagePromise(gamesBtnImageObj, imageSources.gamesBtn),
@@ -283,6 +305,7 @@ export default class HomeCanvasComponent extends Component {
     ])
 
     const imageMap = {
+      behindScenes: [behindScenesImg, behindScenesBtnImg],
       episodes: [episodesImg, episodesBtnImg],
       games: [gamesImg, gamesBtnImg],
       giveBack: [giveBackImg, giveBackBtnImg],
@@ -295,6 +318,8 @@ export default class HomeCanvasComponent extends Component {
     }
 
     fgLayer.add(
+      behindScenesBtnImg,
+      behindScenesImg,
       episodesBtnImg,
       episodesImg,
       gamesBtnImg,
