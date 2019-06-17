@@ -1,30 +1,24 @@
 import Route from '@ember/routing/route'
-import { inject as service } from '@ember/service'
 import { action } from '@ember/object'
+import { inject as service } from '@ember/service'
+import { scheduleOnce } from '@ember/runloop'
 
 export default class ApplicationRoute extends Route {
   @service metrics
-
-  init() {
-    this._super(...arguments)
-
-    this.on('activate', () => {
-      const page = window.location.pathname.replace(/^\//, '')
-
-      if (page === '') {
-        this.metrics.trackPage({ page: 'home' })
-      } else {
-        this.metrics.trackPage({ page })
-      }
-    })
-  }
+  @service router
 
   @action
-  willTransition(transition) {
-    const page = transition && transition.to && transition.to.name
+  didTransition() {
+    this._super(...arguments)
+    this._trackPage()
+  }
 
-    if (page) {
-      this.metrics.trackPage({ page })
-    }
+  _trackPage() {
+    scheduleOnce('afterRender', () => {
+      const page = this.router.currentURL
+      const title = this.router.currentRouteName
+
+      this.metrics.trackPage({ page, title })
+    })
   }
 }

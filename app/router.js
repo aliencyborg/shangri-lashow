@@ -7,14 +7,15 @@ const Router = EmberRouter.extend({
 })
 
 Router.map(function() {
+  this.route('home', { path: '/' })
+
+  this.route('behind-the-scenes')
   this.route('episodes')
   this.route('games')
   this.route('give_back')
-  this.route('home', { path: '/' })
   this.route('music')
   this.route('photos')
   this.route('shop')
-  this.route('trailer')
 
   // 404 page catch-all
   this.route('not-found', { path: '/*path' })
