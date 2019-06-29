@@ -7,5 +7,5 @@ export default class BehindTheScenesController extends Controller {
 
   isMobile = this.media.isMobile
 
-  backgroundSrc = images.behindTheScenes(this.isMobile).background
+  imageSources = images.behindTheScenes(this.isMobile)
 }
