@@ -32,8 +32,8 @@ export default class HomeCanvasComponent extends Component {
 
     const behindScenesBtnImageObj = new Image()
     const behindScenesImageObj = new Image()
-    const trailersBtnImageObj = new Image()
-    const trailersImageObj = new Image()
+    const calendarBtnImageObj = new Image()
+    const calendarImageObj = new Image()
     const gamesBtnImageObj = new Image()
     const gamesImageObj = new Image()
     const giveBackBtnImageObj = new Image()
@@ -48,6 +48,8 @@ export default class HomeCanvasComponent extends Component {
     const titleBtnImageObj = new Image()
     const trailerBtnImageObj = new Image()
     const trailerImageObj = new Image()
+    const trailersBtnImageObj = new Image()
+    const trailersImageObj = new Image()
     const youtopiaBtnImageObj = new Image()
     const youtopiaImageObj = new Image()
 
@@ -106,22 +108,22 @@ export default class HomeCanvasComponent extends Component {
       imageLoci.behindScenes.y,
       imageScale
     )
-    const trailersBtnImg = buildImage(
-      trailersBtnImageObj,
-      'trailers',
-      imageLoci.trailersBtn.x,
-      imageLoci.trailersBtn.y,
+    const calendarBtnImg = buildImage(
+      calendarBtnImageObj,
+      'calendar',
+      imageLoci.calendarBtn.x,
+      imageLoci.calendarBtn.y,
       imageScale,
       false,
       this.isMobile,
-      this.navigate,
-      'trailers'
+      this.external,
+      'https://tockify.com/shangrilashow/agenda'
     )
-    const trailersImg = buildImage(
-      trailersImageObj,
-      'trailers',
-      imageLoci.trailers.x,
-      imageLoci.trailers.y,
+    const calendarImg = buildImage(
+      calendarImageObj,
+      'calendar',
+      imageLoci.calendar.x,
+      imageLoci.calendar.y,
       imageScale
     )
     const gamesBtnImg = buildImage(
@@ -249,6 +251,24 @@ export default class HomeCanvasComponent extends Component {
       imageLoci.trailer.y,
       imageScale
     )
+    const trailersBtnImg = buildImage(
+      trailersBtnImageObj,
+      'trailers',
+      imageLoci.trailersBtn.x,
+      imageLoci.trailersBtn.y,
+      imageScale,
+      false,
+      this.isMobile,
+      this.navigate,
+      'trailers'
+    )
+    const trailersImg = buildImage(
+      trailersImageObj,
+      'trailers',
+      imageLoci.trailers.x,
+      imageLoci.trailers.y,
+      imageScale
+    )
     const youtopiaBtnImg = buildImage(
       youtopiaBtnImageObj,
       'youtopia',
@@ -284,8 +304,8 @@ export default class HomeCanvasComponent extends Component {
     await Promise.all([
       imagePromise(behindScenesBtnImageObj, imageSources.behindScenesBtn),
       imagePromise(behindScenesImageObj, imageSources.behindScenes),
-      imagePromise(trailersBtnImageObj, imageSources.trailersBtn),
-      imagePromise(trailersImageObj, imageSources.trailers),
+      imagePromise(calendarBtnImageObj, imageSources.calendarBtn),
+      imagePromise(calendarImageObj, imageSources.calendar),
       imagePromise(gamesBtnImageObj, imageSources.gamesBtn),
       imagePromise(gamesImageObj, imageSources.games),
       imagePromise(giveBackBtnImageObj, imageSources.giveBackBtn),
@@ -300,13 +320,15 @@ export default class HomeCanvasComponent extends Component {
       imagePromise(titleBtnImageObj, imageSources.titleBtn),
       imagePromise(trailerBtnImageObj, imageSources.trailerBtn),
       imagePromise(trailerImageObj, imageSources.trailer),
+      imagePromise(trailersBtnImageObj, imageSources.trailersBtn),
+      imagePromise(trailersImageObj, imageSources.trailers),
       imagePromise(youtopiaBtnImageObj, imageSources.youtopiaBtn),
       imagePromise(youtopiaImageObj, imageSources.youtopia)
     ])
 
     const imageMap = {
       behindScenes: [behindScenesImg, behindScenesBtnImg],
-      trailers: [trailersImg, trailersBtnImg],
+      calendar: [calendarImg, calendarBtnImg],
       games: [gamesImg, gamesBtnImg],
       giveBack: [giveBackImg, giveBackBtnImg],
       music: [musicImg, musicBtnImg],
@@ -314,14 +336,15 @@ export default class HomeCanvasComponent extends Component {
       shop: [shopImg, shopBtnImg],
       title: [titleImg, titleBtnImg],
       trailer: [trailerImg, trailerBtnImg],
+      trailers: [trailersImg, trailersBtnImg],
       youtopia: [youtopiaImg, youtopiaBtnImg]
     }
 
     fgLayer.add(
       behindScenesBtnImg,
       behindScenesImg,
-      trailersBtnImg,
-      trailersImg,
+      calendarBtnImg,
+      calendarImg,
       gamesBtnImg,
       gamesImg,
       giveBackBtnImg,
@@ -336,6 +359,8 @@ export default class HomeCanvasComponent extends Component {
       titleImg,
       trailerBtnImg,
       trailerImg,
+      trailersBtnImg,
+      trailersImg,
       youtopiaBtnImg,
       youtopiaImg
     )

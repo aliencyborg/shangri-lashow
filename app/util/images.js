@@ -241,8 +241,8 @@ const home = (
       interior: `${scaleUrl}/v1560746835/shangri-lashow/Home%20Page/Home_Page_Canvas_04_MOBILE_1080x1400.png`,
       behindScenes: `${scaleUrl}/v1556592856/shangri-lashow/Home%20Page/Cast_and_Crew_01_MOBILE.png`,
       behindScenesBtn: `${scaleUrl}/v1560745854/shangri-lashow/Home%20Page/BEHIND_THE_SCENES_button.png`,
-      trailers: `${scaleUrl}/v1556592856/shangri-lashow/Home%20Page/Episodes_01_MOBILE.png`,
-      trailersBtn: `${upscaleUrl}/v1560746835/shangri-lashow/Home%20Page/TRAILERS_button_01_VHS_TAPES_MOBILE.png`,
+      calendar: `${scaleUrl}/v1560746835/shangri-lashow/Home%20Page/Calendar_01_MOBILE.png`,
+      calendarBtn: `${upscaleUrl}/v1560746835/shangri-lashow/Home%20Page/Calendar_button_01_MOBILE.png`,
       games: `${scaleUrl}/v1556592857/shangri-lashow/Home%20Page/Games_01_MOBILE.png`,
       gamesBtn: `${upscaleUrl}/v1556592857/shangri-lashow/Home%20Page/Games_Button_01_MOBILE.png`,
       giveBack: `${scaleUrl}/v1556592857/shangri-lashow/Home%20Page/Give_Back_01_MOBILE.png`,
@@ -257,6 +257,8 @@ const home = (
       titleBtn: `${scaleUrl}/v1560746835/shangri-lashow/Home%20Page/Buy_Season_1_MOBILE.png`,
       trailer: `${scaleUrl}/v1556592857/shangri-lashow/Home%20Page/Trailer_01_MOBILE.png`,
       trailerBtn: `${upscaleUrl}/v1560746835/shangri-lashow/Home%20Page/FREE_EPISODES_button_01_TV_MOBILE.png`,
+      trailers: `${scaleUrl}/v1556592856/shangri-lashow/Home%20Page/Episodes_01_MOBILE.png`,
+      trailersBtn: `${upscaleUrl}/v1560746835/shangri-lashow/Home%20Page/TRAILERS_button_01_VHS_TAPES_MOBILE.png`,
       youtopia: `${scaleUrl}/v1556592857/shangri-lashow/Home%20Page/You_Topia_01_MOBILE.png`,
       youtopiaBtn: `${upscaleUrl}/v1556592857/shangri-lashow/Home%20Page/You_Topia_Button_01_MOBILE.png`
     }
@@ -267,8 +269,8 @@ const home = (
     interior: `${scaleUrl}/v1560746707/shangri-lashow/Home%20Page/Home_Page_Canvas_05_1920x1600.png`,
     behindScenes: `${scaleUrl}/v1555109007/shangri-lashow/Home%20Page/CAST_CREW_01.png`,
     behindScenesBtn: `${scaleUrl}/v1560745854/shangri-lashow/Home%20Page/BEHIND_THE_SCENES_button.png`,
-    trailers: `${scaleUrl}/v1555109008/shangri-lashow/Home%20Page/EPISODES_01.png`,
-    trailersBtn: `${scaleUrl}/v1560745854/shangri-lashow/Home%20Page/TRAILERS_button_01_VHS_TAPES.png`,
+    calendar: `${scaleUrl}/v1560745854/shangri-lashow/Home%20Page/CALENDAR_01.png`,
+    calendarBtn: `${scaleUrl}/v1560745854/shangri-lashow/Home%20Page/CALENDAR_button_01.png`,
     games: `${scaleUrl}/v1555109006/shangri-lashow/Home%20Page/GAMES_01.png`,
     gamesBtn: `${scaleUrl}/v1554831011/shangri-lashow/Home%20Page/GAMES_button_01.png`,
     giveBack: `${scaleUrl}/v1555109006/shangri-lashow/Home%20Page/GIVE_BACK_01.png`,
@@ -283,6 +285,8 @@ const home = (
     titleBtn: `${scaleUrl}/v1560745854/shangri-lashow/Home%20Page/Buy_Season_1_button1.png`,
     trailer: `${scaleUrl}/v1555109008/shangri-lashow/Home%20Page/TRAILER_01.png`,
     trailerBtn: `${scaleUrl}/v1560745854/shangri-lashow/Home%20Page/FREE_EPISODES_button_01_TV.png`,
+    trailers: `${scaleUrl}/v1555109008/shangri-lashow/Home%20Page/EPISODES_01.png`,
+    trailersBtn: `${scaleUrl}/v1560745854/shangri-lashow/Home%20Page/TRAILERS_button_01_VHS_TAPES.png`,
     youtopia: `${scaleUrl}/v1555109008/shangri-lashow/Home%20Page/YOUTOPIA_01.png`,
     youtopiaBtn: `${scaleUrl}/v1554831012/shangri-lashow/Home%20Page/YOUTOPIA_button_01.png`
   }
@@ -293,48 +297,52 @@ const homeLoci = isMobile => {
     return {
       behindScenes: { x: 1350, y: 1200 },
       behindScenesBtn: { x: 1100, y: 1050 },
-      trailers: { x: 1330, y: 900 },
-      trailersBtn: { x: 1230, y: 900 },
+      calendar: { x: 1620, y: 80 },
+      calendarBtn: { x: 1400, y: 50 },
       games: { x: 410, y: 530 },
       gamesBtn: { x: 410, y: 530 },
       giveBack: { x: 50, y: 1400 },
       giveBackBtn: { x: 50, y: 1300 },
       music: { x: 1250, y: 795 },
       musicBtn: { x: 1250, y: 750 },
-      photos: { x: 1630, y: 350 },
-      photosBtn: { x: 1500, y: 320 },
+      photos: { x: 1630, y: 400 },
+      photosBtn: { x: 1500, y: 370 },
       shop: { x: 0, y: 750 },
       shopBtn: { x: 0, y: 750 },
       title: { x: 330, y: 270 },
       titleBtn: { x: 330, y: 270 },
       trailer: { x: 550, y: 765 },
       trailerBtn: { x: 550, y: 765 },
-      youtopia: { x: 1287, y: 605 },
-      youtopiaBtn: { x: 1250, y: 585 }
+      trailers: { x: 1330, y: 900 },
+      trailersBtn: { x: 1230, y: 900 },
+      youtopia: { x: 1150, y: 605 },
+      youtopiaBtn: { x: 1100, y: 585 }
     }
   }
 
   return {
     behindScenes: { x: 1470, y: 1130 },
     behindScenesBtn: { x: 1390, y: 1060 },
-    trailers: { x: 560, y: 1130 },
-    trailersBtn: { x: 480, y: 1060 },
+    calendar: { x: 1700, y: 150 },
+    calendarBtn: { x: 1550, y: 150 },
     games: { x: 485, y: 640 },
     gamesBtn: { x: 435, y: 570 },
     giveBack: { x: 1545, y: 1445 },
     giveBackBtn: { x: 1465, y: 1375 },
     music: { x: 500, y: 1020 },
     musicBtn: { x: 450, y: 950 },
-    photos: { x: 1730, y: 450 },
-    photosBtn: { x: 1610, y: 380 },
+    photos: { x: 1730, y: 500 },
+    photosBtn: { x: 1610, y: 430 },
     shop: { x: 20, y: 910 },
     shopBtn: { x: 0, y: 840 },
     title: { x: 680, y: 450 },
     titleBtn: { x: 680, y: 450 },
     trailer: { x: 850, y: 870 },
     trailerBtn: { x: 800, y: 800 },
-    youtopia: { x: 1462, y: 733 },
-    youtopiaBtn: { x: 1382, y: 663 }
+    trailers: { x: 560, y: 1130 },
+    trailersBtn: { x: 480, y: 1060 },
+    youtopia: { x: 1400, y: 733 },
+    youtopiaBtn: { x: 1350, y: 663 }
   }
 }
 
