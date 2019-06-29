@@ -1,8 +1,10 @@
-<div id="games" class="h-screen w-full flex flex-col">
+<div id="games" class="h-screen flex flex-col">
   <TopBar />
-  <img src={{this.pageSource}} alt="Games" class="" >
-  <div class="flex h-24 text-yellow-dark text-4xl text-center">
-    <span class="w-full pt-4">Coming Soon</span>
+  <div class="flex flex-col flex-1 overflow-y-auto">
+    <img src={{this.pageSource}} alt="Games" class="" >
+    <div class="flex h-24 text-yellow-dark text-4xl text-center">
+      <span class="w-full pt-4">Coming Soon</span>
+    </div>
   </div>
   <BottomBar />
 </div>
