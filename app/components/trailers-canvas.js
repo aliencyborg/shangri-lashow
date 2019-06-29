@@ -610,7 +610,7 @@ export default class TrailersCanvasComponent extends Component {
 
       if (['unlock', 'watchNow'].includes(name)) {
         return (window.location.href =
-          'https://vimeo.com/ondemand/shangrilashow')
+          'https://www.amazon.com/Fools-Paradise/dp/B07RT71CDX')
       }
 
       const titleImg = imageMap[name].isLocked

@@ -223,7 +223,7 @@ export default class HomeCanvasComponent extends Component {
       false,
       this.isMobile,
       this.external,
-      'https://vimeo.com/ondemand/shangrilashow/333403952'
+      'https://www.amazon.com/Fools-Paradise/dp/B07RT71CDX'
     )
     const titleImg = buildImage(
       titleImageObj,
