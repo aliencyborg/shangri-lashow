@@ -347,7 +347,7 @@ export default class TrailersCanvasComponent extends Component {
       // imagePromise(ep11LockedImageObj, imageSources.ep11Locked),
       imagePromise(ep12TitleImageObj, imageSources.ep12Title),
       // imagePromise(ep12LockedImageObj, imageSources.ep12Locked),
-      imagePromise(ep13TitleImageObj, imageSources.ep13Title),
+      imagePromise(ep13TitleImageObj, imageSources.ep13Title)
       // imagePromise(ep13LockedImageObj, imageSources.ep13Locked)
     ])
 

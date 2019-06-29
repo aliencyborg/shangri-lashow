@@ -28,7 +28,8 @@ module.exports = function(environment) {
     metricsAdapters: [
       {
         name: 'GoogleAnalytics',
-        environments: ['development', 'production'],
+        // environments: ['development', 'production'],
+        environments: ['production'], // be quiet
         config: {
           id: 'UA-65851442-1',
           debug: environment === 'development',
