@@ -1,6 +1,6 @@
 <div id="photos" class="h-screen flex flex-col">
   <TopBar />
-  <div class="overflow-y-scroll">
+  <div class="flex-grow h-full overflow-y-auto">
     {{#if this.isLoading}}
       <LoadingSpinner />
     {{/if}}
