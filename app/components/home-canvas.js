@@ -32,8 +32,8 @@ export default class HomeCanvasComponent extends Component {
 
     const behindScenesBtnImageObj = new Image()
     const behindScenesImageObj = new Image()
-    const episodesBtnImageObj = new Image()
-    const episodesImageObj = new Image()
+    const trailersBtnImageObj = new Image()
+    const trailersImageObj = new Image()
     const gamesBtnImageObj = new Image()
     const gamesImageObj = new Image()
     const giveBackBtnImageObj = new Image()
@@ -106,22 +106,22 @@ export default class HomeCanvasComponent extends Component {
       imageLoci.behindScenes.y,
       imageScale
     )
-    const episodesBtnImg = buildImage(
-      episodesBtnImageObj,
-      'episodes',
-      imageLoci.episodesBtn.x,
-      imageLoci.episodesBtn.y,
+    const trailersBtnImg = buildImage(
+      trailersBtnImageObj,
+      'trailers',
+      imageLoci.trailersBtn.x,
+      imageLoci.trailersBtn.y,
       imageScale,
       false,
       this.isMobile,
       this.navigate,
-      'episodes'
+      'trailers'
     )
-    const episodesImg = buildImage(
-      episodesImageObj,
-      'episodes',
-      imageLoci.episodes.x,
-      imageLoci.episodes.y,
+    const trailersImg = buildImage(
+      trailersImageObj,
+      'trailers',
+      imageLoci.trailers.x,
+      imageLoci.trailers.y,
       imageScale
     )
     const gamesBtnImg = buildImage(
@@ -284,8 +284,8 @@ export default class HomeCanvasComponent extends Component {
     await Promise.all([
       imagePromise(behindScenesBtnImageObj, imageSources.behindScenesBtn),
       imagePromise(behindScenesImageObj, imageSources.behindScenes),
-      imagePromise(episodesBtnImageObj, imageSources.episodesBtn),
-      imagePromise(episodesImageObj, imageSources.episodes),
+      imagePromise(trailersBtnImageObj, imageSources.trailersBtn),
+      imagePromise(trailersImageObj, imageSources.trailers),
       imagePromise(gamesBtnImageObj, imageSources.gamesBtn),
       imagePromise(gamesImageObj, imageSources.games),
       imagePromise(giveBackBtnImageObj, imageSources.giveBackBtn),
@@ -306,7 +306,7 @@ export default class HomeCanvasComponent extends Component {
 
     const imageMap = {
       behindScenes: [behindScenesImg, behindScenesBtnImg],
-      episodes: [episodesImg, episodesBtnImg],
+      trailers: [trailersImg, trailersBtnImg],
       games: [gamesImg, gamesBtnImg],
       giveBack: [giveBackImg, giveBackBtnImg],
       music: [musicImg, musicBtnImg],
@@ -320,8 +320,8 @@ export default class HomeCanvasComponent extends Component {
     fgLayer.add(
       behindScenesBtnImg,
       behindScenesImg,
-      episodesBtnImg,
-      episodesImg,
+      trailersBtnImg,
+      trailersImg,
       gamesBtnImg,
       gamesImg,
       giveBackBtnImg,

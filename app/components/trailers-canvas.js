@@ -13,9 +13,8 @@ import {
 import images from 'shangri-lashow/util/images'
 
 function _isLocked(episode) {
-  // TODO put this on a calendar
-
-  return episode > 3
+  // open everything now
+  return false
 }
 
 function _isPlaying(videoObj) {
@@ -28,7 +27,7 @@ function _isPlaying(videoObj) {
   )
 }
 
-export default class EpisodesCanvasComponent extends Component {
+export default class TrailersCanvasComponent extends Component {
   @service media
   @service router
   @service userAgent
@@ -53,27 +52,27 @@ export default class EpisodesCanvasComponent extends Component {
     const ep01TitleImageObj = new Image()
     const ep02TitleImageObj = new Image()
     const ep03TitleImageObj = new Image()
-    const ep03LockedImageObj = new Image()
+    // const ep03LockedImageObj = new Image()
     const ep04TitleImageObj = new Image()
-    const ep04LockedImageObj = new Image()
+    // const ep04LockedImageObj = new Image()
     const ep05TitleImageObj = new Image()
-    const ep05LockedImageObj = new Image()
+    // const ep05LockedImageObj = new Image()
     const ep06TitleImageObj = new Image()
-    const ep06LockedImageObj = new Image()
+    // const ep06LockedImageObj = new Image()
     const ep07TitleImageObj = new Image()
-    const ep07LockedImageObj = new Image()
+    // const ep07LockedImageObj = new Image()
     const ep08TitleImageObj = new Image()
-    const ep08LockedImageObj = new Image()
+    // const ep08LockedImageObj = new Image()
     const ep09TitleImageObj = new Image()
-    const ep09LockedImageObj = new Image()
+    // const ep09LockedImageObj = new Image()
     const ep10TitleImageObj = new Image()
-    const ep10LockedImageObj = new Image()
+    // const ep10LockedImageObj = new Image()
     const ep11TitleImageObj = new Image()
-    const ep11LockedImageObj = new Image()
+    // const ep11LockedImageObj = new Image()
     const ep12TitleImageObj = new Image()
-    const ep12LockedImageObj = new Image()
+    // const ep12LockedImageObj = new Image()
     const ep13TitleImageObj = new Image()
-    const ep13LockedImageObj = new Image()
+    // const ep13LockedImageObj = new Image()
 
     const tape01ImageObj = new Image()
     const tape02ImageObj = new Image()
@@ -113,9 +112,9 @@ export default class EpisodesCanvasComponent extends Component {
     const xFactor = Number((stageWidth / baseWidth).toFixed(3))
     const yFactor = Number((stageHeight / baseHeight).toFixed(3))
     const imageScale = { x: xFactor, y: yFactor }
-    const imageLoci = images.episodesLoci(this.isMobile)
+    const imageLoci = images.trailersLoci(this.isMobile)
 
-    const imageSources = images.episodes(
+    const imageSources = images.trailers(
       stageHeight,
       stageWidth,
       baseHeight,
@@ -141,7 +140,7 @@ export default class EpisodesCanvasComponent extends Component {
     const bgLayer = makeLayer()
     const tapeLayer = makeLayer()
     const titleLayer = makeLayer()
-    this.stage = makeStage('episodes-container', stageHeight, stageWidth)
+    this.stage = makeStage('Trailers-container', stageHeight, stageWidth)
 
     // do nothing, animation just need to update the layer
     this.anim = new Konva.Animation(() => {}, videoLayer)
@@ -198,17 +197,17 @@ export default class EpisodesCanvasComponent extends Component {
     const ep11TitleImg = buildImage(ep11TitleImageObj, `ep11title`, 0, 0)
     const ep12TitleImg = buildImage(ep12TitleImageObj, `ep12title`, 0, 0)
     const ep13TitleImg = buildImage(ep13TitleImageObj, `ep13title`, 0, 0)
-    const ep03LockedImg = buildImage(ep03LockedImageObj, `ep03locked`, 0, 0)
-    const ep04LockedImg = buildImage(ep04LockedImageObj, `ep04locked`, 0, 0)
-    const ep05LockedImg = buildImage(ep05LockedImageObj, `ep05locked`, 0, 0)
-    const ep06LockedImg = buildImage(ep06LockedImageObj, `ep06locked`, 0, 0)
-    const ep07LockedImg = buildImage(ep07LockedImageObj, `ep07locked`, 0, 0)
-    const ep08LockedImg = buildImage(ep08LockedImageObj, `ep08locked`, 0, 0)
-    const ep09LockedImg = buildImage(ep09LockedImageObj, `ep09locked`, 0, 0)
-    const ep10LockedImg = buildImage(ep10LockedImageObj, `ep10locked`, 0, 0)
-    const ep11LockedImg = buildImage(ep11LockedImageObj, `ep11locked`, 0, 0)
-    const ep12LockedImg = buildImage(ep12LockedImageObj, `ep12locked`, 0, 0)
-    const ep13LockedImg = buildImage(ep13LockedImageObj, `ep13locked`, 0, 0)
+    // const ep03LockedImg = buildImage(ep03LockedImageObj, `ep03locked`, 0, 0)
+    // const ep04LockedImg = buildImage(ep04LockedImageObj, `ep04locked`, 0, 0)
+    // const ep05LockedImg = buildImage(ep05LockedImageObj, `ep05locked`, 0, 0)
+    // const ep06LockedImg = buildImage(ep06LockedImageObj, `ep06locked`, 0, 0)
+    // const ep07LockedImg = buildImage(ep07LockedImageObj, `ep07locked`, 0, 0)
+    // const ep08LockedImg = buildImage(ep08LockedImageObj, `ep08locked`, 0, 0)
+    // const ep09LockedImg = buildImage(ep09LockedImageObj, `ep09locked`, 0, 0)
+    // const ep10LockedImg = buildImage(ep10LockedImageObj, `ep10locked`, 0, 0)
+    // const ep11LockedImg = buildImage(ep11LockedImageObj, `ep11locked`, 0, 0)
+    // const ep12LockedImg = buildImage(ep12LockedImageObj, `ep12locked`, 0, 0)
+    // const ep13LockedImg = buildImage(ep13LockedImageObj, `ep13locked`, 0, 0)
 
     const tape01Img = buildImage(
       tape01ImageObj,
@@ -318,7 +317,7 @@ export default class EpisodesCanvasComponent extends Component {
 
     this.resizeFit = () => {
       fitStageIntoParentContainer(
-        `#episodes-container`,
+        `#Trailers-container`,
         this.stage,
         stageHeight,
         stageWidth
@@ -329,25 +328,27 @@ export default class EpisodesCanvasComponent extends Component {
       imagePromise(ep01TitleImageObj, imageSources.ep01Title),
       imagePromise(ep02TitleImageObj, imageSources.ep02Title),
       imagePromise(ep03TitleImageObj, imageSources.ep03Title),
-      imagePromise(ep03LockedImageObj, imageSources.ep03Locked),
+      // imagePromise(ep03LockedImageObj, imageSources.ep03Locked),
       imagePromise(ep04TitleImageObj, imageSources.ep04Title),
-      imagePromise(ep04LockedImageObj, imageSources.ep04Locked),
+      // imagePromise(ep04LockedImageObj, imageSources.ep04Locked),
       imagePromise(ep05TitleImageObj, imageSources.ep05Title),
-      imagePromise(ep05LockedImageObj, imageSources.ep05Locked),
+      // imagePromise(ep05LockedImageObj, imageSources.ep05Locked),
       imagePromise(ep06TitleImageObj, imageSources.ep06Title),
-      imagePromise(ep06LockedImageObj, imageSources.ep06Locked),
+      // imagePromise(ep06LockedImageObj, imageSources.ep06Locked),
       imagePromise(ep07TitleImageObj, imageSources.ep07Title),
-      imagePromise(ep07LockedImageObj, imageSources.ep07Locked),
+      // imagePromise(ep07LockedImageObj, imageSources.ep07Locked),
       imagePromise(ep08TitleImageObj, imageSources.ep08Title),
-      imagePromise(ep08LockedImageObj, imageSources.ep08Locked),
+      // imagePromise(ep08LockedImageObj, imageSources.ep08Locked),
       imagePromise(ep09TitleImageObj, imageSources.ep09Title),
-      imagePromise(ep09LockedImageObj, imageSources.ep09Locked),
+      // imagePromise(ep09LockedImageObj, imageSources.ep09Locked),
+      imagePromise(ep10TitleImageObj, imageSources.ep10Title),
+      // imagePromise(ep10LockedImageObj, imageSources.ep10Locked),
       imagePromise(ep11TitleImageObj, imageSources.ep11Title),
-      imagePromise(ep11LockedImageObj, imageSources.ep11Locked),
+      // imagePromise(ep11LockedImageObj, imageSources.ep11Locked),
       imagePromise(ep12TitleImageObj, imageSources.ep12Title),
-      imagePromise(ep12LockedImageObj, imageSources.ep12Locked),
+      // imagePromise(ep12LockedImageObj, imageSources.ep12Locked),
       imagePromise(ep13TitleImageObj, imageSources.ep13Title),
-      imagePromise(ep13LockedImageObj, imageSources.ep13Locked)
+      // imagePromise(ep13LockedImageObj, imageSources.ep13Locked)
     ])
 
     titleLayer.add(ep01TitleImg)
@@ -387,167 +388,167 @@ export default class EpisodesCanvasComponent extends Component {
         videoSources.ep03Trailer,
         this.isMobile,
         imageScale
+      ),
+      buildVideo(
+        ep04TrailerVideoObj,
+        `ep04Trailer`,
+        videoSources.ep04Trailer,
+        this.isMobile,
+        imageScale
+      ),
+      buildVideo(
+        ep05TrailerVideoObj,
+        `ep05Trailer`,
+        videoSources.ep05Trailer,
+        this.isMobile,
+        imageScale
+      ),
+      buildVideo(
+        ep06TrailerVideoObj,
+        `ep06Trailer`,
+        videoSources.ep06Trailer,
+        this.isMobile,
+        imageScale
+      ),
+      buildVideo(
+        ep07TrailerVideoObj,
+        `ep07Trailer`,
+        videoSources.ep07Trailer,
+        this.isMobile,
+        imageScale
+      ),
+      buildVideo(
+        ep08TrailerVideoObj,
+        `ep08Trailer`,
+        videoSources.ep08Trailer,
+        this.isMobile,
+        imageScale
+      ),
+      buildVideo(
+        ep09TrailerVideoObj,
+        `ep09Trailer`,
+        videoSources.ep09Trailer,
+        this.isMobile,
+        imageScale
+      ),
+      buildVideo(
+        ep10TrailerVideoObj,
+        `ep10Trailer`,
+        videoSources.ep10Trailer,
+        this.isMobile,
+        imageScale
+      ),
+      buildVideo(
+        ep11TrailerVideoObj,
+        `ep11Trailer`,
+        videoSources.ep11Trailer,
+        this.isMobile,
+        imageScale
+      ),
+      buildVideo(
+        ep12TrailerVideoObj,
+        `ep12Trailer`,
+        videoSources.ep12Trailer,
+        this.isMobile,
+        imageScale
+      ),
+      buildVideo(
+        ep13TrailerVideoObj,
+        `ep13Trailer`,
+        videoSources.ep13Trailer,
+        this.isMobile,
+        imageScale
       )
-      // buildVideo(
-      // ep04TrailerVideoObj,
-      // `ep04Trailer`,
-      // videoSources.ep04Trailer,
-      // this.isMobile,
-      // imageScale
-      // ),
-      // buildVideo(
-      // ep05TrailerVideoObj,
-      // `ep05Trailer`,
-      // videoSources.ep05Trailer,
-      // this.isMobile,
-      // imageScale
-      // ),
-      // buildVideo(
-      // ep06TrailerVideoObj,
-      // `ep06Trailer`,
-      // videoSources.ep06Trailer,
-      // this.isMobile,
-      // imageScale
-      // ),
-      // buildVideo(
-      // ep07TrailerVideoObj,
-      // `ep07Trailer`,
-      // videoSources.ep07Trailer,
-      // this.isMobile,
-      // imageScale
-      // ),
-      // buildVideo(
-      // ep08TrailerVideoObj,
-      // `ep08Trailer`,
-      // videoSources.ep08Trailer,
-      // this.isMobile,
-      // imageScale
-      // ),
-      // buildVideo(
-      // ep09TrailerVideoObj,
-      // `ep09Trailer`,
-      // videoSources.ep09Trailer,
-      // this.isMobile,
-      // imageScale
-      // ),
-      // buildVideo(
-      // ep10TrailerVideoObj,
-      // `ep10Trailer`,
-      // videoSources.ep10Trailer,
-      // this.isMobile,
-      // imageScale
-      // ),
-      // buildVideo(
-      // ep11TrailerVideoObj,
-      // `ep11Trailer`,
-      // videoSources.ep11Trailer,
-      // this.isMobile,
-      // imageScale
-      // ),
-      // buildVideo(
-      // ep12TrailerVideoObj,
-      // `ep12Trailer`,
-      // videoSources.ep12Trailer,
-      // this.isMobile,
-      // imageScale
-      // ),
-      // buildVideo(
-      // ep13TrailerVideoObj,
-      // `ep13Trailer`,
-      // videoSources.ep13Trailer,
-      // this.isMobile,
-      // imageScale
-      // )
     ])
 
     const imageMap = {
       tape01: {
         isLocked: _isLocked(1),
-        lockedTitle: ep01TitleImg,
+        // lockedTitle: ep01TitleImg,
         title: ep01TitleImg,
         trailer: ep01TrailerVideo,
         trailerObj: ep01TrailerVideoObj
       },
       tape02: {
         isLocked: _isLocked(2),
-        lockedTitle: ep02TitleImg,
+        // lockedTitle: ep02TitleImg,
         title: ep02TitleImg,
         trailer: ep02TrailerVideo,
         trailerObj: ep02TrailerVideoObj
       },
       tape03: {
         isLocked: _isLocked(3),
-        lockedTitle: ep03LockedImg,
+        // lockedTitle: ep03LockedImg,
         title: ep03TitleImg,
         trailer: ep03TrailerVideo,
         trailerObj: ep03TrailerVideoObj
       },
       tape04: {
         isLocked: _isLocked(4),
-        lockedTitle: ep04LockedImg,
+        // lockedTitle: ep04LockedImg,
         title: ep04TitleImg,
         trailer: ep04TrailerVideo,
         trailerObj: ep04TrailerVideoObj
       },
       tape05: {
         isLocked: _isLocked(5),
-        lockedTitle: ep05LockedImg,
+        // lockedTitle: ep05LockedImg,
         title: ep05TitleImg,
         trailer: ep05TrailerVideo,
         trailerObj: ep05TrailerVideoObj
       },
       tape06: {
         isLocked: _isLocked(6),
-        lockedTitle: ep06LockedImg,
+        // lockedTitle: ep06LockedImg,
         title: ep06TitleImg,
         trailer: ep06TrailerVideo,
         trailerObj: ep06TrailerVideoObj
       },
       tape07: {
         isLocked: _isLocked(7),
-        lockedTitle: ep07LockedImg,
+        // lockedTitle: ep07LockedImg,
         title: ep07TitleImg,
         trailer: ep07TrailerVideo,
         trailerObj: ep07TrailerVideoObj
       },
       tape08: {
         isLocked: _isLocked(8),
-        lockedTitle: ep08LockedImg,
+        // lockedTitle: ep08LockedImg,
         title: ep08TitleImg,
         trailer: ep08TrailerVideo,
         trailerObj: ep08TrailerVideoObj
       },
       tape09: {
         isLocked: _isLocked(9),
-        lockedTitle: ep09LockedImg,
+        // lockedTitle: ep09LockedImg,
         title: ep09TitleImg,
         trailer: ep09TrailerVideo,
         trailerObj: ep09TrailerVideoObj
       },
       tape10: {
         isLocked: _isLocked(10),
-        lockedTitle: ep10LockedImg,
+        // lockedTitle: ep10LockedImg,
         title: ep10TitleImg,
         trailer: ep10TrailerVideo,
         trailerObj: ep10TrailerVideoObj
       },
       tape11: {
         isLocked: _isLocked(11),
-        lockedTitle: ep11LockedImg,
+        // lockedTitle: ep11LockedImg,
         title: ep11TitleImg,
         trailer: ep11TrailerVideo,
         trailerObj: ep11TrailerVideoObj
       },
       tape12: {
         isLocked: _isLocked(12),
-        lockedTitle: ep12LockedImg,
+        // lockedTitle: ep12LockedImg,
         title: ep12TitleImg,
         trailer: ep12TrailerVideo,
         trailerObj: ep12TrailerVideoObj
       },
       tape13: {
         isLocked: _isLocked(13),
-        lockedTitle: ep13LockedImg,
+        // lockedTitle: ep13LockedImg,
         title: ep13TitleImg,
         trailer: ep13TrailerVideo,
         trailerObj: ep13TrailerVideoObj

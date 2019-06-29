@@ -10,7 +10,7 @@ Router.map(function() {
   this.route('home', { path: '/' })
 
   this.route('behind-the-scenes')
-  this.route('episodes')
+  this.route('trailers')
   this.route('games')
   this.route('give_back')
   this.route('music')

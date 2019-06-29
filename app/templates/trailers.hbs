@@ -1,4 +1,4 @@
-<div id="episodes" class="h-screen flex flex-col">
+<div id="trailers" class="h-screen flex flex-col">
   <TopBar />
   <div class="overflow-x-auto overflow-y-auto flex-grow">
     <div class="flex bg-blackest">
@@ -7,9 +7,9 @@
         {{#if this.isLoading}}
           <LoadingSpinner />
         {{/if}}
-        <EpisodesCanvas @stopLoading={{this.stopLoading}}>
+        <TrailersCanvas @stopLoading={{this.stopLoading}}>
           {{outlet}}
-        </EpisodesCanvas>
+        </TrailersCanvas>
       </div>
       <div class="xl:w-1/6"></div>
     </div>

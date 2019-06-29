@@ -32,7 +32,7 @@ const makeWidthUrl = width => {
   return `${ecoUrl},c_scale,w_${width}`
 }
 
-const episodes = (
+const trailers = (
   height,
   width,
   baseHeight,
@@ -175,7 +175,7 @@ const videos = (xFactor = null, suffix = 'webm') => {
   }
 }
 
-const episodesLoci = isMobile => {
+const trailersLoci = isMobile => {
   const shared = {}
 
   if (isMobile) {
@@ -241,8 +241,8 @@ const home = (
       interior: `${scaleUrl}/v1560746835/shangri-lashow/Home%20Page/Home_Page_Canvas_04_MOBILE_1080x1400.png`,
       behindScenes: `${scaleUrl}/v1556592856/shangri-lashow/Home%20Page/Cast_and_Crew_01_MOBILE.png`,
       behindScenesBtn: `${scaleUrl}/v1560745854/shangri-lashow/Home%20Page/BEHIND_THE_SCENES_button.png`,
-      episodes: `${scaleUrl}/v1556592856/shangri-lashow/Home%20Page/Episodes_01_MOBILE.png`,
-      episodesBtn: `${upscaleUrl}/v1560746835/shangri-lashow/Home%20Page/TRAILERS_button_01_VHS_TAPES_MOBILE.png`,
+      trailers: `${scaleUrl}/v1556592856/shangri-lashow/Home%20Page/Episodes_01_MOBILE.png`,
+      trailersBtn: `${upscaleUrl}/v1560746835/shangri-lashow/Home%20Page/TRAILERS_button_01_VHS_TAPES_MOBILE.png`,
       games: `${scaleUrl}/v1556592857/shangri-lashow/Home%20Page/Games_01_MOBILE.png`,
       gamesBtn: `${upscaleUrl}/v1556592857/shangri-lashow/Home%20Page/Games_Button_01_MOBILE.png`,
       giveBack: `${scaleUrl}/v1556592857/shangri-lashow/Home%20Page/Give_Back_01_MOBILE.png`,
@@ -267,8 +267,8 @@ const home = (
     interior: `${scaleUrl}/v1560746707/shangri-lashow/Home%20Page/Home_Page_Canvas_05_1920x1600.png`,
     behindScenes: `${scaleUrl}/v1555109007/shangri-lashow/Home%20Page/CAST_CREW_01.png`,
     behindScenesBtn: `${scaleUrl}/v1560745854/shangri-lashow/Home%20Page/BEHIND_THE_SCENES_button.png`,
-    episodes: `${scaleUrl}/v1555109008/shangri-lashow/Home%20Page/EPISODES_01.png`,
-    episodesBtn: `${scaleUrl}/v1560745854/shangri-lashow/Home%20Page/TRAILERS_button_01_VHS_TAPES.png`,
+    trailers: `${scaleUrl}/v1555109008/shangri-lashow/Home%20Page/EPISODES_01.png`,
+    trailersBtn: `${scaleUrl}/v1560745854/shangri-lashow/Home%20Page/TRAILERS_button_01_VHS_TAPES.png`,
     games: `${scaleUrl}/v1555109006/shangri-lashow/Home%20Page/GAMES_01.png`,
     gamesBtn: `${scaleUrl}/v1554831011/shangri-lashow/Home%20Page/GAMES_button_01.png`,
     giveBack: `${scaleUrl}/v1555109006/shangri-lashow/Home%20Page/GIVE_BACK_01.png`,
@@ -293,8 +293,8 @@ const homeLoci = isMobile => {
     return {
       behindScenes: { x: 1350, y: 1200 },
       behindScenesBtn: { x: 1100, y: 1050 },
-      episodes: { x: 1330, y: 900 },
-      episodesBtn: { x: 1230, y: 900 },
+      trailers: { x: 1330, y: 900 },
+      trailersBtn: { x: 1230, y: 900 },
       games: { x: 410, y: 530 },
       gamesBtn: { x: 410, y: 530 },
       giveBack: { x: 50, y: 1400 },
@@ -317,8 +317,8 @@ const homeLoci = isMobile => {
   return {
     behindScenes: { x: 1470, y: 1130 },
     behindScenesBtn: { x: 1390, y: 1060 },
-    episodes: { x: 560, y: 1130 },
-    episodesBtn: { x: 480, y: 1060 },
+    trailers: { x: 560, y: 1130 },
+    trailersBtn: { x: 480, y: 1060 },
     games: { x: 485, y: 640 },
     gamesBtn: { x: 435, y: 570 },
     giveBack: { x: 1545, y: 1445 },
@@ -456,8 +456,8 @@ export default {
   backgrounds,
   behindTheScenes,
   bigTime,
-  episodes,
-  episodesLoci,
+  trailers,
+  trailersLoci,
   games,
   home,
   homeLoci,
