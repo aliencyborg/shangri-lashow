@@ -1,0 +1,40 @@
+---
+- name: web application deploy
+  hosts: east
+  remote_user: toofan
+  vars:
+    workdir: /home/toofan/code/src/github.com/aliencyborg/shangri-lashow
+  tasks:
+    - name: ensure code/src/github.com/aliencyborg directory is present
+      file:
+        path: /home/toofan/code/src/github.com/aliencyborg
+        state: directory
+
+    - name: clone or update shangri-lashow repository (prod)
+      git:
+        dest: "{{ workdir }}"
+        repo: 'https://github.com/aliencyborg/shangri-lashow.git'
+        update: yes
+        version: master
+
+    - name: build docker image
+      docker_image:
+        force_source: yes
+        name: shangri-lashow
+        source: build
+        tag: latest
+        build:
+          path: "{{ workdir }}"
+          pull: no
+
+    - name: run docker container
+      docker_container:
+        expose: 80
+        image: shangri-lashow:latest
+        name: shangri-lashow
+        env:
+          HSTS: 'off'
+          LETSENCRYPT_HOST: 'www.shangri-lashow.com,shangri-lashow.com'
+          PORT: '80'
+          VIRTUAL_HOST: 'www.shangri-lashow.com,shangri-lashow.com'
+
