@@ -1,28 +1,36 @@
 ---
 - name: web application deploy
-  hosts: east
-  remote_user: toofan
+  hosts: west
+  remote_user: beast
   vars:
-    workdir: /home/toofan/code/src/github.com/aliencyborg/shangri-lashow
+    branch: prod
+    homedir: "/home/{{ user }}"
+    org: aliencyborg
+    repo: shangri-lashow
+    user: hank
+    workdir: "{{ homedir }}/code/src/github.com/{{ org }}/{{ repo }}"
+
+
   tasks:
-    - name: ensure code/src/github.com/aliencyborg directory is present
+    - name: ensure workdir parent dir is present
       file:
-        path: /home/toofan/code/src/github.com/aliencyborg
+        path: "{{ homedir }}/code/src/github.com/{{ org }}"
         state: directory
 
-    - name: clone or update shangri-lashow repository (prod)
+    - name: clone or update repo
       git:
+        accept_hostkey: yes
         dest: "{{ workdir }}"
-        repo: 'https://github.com/aliencyborg/shangri-lashow.git'
+        key_file: "{{ homedir }}/.ssh/id_rsa"
+        repo: "git@github.com:{{ org }}/{{ repo }}.git"
         update: yes
-        version: master
+        version: "{{ branch }}"
 
     - name: build docker image
       docker_image:
         force_source: yes
         name: shangri-lashow
         source: build
-        tag: latest
         build:
           path: "{{ workdir }}"
           pull: no
@@ -30,11 +38,13 @@
     - name: run docker container
       docker_container:
         expose: 80
-        image: shangri-lashow:latest
+        image: shangri-lashow
         name: shangri-lashow
+        recreate: yes
+        restart_policy: always
         env:
-          HSTS: 'off'
-          LETSENCRYPT_HOST: 'www.shangri-lashow.com,shangri-lashow.com'
-          PORT: '80'
-          VIRTUAL_HOST: 'www.shangri-lashow.com,shangri-lashow.com'
+          HSTS: "off"
+          #LETSENCRYPT_HOST: "www.shangri-lashow.com,shangri-lashow.com"
+          PORT: "80"
+          VIRTUAL_HOST: "www.shangri-lashow.com,shangri-lashow.com"
 
