@@ -1,19 +1,23 @@
-FROM nginx
+# BUILD
+FROM node:lts-alpine as build
 
-RUN apt-get -y update
-RUN apt-get -y install apt-utils build-essential git-core python wget
-RUN wget -qO- https://deb.nodesource.com/setup_10.x > node_setup.sh
-RUN bash node_setup.sh
-RUN apt-get -y install nodejs
-RUN npm install -g ember-cli
+MAINTAINER Benjamin Rosas <ben@aliencyb.org>
 
-RUN mkdir /app
-# can't handle package-lock & npm ci right now, probably due to ember canary build
-COPY package.json /app/
-RUN cd /app && npm install
-COPY . /app
-COPY nginx-default.conf /etc/nginx/conf.d/default.conf
-RUN cd /app && ember build -environment production --output-path /usr/share/nginx/html
+WORKDIR /app/
 
-WORKDIR /usr/share/nginx/html
+RUN apk add git
+RUN npm install -g --silent ember-cli
+
+COPY package*.json ./
+RUN npm ci --silent
+
+COPY . .
+
+RUN ember build -prod
+
+
+# RUN
+FROM nginx:alpine
+
+COPY --from=build /app/dist /usr/share/nginx/html
 

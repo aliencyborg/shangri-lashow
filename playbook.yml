@@ -19,10 +19,8 @@
 
     - name: clone or update repo
       git:
-        accept_hostkey: yes
         dest: "{{ workdir }}"
-        key_file: "{{ homedir }}/.ssh/id_rsa"
-        repo: "git@github.com:{{ org }}/{{ repo }}.git"
+        repo: "https://github.com/{{ org }}/{{ repo }}.git"
         update: yes
         version: "{{ branch }}"
 
@@ -44,7 +42,7 @@
         restart_policy: always
         env:
           HSTS: "off"
-          #LETSENCRYPT_HOST: "www.shangri-lashow.com,shangri-lashow.com"
+          LETSENCRYPT_HOST: "www.shangri-lashow.com,shangri-lashow.com"
           PORT: "80"
           VIRTUAL_HOST: "www.shangri-lashow.com,shangri-lashow.com"
 
