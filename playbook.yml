@@ -1,13 +1,13 @@
 ---
 - name: web application deploy
-  hosts: west
-  remote_user: beast
+  hosts: east
+  remote_user: luis
   vars:
     branch: prod
     homedir: "/home/{{ user }}"
     org: aliencyborg
     repo: shangri-lashow
-    user: hank
+    user: luis
     workdir: "{{ homedir }}/code/src/github.com/{{ org }}/{{ repo }}"
 
 
